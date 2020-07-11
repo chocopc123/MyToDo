@@ -22,7 +22,7 @@ class TodoController extends Controller
         $todo->explanation = $request->explanation;
         $todo->difficulty = $request->difficulty;
         $todo->importance = $request->importance;
-        $todo->complete = $request->complete;
+        $todo->deadline = $request->deadline;
         $todo->save();
 
         return view('todo.store');
