@@ -22,6 +22,7 @@ class TodoController extends Controller
         $todo->explanation = $request->explanation;
         $todo->difficulty = $request->difficulty;
         $todo->importance = $request->importance;
+        $todo->complete = false;
         $todo->deadline = $request->deadline;
         $todo->save();
 

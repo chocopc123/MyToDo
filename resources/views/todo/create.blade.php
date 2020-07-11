@@ -26,7 +26,7 @@
         <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="1"></label>
       </div>
       <div class="form-group">
-        <label>目標期限<input type="date" class="form-control" name="deadline"></label>
+      <label>目標期限<input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}"></label>
       </div>
       <input type="submit" class="btn btn-primary" value="追加"></li>
     </form>
