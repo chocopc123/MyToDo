@@ -8,7 +8,7 @@ use App\Todo;
 class TodoController extends Controller
 {
     public function index(){
-        $todos = Todo::all();
+        $todos = Todo::orderBy('created_at', 'desc')->get();
         return view('todo.index', ['todos' => $todos]);
     }
 
