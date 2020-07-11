@@ -9,9 +9,6 @@ class TodoController extends Controller
 {
     public function index(){
         $todos = Todo::all();
-        return view('index', ['todos'=>$todos]);
-    }
-
-    public function create(){
+        return view('todo.index', ['todos' => $todos]);
     }
 }
