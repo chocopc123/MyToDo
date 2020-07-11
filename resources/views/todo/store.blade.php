@@ -11,7 +11,7 @@
 
     <div class="alert alert-primary" role="alert">
       ToDoを追加しました。
-      <a href="index" class="btn btn-primary">一覧に戻る</a>
+      <a href="/" class="btn btn-primary">一覧に戻る</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

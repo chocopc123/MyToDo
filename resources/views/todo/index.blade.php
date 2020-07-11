@@ -17,6 +17,7 @@
         <p>{{$todo->explanation}}</p>
         <h6 card-subtitle mb-2 text-muted>難易度：{{$todo->difficulty}}</h6>
         <h6 card-subtitle mb-2 text-muted>重要度：{{$todo->importance}}</h6>
+        <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
         <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
         <a href="/delete/{{$todo->id}}" class="card-link">削除</a>
       </div>

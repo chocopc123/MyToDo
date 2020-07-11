@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function(){
-    return view('welcome');
-});
-Route::get('index', 'TodoController@index');
+Route::get('/', 'TodoController@index');
 Route::get('create', 'TodoController@create');
 Route::post('create', 'TodoController@store');
 Route::get('edit/{id}', 'TodoController@edit');
