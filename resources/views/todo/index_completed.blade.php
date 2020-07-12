@@ -10,27 +10,30 @@
     <h3>達成リスト</h3>
     <p><a href="/" class="btn btn-success">戻る</a></p>
 
-    @foreach($todos as $todo)
-    <div class="card mb-2">
-      <div class="card-body">
-        <h4 class="card-title">{{$todo->title}}</h4>
-        <p>{!! nl2br(e($todo->explanation)) !!}</p>
-        <h6 card-subtitle mb-2 text-muted>難易度：{{$todo->difficulty}}</h6>
-        <h6 card-subtitle mb-2 text-muted>重要度：{{$todo->importance}}</h6>
-        @if($todo->deadline_time)
-          <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline. " ". $todo->deadline_time}}</h6>
-        @else
-          <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
-        @endif
-        <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d')}}</h6>
-        <h6 card-subtitle mb-2 text-muted>達成日時：{{$todo->completed_date. " ". $todo->completed_time}}</h6>
-
-        <p><a href="/release_confirm/{{$todo->id}}" class="btn btn-warning">解除</a></p>
-        <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
-        <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
-      </div>
-    </div>
-    @endforeach
+    @if(count($todos)==0)
+      <h5>ToDoがまだありません。</h5>
+    @else
+      @foreach($todos as $todo)
+        <div class="card mb-2">
+          <div class="card-body">
+            <h4 class="card-title">{{$todo->title}}</h4>
+            <p>{!! nl2br(e($todo->explanation)) !!}</p>
+            <h6 card-subtitle mb-2 text-muted>難易度：{{$todo->difficulty}}</h6>
+            <h6 card-subtitle mb-2 text-muted>重要度：{{$todo->importance}}</h6>
+            @if($todo->deadline_time)
+              <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline. " ". $todo->deadline_time}}</h6>
+            @else
+              <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
+            @endif
+            <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d')}}</h6>
+            <h6 card-subtitle mb-2 text-muted>達成日時：{{$todo->completed_date. " ". $todo->completed_time}}</h6>
+            <p><a href="/release_confirm/{{$todo->id}}" class="btn btn-warning">解除</a></p>
+            <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
+            <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
+          </div>
+        </div>
+      @endforeach
+    @endif
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
