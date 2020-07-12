@@ -8,6 +8,7 @@
   </head>
   <body class="p-3">
     <h3>ToDo一覧</h3>
+    <p><a href="{{$index}}" class="btn btn-primary">{{$index_title}}</a></p>
     <p><a href="/create" class="btn btn-primary">ToDo追加</a></p>
 
     @foreach($todos as $todo)

@@ -8,8 +8,17 @@ use App\Todo;
 class TodoController extends Controller
 {
     public function index(){
-        $todos = Todo::orderBy('created_at', 'desc')->get();
-        return view('todo.index', ['todos' => $todos]);
+        $todos = Todo::where('complete', false)->orderBy('created_at', 'desc')->get();
+        $index = "/index_completed";
+        $index_title = "達成済みToDoリスト";
+        return view('todo.index', ['todos' => $todos, 'index' => $index, 'index_title' => $index_title]);
+    }
+
+    public function index_completed(){
+        $todos = Todo::where('complete', true)->orderBy('created_at', 'desc')->get();
+        $index = "/";
+        $index_title = "未達成ToDoリスト";
+        return view('todo.index', ['todos' => $todos, 'index' => $index, 'index_title' => $index_title]);
     }
 
     public function create(){
