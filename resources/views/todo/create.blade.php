@@ -11,23 +11,44 @@
 
     <form method="POST" action="/create">
       {{ csrf_field() }}
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
       <div class="form-group">
         <label for="titleInput">タイトル <span class="badge badge-danger">必須</span></label>
-        <input type="text" class="form-control" id="titleInput" name="title">
+        <input type="text" class="form-control" id="titleInput" name="title" value="{{old('title')}}">
       </div>
       <div class="form-group">
         <label for="explanationInput">詳細 <span class="badge badge-danger">必須</span></label>
-        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10"></textarea>
+        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10">{{old('explanation')}}</textarea>
       </div>
       <div class="form-group">
-        <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="1"></label>
+        @if(old('difficulty'))
+          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="{{old('difficulty')}}"></label>
+        @else
+          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="1"></label>
+        @endif
       </div>
       <div class="form-group">
-        <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="1"></label>
+        @if(old('importance'))
+          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="{{old('importance')}}"></label>
+        @else
+          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="1"></label>
+        @endif
       </div>
       <div class="form-group">
-        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}"></label>
-        <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time"></label>
+        @if(old('deadline'))
+          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{old('deadline')}}"></label>
+        @else
+          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}"></label>
+        @endif
+        <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time" value="{{old('deadline_time')}}"></label>
       </div>
       <input type="submit" class="btn btn-primary" value="追加"></li>
     </form>

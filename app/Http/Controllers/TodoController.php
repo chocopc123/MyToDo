@@ -22,6 +22,13 @@ class TodoController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'title'=>'required|string|max:70',
+            'explanation'=>'required|string',
+            'difficulty'=>'required|integer|max:3',
+            'importance'=>'required|integer|max:3',
+            'deadline'=>'required|string',
+        ]);
         $todo = new Todo;
         $todo->title = $request->title;
         $todo->explanation = $request->explanation;
@@ -43,6 +50,13 @@ class TodoController extends Controller
     }
 
     public function update(Request $request){
+        $request->validate([
+            'title'=>'required|string|max:70',
+            'explanation'=>'required|string',
+            'difficulty'=>'required|integer|max:3',
+            'importance'=>'required|integer|max:3',
+            'deadline'=>'required|string',
+        ]);
         $todo = Todo::find($request->id);
         $todo->title = $request->title;
         $todo->explanation = $request->explanation;
