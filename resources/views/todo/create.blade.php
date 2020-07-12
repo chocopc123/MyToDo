@@ -12,11 +12,11 @@
     <form method="POST" action="/create">
       {{ csrf_field() }}
       <div class="form-group">
-        <label for="titleInput">タイトル</label>
+        <label for="titleInput">タイトル <span class="badge badge-danger">必須</span></label>
         <input type="text" class="form-control" id="titleInput" name="title">
       </div>
       <div class="form-group">
-        <label for="explanationInput">詳細</label>
+        <label for="explanationInput">詳細 <span class="badge badge-danger">必須</span></label>
         <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10"></textarea>
       </div>
       <div class="form-group">
@@ -26,7 +26,8 @@
         <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="1"></label>
       </div>
       <div class="form-group">
-      <label>目標期限<input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}"></label>
+        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}"></label>
+        <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time"></label>
       </div>
       <input type="submit" class="btn btn-primary" value="追加"></li>
     </form>

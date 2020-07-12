@@ -24,6 +24,9 @@ class TodoController extends Controller
         $todo->importance = $request->importance;
         $todo->complete = false;
         $todo->deadline = $request->deadline;
+        if($request->deadline_time){
+            $todo->deadline_time = $request->deadline_time;
+        }
         $todo->save();
 
         return view('todo.store');
@@ -41,6 +44,9 @@ class TodoController extends Controller
         $todo->difficulty = $request->difficulty;
         $todo->importance = $request->importance;
         $todo->deadline = $request->deadline;
+        if($request->deadline_time){
+            $todo->deadline_time = $request->deadline_time;
+        }
         $todo->save();
 
         return view('todo.update');
