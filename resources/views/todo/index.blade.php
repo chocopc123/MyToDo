@@ -18,7 +18,11 @@
         <p>{!! nl2br(e($todo->explanation)) !!}</p>
         <h6 card-subtitle mb-2 text-muted>難易度：{{$todo->difficulty}}</h6>
         <h6 card-subtitle mb-2 text-muted>重要度：{{$todo->importance}}</h6>
-        <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
+        @if($todo->deadline_time)
+          <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline. " ". $todo->deadline_time}}</h6>
+        @else
+          <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
+        @endif
         <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d')}}</h6>
 
         <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-primary">達成</a></p>
