@@ -80,4 +80,18 @@ class TodoController extends Controller
         $todo->save();
         return view('todo.complete');
     }
+
+    public function release_confirm(Request $request, $id){
+        $todo = Todo::find($id);
+        return view('todo.release_confirm', ['todo' => $todo]);
+    }
+
+    public function release(Request $request){
+        $todo = Todo::find($request->id);
+        $todo->complete = false;
+        $todo->completed_date = null;
+        $todo->completed_time = null;
+        $todo->save();
+        return view('todo.release');
+    }
 }

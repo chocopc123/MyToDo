@@ -25,7 +25,7 @@
         <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d')}}</h6>
         <h6 card-subtitle mb-2 text-muted>達成日時：{{$todo->completed_date. " ". $todo->completed_time}}</h6>
 
-        <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-primary">達成</a></p>
+        <p><a href="/release_confirm/{{$todo->id}}" class="btn btn-warning">解除</a></p>
         <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
         <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
       </div>
