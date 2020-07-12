@@ -9,16 +9,12 @@ class TodoController extends Controller
 {
     public function index(){
         $todos = Todo::where('complete', false)->orderBy('created_at', 'desc')->get();
-        $index = "/index_completed";
-        $index_title = "達成済みToDoリスト";
-        return view('todo.index', ['todos' => $todos, 'index' => $index, 'index_title' => $index_title]);
+        return view('todo.index', ['todos' => $todos]);
     }
 
     public function index_completed(){
         $todos = Todo::where('complete', true)->orderBy('created_at', 'desc')->get();
-        $index = "/";
-        $index_title = "未達成ToDoリスト";
-        return view('todo.index', ['todos' => $todos, 'index' => $index, 'index_title' => $index_title]);
+        return view('todo.index_completed', ['todos' => $todos]);
     }
 
     public function create(){

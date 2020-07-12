@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>ToDo一覧|MyToDo</title>
+    <title>達成済み|MyToDo</title>
   </head>
   <body class="p-3">
-    <h3>ToDoリスト</h3>
-    <p><a href="/index_completed" class="btn btn-success">達成リスト  </a></p>
-    <p><a href="/create" class="btn btn-primary">ToDo追加</a></p>
+    <h3>達成リスト</h3>
+    <p><a href="/" class="btn btn-success">戻る</a></p>
 
     @foreach($todos as $todo)
     <div class="card mb-2">
