@@ -28,6 +28,7 @@
       </div>
       <div class="form-group">
         <label>目標期限<input type="date" readonly class="form-control" name="deadline" value="{{$todo->deadline}}"></label>
+        <label>時刻<input type="time" readonly class="form-control" name="deadline_time" value="{{$todo->deadline_time}}"></label>
       </div>
       <input type="submit" readonly class="btn btn-danger" value="削除"></li>
     </form>
