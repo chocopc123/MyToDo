@@ -26,7 +26,7 @@
             @else
               <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
             @endif
-            <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d')}}</h6>
+            <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
             <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-primary">達成</a></p>
             <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
             <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>

@@ -19,7 +19,7 @@
         @else
           <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
         @endif
-        <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d')}}</h6>
+        <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
         <h6 card-subtitle mb-2 text-muted>達成日時：{{$todo->completed_date. " ". substr($todo->completed_time, 0, 5)}}</h6>
       </div>
     </div>
