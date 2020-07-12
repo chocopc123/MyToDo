@@ -70,6 +70,8 @@ class TodoController extends Controller
     public function complete(Request $request){
         $todo = Todo::find($request->id);
         $todo->complete = true;
+        $todo->completed_date = date("Y-m-d");
+        $todo->completed_time = date("H:i:s");
         $todo->save();
         return view('todo.complete');
     }
