@@ -46,13 +46,25 @@ class TodoController extends Controller
         return view('todo.update');
     }
 
-    public function show(Request $request, $id){
+    public function delete_confirm(Request $request, $id){
         $todo = Todo::find($id);
-        return view('todo.show', ['todo' => $todo]);
+        return view('todo.delete_confirm', ['todo' => $todo]);
     }
 
     public function delete(Request $request){
         Todo::destroy($request->id);
         return view('todo.delete');
+    }
+
+    public function complete_confirm(Request $request, $id){
+        $todo = Todo::find($id);
+        return view('todo.complete_confirm', ['todo' => $todo]);
+    }
+
+    public function complete(Request $request){
+        $todo = Todo::find($request->id);
+        $todo->complete = true;
+        $todo->save();
+        return view('todo.complete');
     }
 }
