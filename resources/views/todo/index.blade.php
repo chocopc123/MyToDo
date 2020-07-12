@@ -22,7 +22,7 @@
             <h6 card-subtitle mb-2 text-muted>難易度：{{$todo->difficulty}}</h6>
             <h6 card-subtitle mb-2 text-muted>重要度：{{$todo->importance}}</h6>
             @if($todo->deadline_time)
-              <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline. " ". $todo->deadline_time}}</h6>
+              <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline. " ". substr($todo->deadline_time, 0, 5)}}</h6>
             @else
               <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
             @endif

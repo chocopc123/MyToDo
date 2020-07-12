@@ -66,6 +66,12 @@ class TodoController extends Controller
         if($request->deadline_time){
             $todo->deadline_time = $request->deadline_time;
         }
+        if($request->completed_date){
+            $todo->completed_date = $request->completed_date;
+        }
+        if($request->completed_time){
+            $todo->completed_time = $request->completed_time;
+        }
         $todo->save();
 
         return view('todo.update');

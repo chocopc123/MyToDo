@@ -30,8 +30,15 @@
         <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{$todo->deadline}}"></label>
         <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time" value="{{$todo->deadline_time}}"></label>
       </div>
-      <input type="submit" class="btn btn-primary" value="修正"></li>
+      @if($todo->complete)
+        <div class="form-group">
+          <label>達成日付 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="completed_date" value="{{$todo->completed_date}}"></label>
+          <label>時刻 <span class="badge badge-danger">必須</span><input type="time" class="form-control" name="completed_time" value="{{substr($todo->completed_time, 0, 5)}}"></label>
+        </div>
+      @endif
+      <input type="submit" class="btn btn-success" value="修正"></li>
     </form>
+    <a href="/" class="btn btn-primary">一覧に戻る</a>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
