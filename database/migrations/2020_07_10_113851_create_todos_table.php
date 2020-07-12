@@ -19,7 +19,7 @@ class CreateTodosTable extends Migration
             $table->text('explanation');
             $table->integer('difficulty');
             $table->integer('importance');
-            $table->boolean('complete');
+            $table->boolean('complete')->default(false)->change();
             $table->date('deadline');
             $table->timestamps();
         });
