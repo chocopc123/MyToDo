@@ -7,10 +7,40 @@
     <title>ToDo一覧|MyToDo</title>
   </head>
   <body class="p-3">
-    <h3>ToDoリスト</h3>
-    <p><a href="/index_completed" class="btn btn-success">達成リスト  </a></p>
-    <p><a href="/create" class="btn btn-primary">ToDo追加</a></p>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;"">
+      <a class="navbar-brand" href="/">ToDoリスト</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">未達成リスト <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/index_completed">達成リスト</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <p class="pt-3"><a href="/create" class="btn btn-primary">ToDo追加</a></p>
     @if(count($todos)==0)
       <h5>ToDoがまだありません。</h5>
     @else
@@ -27,7 +57,7 @@
               <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
             @endif
             <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
-            <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-primary">達成</a></p>
+            <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a></p>
             <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
             <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
           </div>
