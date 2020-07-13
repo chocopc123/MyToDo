@@ -10,7 +10,7 @@
     <h3>ToDo解除完了</h3>
 
     <div class="alert alert-primary" role="alert">
-      ToDoを解除しました。
+      達成状態を解除しました。
       <a href="/index_completed" class="btn btn-primary">一覧に戻る</a>
     </div>
 

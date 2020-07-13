@@ -56,6 +56,8 @@ class TodoController extends Controller
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string',
+            'completed_date'=>'filled|string',
+            'completed_time'=>'filled|string',
         ]);
         $todo = Todo::find($request->id);
         $todo->title = $request->title;
