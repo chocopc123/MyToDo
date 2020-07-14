@@ -25,6 +25,13 @@
           </form>
         </div>
       </nav>
+
+      {{-- フラッシュメッセージを表示 --}}
+      @if(session('flash_message'))
+        <div class="alert alert-success text-center py-3 my-0">
+          {{ session('flash_message') }}
+        </div>
+      @endif
     </header>
 
     <div id="wrapper" class="p-3">
