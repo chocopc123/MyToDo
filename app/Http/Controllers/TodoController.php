@@ -8,6 +8,7 @@ use App\Todo;
 class TodoController extends Controller
 {
     public function index(){
+        session(['completed' => false]);
         // 未達成のToDo一覧を作成日時の降順で取得
         $todos = Todo::where('complete', false)->orderBy('created_at', 'desc')->get();
         // $todosを渡してindexビューを返す
@@ -16,6 +17,7 @@ class TodoController extends Controller
 
 
     public function index_completed(){
+        session(['completed' => true]);
         // 未達成のToDo一覧を作成日時の降順で取得
         $todos = Todo::where('complete', true)->orderBy('created_at', 'desc')->get();
         // $todosを渡してindex_completedビューを返す
@@ -101,8 +103,12 @@ class TodoController extends Controller
         $todo->save();
         // flash_messageセッションにメッセージを代入
         session()->flash('flash_message', 'ToDoの編集が完了しました');
-        // リダイレクトする
-        return redirect('/');
+        // session('completed')がtrueだったらindex_completedにリダイレクトする
+        if(session('completed')){
+            return redirect('/index_completed');
+        }else{
+            return redirect('/');
+        }
     }
 
 
@@ -119,8 +125,12 @@ class TodoController extends Controller
         Todo::destroy($request->id);
         // flash_messageセッションにメッセージを代入
         session()->flash('flash_message', '削除が完了しました');
-        // リダイレクトする
-        return redirect('/');
+        // session('completed')がtrueだったらindex_completedにリダイレクトする
+        if(session('completed')){
+            return redirect('/index_completed');
+        }else{
+            return redirect('/');
+        }
     }
 
 
@@ -144,7 +154,7 @@ class TodoController extends Controller
         // flash_messageセッションにメッセージを代入
         session()->flash('flash_message', 'ToDoを達成しました');
         // リダイレクトする
-        return redirect('/');;
+        return redirect('/');
     }
 
 
