@@ -120,6 +120,10 @@
 
     {{-- 各種ボタン --}}
     <input type="submit" class="btn btn-success" value="修正"></li>
-    <a href="/" class="btn btn-primary">一覧に戻る</a>
+    @if(session('completed'))
+      <a href="/index_completed" class="btn btn-primary">一覧に戻る</a>
+    @else
+      <a href="/" class="btn btn-primary">一覧に戻る</a>
+    @endif
   </form>
 @endsection

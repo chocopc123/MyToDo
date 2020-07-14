@@ -79,6 +79,10 @@
 
     {{-- 各種ボタン --}}
     <input type="submit" readonly class="btn btn-danger" value="削除"></li>
-    <a href="/" class="btn btn-primary">一覧に戻る</a>
+    @if(session('completed'))
+      <a href="/index_completed" class="btn btn-primary">一覧に戻る</a>
+    @else
+      <a href="/" class="btn btn-primary">一覧に戻る</a>
+    @endif
   </form>
 @endsection
