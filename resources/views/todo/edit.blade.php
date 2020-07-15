@@ -10,12 +10,22 @@
 {{-- template.blade.phpの@yield('navi')に渡す --}}
 {{-- class="active"と<span class="sr-only">(current)</span>を指定する --}}
 @section('navi')
-  <li class="nav-item">
-    <a class="nav-link" href="/">未達成リスト</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/index_completed">達成リスト</a>
-  </li>
+  {{-- セッションの値によってactiveを付け替える --}}
+  @if(session('completed'))
+    <li class="nav-item">
+      <a class="nav-link" href="/">未達成リスト</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="/index_completed">達成リスト <span class="sr-only">(current)</span></a>
+    </li>
+  @else
+    <li class="nav-item active">
+      <a class="nav-link" href="/">未達成リスト <span class="sr-only">(current)</span>  </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/index_completed">達成リスト</a>
+    </li>
+  @endif
   <li class="nav-item">
     <a class="nav-link" href="/login">ログイン</a>
   </li>
@@ -126,6 +136,7 @@
 
     {{-- 各種ボタン --}}
     <input type="submit" class="btn btn-success" value="修正">
+    {{-- セッションの値によって一覧に戻るボタンの挙動を変える --}}
     @if(session('completed'))
       <a href="/index_completed" class="btn btn-primary">一覧に戻る</a>
     @else
