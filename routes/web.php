@@ -25,3 +25,4 @@ Route::get('release_confirm/{id}', 'TodoController@release_confirm');
 Route::post('release', 'TodoController@release');
 
 Route::get('register', 'UserController@register_form');
+Route::post('register', 'UserController@register');
