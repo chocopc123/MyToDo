@@ -67,6 +67,5 @@
 
     {{-- 各種ボタン --}}
     <input type="submit" class="btn btn-success" value="登録">
-    <a href="/" class="btn btn-primary">一覧に戻る</a>
   </form>
 @endsection
