@@ -35,10 +35,11 @@ class TodoController extends Controller
         // バリデーションを設定する
         $request->validate([
             'title'=>'required|string|max:40',
-            'explanation'=>'required|string',
+            'explanation'=>'required|string|max:500',
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
-            'deadline'=>'required|string',
+            'deadline'=>'required|string|max:10',
+            'deadline_time'=>'string',
         ]);
         // $todoに値を設定する
         $todo = new Todo;
@@ -73,12 +74,13 @@ class TodoController extends Controller
         // バリデーションを設定する
         $request->validate([
             'title'=>'required|string|max:40',
-            'explanation'=>'required|string',
+            'explanation'=>'required|string|max:500',
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
-            'deadline'=>'required|string',
-            'completed_date'=>'filled|string',
-            'completed_time'=>'filled|string',
+            'deadline'=>'required|string|max:10',
+            'deadline_time'=>'string|max:8',
+            'completed_date'=>'filled|string|max:10',
+            'completed_time'=>'filled|string|max:8',
         ]);
         // $todoに値を設定する
         $todo = Todo::find($request->id);
