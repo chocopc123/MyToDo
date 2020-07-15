@@ -34,7 +34,7 @@ class TodoController extends Controller
     public function store(Request $request){
         // バリデーションを設定する
         $request->validate([
-            'title'=>'required|string|max:70',
+            'title'=>'required|string|max:40',
             'explanation'=>'required|string',
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
@@ -72,7 +72,7 @@ class TodoController extends Controller
     public function update(Request $request){
         // バリデーションを設定する
         $request->validate([
-            'title'=>'required|string|max:70',
+            'title'=>'required|string|max:40',
             'explanation'=>'required|string',
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
