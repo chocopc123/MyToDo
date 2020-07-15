@@ -16,6 +16,9 @@
   <li class="nav-item">
     <a class="nav-link" href="/index_completed">達成リスト</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/login">ログイン</a>
+  </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Dropdown
@@ -78,7 +81,7 @@
     @endif
 
     {{-- 各種ボタン --}}
-    <input type="submit" readonly class="btn btn-danger" value="削除"></li>
+    <input type="submit" readonly class="btn btn-danger" value="削除">
     @if(session('completed'))
       <a href="/index_completed" class="btn btn-primary">一覧に戻る</a>
     @else

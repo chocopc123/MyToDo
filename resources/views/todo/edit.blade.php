@@ -16,6 +16,9 @@
   <li class="nav-item">
     <a class="nav-link" href="/index_completed">達成リスト</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/login">ログイン</a>
+  </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Dropdown
@@ -57,18 +60,18 @@
       <label for="titleInput">タイトル <span class="badge badge-danger">必須</span></label>
       {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
       @if(old('title'))
-        <input type="text" class="form-control" id="titleInput" name="title" value="{{old('title')}}">
+        <input type="text" class="form-control" id="titleInput" name="title" value="{{old('title')}}" required>
       @else
-        <input type="text" class="form-control" id="titleInput" name="title" value="{{$todo->title}}">
+        <input type="text" class="form-control" id="titleInput" name="title" value="{{$todo->title}}" required>
       @endif
     </div>
     <div class="form-group">
       <label for="explanationInput">詳細 <span class="badge badge-danger">必須</span></label>
       {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
       @if(old('explanation'))
-        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10">{{old('explanation')}}</textarea>
+        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{old('explanation')}}</textarea>
       @else
-        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10">{{$todo->explanation}}</textarea>
+        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{$todo->explanation}}</textarea>
       @endif
     </div>
     <div class="form-group">
@@ -90,9 +93,9 @@
     <div class="form-group">
       {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
       @if(old('deadline'))
-        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{old('deadline')}}"></label>
+        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{old('deadline')}}" required></label>
       @else
-        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{$todo->deadline}}"></label>
+        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{$todo->deadline}}" required></label>
       @endif
       {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
       @if(old('deadline_time'))
@@ -106,20 +109,20 @@
     @if($todo->complete)
       <div class="form-group">
         @if(old('completed_date'))
-          <label>達成日付 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="completed_date" value="{{old('completed_date')}}"></label>
+          <label>達成日付 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="completed_date" value="{{old('completed_date')}}" required></label>
         @else
-          <label>達成日付 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="completed_date" value="{{$todo->completed_date}}"></label>
+          <label>達成日付 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="completed_date" value="{{$todo->completed_date}}" required></label>
         @endif
         @if(old('completed_time'))
-          <label>時刻 <span class="badge badge-danger">必須</span><input type="time" class="form-control" name="completed_time" value="{{substr(old('completed_time'), 0, 5)}}"></label>
+          <label>時刻 <span class="badge badge-danger">必須</span><input type="time" class="form-control" name="completed_time" value="{{substr(old('completed_time'), 0, 5)}}" required></label>
         @else
-          <label>時刻 <span class="badge badge-danger">必須</span><input type="time" class="form-control" name="completed_time" value="{{substr($todo->completed_time, 0, 5)}}"></label>
+          <label>時刻 <span class="badge badge-danger">必須</span><input type="time" class="form-control" name="completed_time" value="{{substr($todo->completed_time, 0, 5)}}" required></label>
         @endif
       </div>
     @endif
 
     {{-- 各種ボタン --}}
-    <input type="submit" class="btn btn-success" value="修正"></li>
+    <input type="submit" class="btn btn-success" value="修正">
     @if(session('completed'))
       <a href="/index_completed" class="btn btn-primary">一覧に戻る</a>
     @else
