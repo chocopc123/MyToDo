@@ -23,3 +23,4 @@ Route::get('complete_confirm/{id}', 'TodoController@complete_confirm');
 Route::post('complete', 'TodoController@complete');
 Route::get('release_confirm/{id}', 'TodoController@release_confirm');
 Route::post('release', 'TodoController@release');
+Route::get('register', 'UserController@register');
