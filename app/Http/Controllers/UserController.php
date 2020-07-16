@@ -53,8 +53,8 @@ class UserController extends Controller{
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             return redirect()->intended('profile');
         }
-        // 失敗した場合はloginにリダイレクト
-        return redirect('login');
+        // 失敗した場合はregisterにリダイレクト
+        return redirect('register');
     }
 
     public function profile(){
