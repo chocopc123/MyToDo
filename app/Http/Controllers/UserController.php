@@ -49,12 +49,12 @@ class UserController extends Controller{
             'password'=>'required|string|min:8|max:128',
         ]);
         // ログインする
-        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             return redirect()->intended('profile');
         }
-        // 失敗した場合はregisterにリダイレクト
-        return redirect('register');
+        // 失敗した場合はloginにリダイレクト
+        return redirect('login');
     }
 
     public function profile(){
