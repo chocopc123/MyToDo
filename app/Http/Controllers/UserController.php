@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller{
     public function __construct(){
@@ -49,7 +49,7 @@ class UserController extends Controller{
             'password'=>'required|string|min:8|max:128',
         ]);
         // ログインする
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             return redirect()->intended('profile');
         }
