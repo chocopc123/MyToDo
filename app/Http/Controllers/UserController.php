@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 
-class UserController extends Controller
-{
+class UserController extends Controller{
     public function register_form(){
         return view('user.register_form');
     }
@@ -40,9 +39,9 @@ class UserController extends Controller
             'password'=>'required|string|min:8|max:128',
         ]);
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
-            return redirect('profile');
+            return redirect()->intended('profile');
         }
-        return redirect('/');
+        return redirect('login');
     }
 
     public function profile(){

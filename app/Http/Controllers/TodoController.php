@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Todo;
 
-class TodoController extends Controller
-{
+class TodoController extends Controller{
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
         session(['completed' => false]);
         // 未達成のToDo一覧を作成日時の降順で取得
