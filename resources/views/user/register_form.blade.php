@@ -63,6 +63,7 @@
     <div class="form-group">
       <label for="passwordInput">パスワード <span class="badge badge-danger">必須</span></label>
       <input type="password" class="form-control" id="passwordInput" name="password" required>
+      <span class="form-text text-muted">パスワードは8文字以上128文字以内で入力してください。</span>
     </div>
     <div class="form-group">
       <label for="passwordInput">パスワード確認 <span class="badge badge-danger">必須</span></label>

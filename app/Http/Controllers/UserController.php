@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required|string|max:30',
             'email'=>'required|string|max:254',
-            'password'=>'required|string|max:128|confirmed',
+            'password'=>'required|string|min:8|max:128|confirmed',
         ]);
         // $userに値を設定する
         $user = new User;
@@ -31,5 +32,20 @@ class UserController extends Controller
 
     public function login_form(){
         return view('user.login_form');
+    }
+
+    public function login(Request $request){
+        $request->validate([
+            'email'=>'required|string|max:254',
+            'password'=>'required|string|min:8|max:128',
+        ]);
+        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+            return redirect('profile');
+        }
+        return redirect('/');
+    }
+
+    public function profile(){
+        return view('user.profile');
     }
 }

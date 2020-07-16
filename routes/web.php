@@ -27,3 +27,5 @@ Route::post('release', 'TodoController@release');
 Route::get('register', 'UserController@register_form');
 Route::post('register', 'UserController@register');
 Route::get('login', 'UserController@login_form');
+Route::post('login', 'UserController@login');
+Route::get('profile', 'UserController@profile');
