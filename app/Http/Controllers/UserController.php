@@ -30,7 +30,7 @@ class UserController extends Controller{
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         // データベースに保存
         $user->save();
         // リダイレクトする
@@ -49,7 +49,7 @@ class UserController extends Controller{
             'password'=>'required|string|min:8|max:128',
         ]);
         // ログインする
-        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->remember)){
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             return redirect()->intended('profile');
         }
