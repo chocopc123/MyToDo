@@ -7,6 +7,7 @@ use App\Todo;
 
 class TodoController extends Controller{
     public function __construct(){
+        // ログインしていないとアクションにアクセス出来ないようにする
         $this->middleware('auth');
     }
 
