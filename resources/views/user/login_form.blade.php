@@ -2,7 +2,7 @@
 @extends('layouts.template')
 
 {{-- head.blade.phpの@yield('title')に渡す --}}
-@section('title', 'ユーザー作成|MyToDo')
+@section('title', 'ログイン|MyToDo')
 {{-- head.blade.phpを差し込む --}}
 @include('layouts.head')
 
@@ -11,24 +11,10 @@
 {{-- class="active"と<span class="sr-only">(current)</span>を指定する --}}
 @section('navi')
   <li class="nav-item">
-    <a class="nav-link" href="/">未達成リスト</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/index_completed">達成リスト</a>
+    <a class="nav-link" href="/register">新規登録</a>
   </li>
   <li class="nav-item active">
     <a class="nav-link" href="/login">ログイン <span class="sr-only">(current)</span></a>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown
-    </a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
   </li>
 @endsection
 

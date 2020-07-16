@@ -9,9 +9,9 @@ use Auth;
 class UserController extends Controller{
     public function __construct(){
         // ログインしていないとlogoutにはアクセス出来ないようにする
-        $this->middleware('auth', ['only' => 'logout']);
+        $this->middleware('auth', ['only' => ['logout', 'profile']]);
         // ログインしていたらlogout以外にはアクセスできないようにする
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout', 'profile']]);
     }
 
     public function register_form(){
