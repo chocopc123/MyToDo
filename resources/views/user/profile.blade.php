@@ -17,14 +17,12 @@
     <a class="nav-link" href="/index_completed">達成リスト</a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      ダッシュボード
+    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      ダッシュボード <span class="sr-only">(current)</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item active" href="/profile">プロフィール</a>
+      <a class="dropdown-item active" href="/profile">プロフィール <span class="sr-only">(current)</span></a>
       <a class="dropdown-item" href="/logout">ログアウト</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Something else here</a>
     </div>
   </li>
 @endsection

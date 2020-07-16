@@ -33,8 +33,6 @@
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <a class="dropdown-item" href="/profile">プロフィール</a>
       <a class="dropdown-item" href="/logout">ログアウト</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Something else here</a>
     </div>
   </li>
 @endsection
