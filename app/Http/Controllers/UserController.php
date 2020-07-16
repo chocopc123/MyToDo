@@ -8,9 +8,9 @@ use Auth;
 
 class UserController extends Controller{
     public function __construct(){
-        // ログインしていないとlogoutにはアクセス出来ないようにする
+        // ログインしていないとlogoutとprofileにはアクセス出来ないようにする
         $this->middleware('auth', ['only' => ['logout', 'profile']]);
-        // ログインしていたらlogout以外にはアクセスできないようにする
+        // ログインしていたらlogoutとprofile以外にはアクセスできないようにする
         $this->middleware('guest', ['except' => ['logout', 'profile']]);
     }
 
