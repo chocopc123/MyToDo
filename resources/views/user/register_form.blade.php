@@ -62,11 +62,11 @@
     </div>
     <div class="form-group">
       <label for="passwordInput">パスワード <span class="badge badge-danger">必須</span></label>
-      <input type="password" class="form-control" id="passwordInput" name="password" value="{{old('password')}}" required>
+      <input type="password" class="form-control" id="passwordInput" name="password" required>
     </div>
     <div class="form-group">
       <label for="passwordInput">パスワード確認 <span class="badge badge-danger">必須</span></label>
-      <input type="password" class="form-control" id="passwordInput" name="password_confirmation" value="{{old('password')}}" required>
+      <input type="password" class="form-control" id="passwordInput" name="password_confirmation" required>
     </div>
 
     {{-- 各種ボタン --}}
