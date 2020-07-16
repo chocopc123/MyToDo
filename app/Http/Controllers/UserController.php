@@ -28,4 +28,8 @@ class UserController extends Controller
         // リダイレクトする
         return redirect('/');
     }
+
+    public function login_form(){
+        return view('user.login_form');
+    }
 }
