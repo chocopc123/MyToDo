@@ -16,7 +16,7 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required|string|max:30',
             'email'=>'required|string|max:254',
-            'password'=>'required|string|max:128',
+            'password'=>'required|string|max:128|confirmed',
         ]);
         // $userに値を設定する
         $user = new User;
