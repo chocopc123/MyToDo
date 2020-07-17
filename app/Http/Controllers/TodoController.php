@@ -45,6 +45,7 @@ class TodoController extends Controller{
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string|max:10',
             'deadline_time'=>'nullable|string',
+            'user_id'=>'required|integer'
         ]);
         // $todoに値を設定する
         $todo = new Todo;
