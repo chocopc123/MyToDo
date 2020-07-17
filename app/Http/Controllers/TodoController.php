@@ -14,7 +14,7 @@ class TodoController extends Controller{
 
     public function index(){
         session(['completed' => false]);
-        // 未達成のToDo一覧を作成日時の降順で取得
+        // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
         $todos = Todo::where([['complete', false], ['user_id', Auth::id()]])->orderBy('created_at', 'desc')->get();
         // $todosを渡してindexビューを返す
         return view('todo.index', ['todos' => $todos]);
@@ -23,8 +23,8 @@ class TodoController extends Controller{
 
     public function index_completed(){
         session(['completed' => true]);
-        // 未達成のToDo一覧を作成日時の降順で取得
-        $todos = Todo::where('complete', true)->orderBy('created_at', 'desc')->get();
+        // ログインユーザーの達成済みのToDo一覧を作成日時の降順で取得
+        $todos = Todo::where([['complete', true], ['user_id', Auth::id()]])->orderBy('created_at', 'desc')->get();
         // $todosを渡してindex_completedビューを返す
         return view('todo.index_completed', ['todos' => $todos]);
     }
@@ -45,7 +45,6 @@ class TodoController extends Controller{
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string|max:10',
             'deadline_time'=>'nullable|string',
-            'user_id'=>'required|integer'
         ]);
         // $todoに値を設定する
         $todo = new Todo;
@@ -55,6 +54,7 @@ class TodoController extends Controller{
         $todo->importance = $request->importance;
         $todo->complete = false;
         $todo->deadline = $request->deadline;
+        $todo->user_id = Auth::id();
         // deadline_timeが送られてきた場合は設定する
         if($request->deadline_time){
             $todo->deadline_time = $request->deadline_time;
