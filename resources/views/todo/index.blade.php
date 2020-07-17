@@ -47,7 +47,9 @@
 
           {{-- 現在日時と目標日時の差によって期限までの日数を表示 --}}
           <?php
-            if( ($todo->deadline. " ". $todo->deadline_time) < date("Y-m-d H:i:s") ):
+            if($todo->deadline == date("Y-m-d")):
+              echo '<h6 class="card-subtitle mb-2 text-danger">本日期限</h6>';
+            elseif( ($todo->deadline. " ". $todo->deadline_time) < date("Y-m-d H:i:s") ):
               echo '<h6 class="card-subtitle mb-2 text-danger">'. ((strtotime(date("Y-m-d")) - (strtotime($todo->deadline))) / (60*60*24)). "日経過</h6>";
             elseif( ($todo->deadline. " ". $todo->deadline_time) < date("Y-m-d H:i:s", strtotime('+3 day')) ):
               echo '<h6 class="card-subtitle mb-2 text-warning">あと'. (strtotime($todo->deadline) - strtotime(date("Y-m-d"))) / (60*60*24). "日</h6>";
