@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller{
     public function __construct(){
@@ -14,7 +15,7 @@ class TodoController extends Controller{
     public function index(){
         session(['completed' => false]);
         // 未達成のToDo一覧を作成日時の降順で取得
-        $todos = Todo::where('complete', false)->orderBy('created_at', 'desc')->get();
+        $todos = Todo::where([['complete', false], ['user_id', Auth::id()]])->orderBy('created_at', 'desc')->get();
         // $todosを渡してindexビューを返す
         return view('todo.index', ['todos' => $todos]);
     }
