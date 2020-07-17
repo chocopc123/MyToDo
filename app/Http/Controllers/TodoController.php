@@ -43,7 +43,7 @@ class TodoController extends Controller{
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string|max:10',
-            'deadline_time'=>'string',
+            'deadline_time'=>'nullable|string',
         ]);
         // $todoに値を設定する
         $todo = new Todo;
