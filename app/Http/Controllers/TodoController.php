@@ -84,7 +84,7 @@ class TodoController extends Controller{
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string|max:10',
-            'deadline_time'=>'string|max:8',
+            'deadline_time'=>'nullable|string|max:8',
             'completed_date'=>'filled|string|max:10',
             'completed_time'=>'filled|string|max:8',
         ]);
