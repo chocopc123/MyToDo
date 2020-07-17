@@ -61,5 +61,6 @@
         </div>
       </div>
     @endforeach
+    {{ $todos->links() }}
   @endif
 @endsection
