@@ -45,23 +45,21 @@
           <h6 class="card-subtitle mb-2 text-body">難易度：{{$todo->difficulty}}</h6>
           <h6 class="card-subtitle mb-2 text-body">重要度：{{$todo->importance}}</h6>
 
+          {{-- 現在日時と目標日時の差によって期限までの日数を表示 --}}
           <?php
             if( ($todo->deadline. " ". $todo->deadline_time) < date("Y-m-d H:i:s") ):
-              $text_color = "text-danger";
-              echo '<h6 class="text-danger">'. ((strtotime(date("Y-m-d")) - (strtotime($todo->deadline))) / (60*60*24)). "日経過</h6>";
+              echo '<h6 class="card-subtitle mb-2 text-danger">'. ((strtotime(date("Y-m-d")) - (strtotime($todo->deadline))) / (60*60*24)). "日経過</h6>";
             elseif( ($todo->deadline. " ". $todo->deadline_time) < date("Y-m-d H:i:s", strtotime('+3 day')) ):
-              $text_color = "text-warning";
-              echo '<h6 class="text-warning">あと'. (strtotime($todo->deadline) - strtotime(date("Y-m-d"))) / (60*60*24). "日</h6>";
+              echo '<h6 class="card-subtitle mb-2 text-warning">あと'. (strtotime($todo->deadline) - strtotime(date("Y-m-d"))) / (60*60*24). "日</h6>";
             else:
-              $text_color = "text-body";
-              echo '<h6 class="text-success">あと'. (strtotime($todo->deadline) - strtotime(date("Y-m-d"))) / (60*60*24). "日</h6>";
+              echo '<h6 class="card-subtitle mb-2 text-success">あと'. (strtotime($todo->deadline) - strtotime(date("Y-m-d"))) / (60*60*24). "日</h6>";
             endif;
           ?>
           {{-- 目標期限に時間を設定している場合は表示する(時間設定は任意) --}}
           @if($todo->deadline_time)
-            <h6 class="card-subtitle mb-2 {{ $text_color }}">目標期限：{{$todo->deadline. " ". substr($todo->deadline_time, 0, 5)}}</h6>
+            <h6 class="card-subtitle mb-2 text-body">目標期限：{{$todo->deadline. " ". substr($todo->deadline_time, 0, 5)}}</h6>
           @else
-            <h6 class="card-subtitle mb-2 {{ $text_color }}">目標期限：{{$todo->deadline}}</h6>
+            <h6 class="card-subtitle mb-2 text-body">目標期限：{{$todo->deadline}}</h6>
           @endif
 
           <h6 class="card-subtitle mb-2 text-body">作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
