@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Todo;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller{
     public function __construct(){
         // ログインしていないとlogoutとprofileにはアクセス出来ないようにする
-        $this->middleware('auth', ['only' => ['logout', 'profile']]);
+        $this->middleware('auth', ['only' => ['logout', 'profile', 'user_delete_confirm', 'user_delete']]);
         // ログインしていたらlogoutとprofile以外にはアクセスできないようにする
-        $this->middleware('guest', ['except' => ['logout', 'profile']]);
+        $this->middleware('guest', ['except' => ['logout', 'profile', 'user_delete_confirm', 'user_delete']]);
     }
 
     public function register_form(){
@@ -73,5 +74,24 @@ class UserController extends Controller{
         Auth::logout();
         // ログインビューを返す
         return redirect('login');
+    }
+
+    public function user_delete_confirm(Request $request, $id){
+        // $idをもつユーザーを抜き出す
+        $user = User::find($id);
+        // $userを渡してdelete_confirmビューを返す
+        return view('user.user_delete_confirm', ['user' => $user]);
+    }
+
+    public function user_delete(Request $request){
+        // ユーザーに対応したToDoをソフトデリートする
+        Todo::where('user_id', $request->id)->delete();
+        // 受け取ったidのUserを削除する
+        User::where('id', $request->id)->delete();
+        // ログアウト
+        Auth::logout();
+        // フラッシュメッセージの表示
+        session()->flash('flash_message', 'ユーザーの削除が完了しました');
+        return redirect('/register');
     }
 }

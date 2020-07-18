@@ -130,7 +130,7 @@ class TodoController extends Controller{
 
     public function delete(Request $request){
         // 受け取ったidのToDoを削除する
-        Todo::destroy($request->id);
+        Todo::where('id', $request->id)->delete();
         // flash_messageセッションにメッセージを代入
         session()->flash('flash_message', '削除が完了しました');
         // session('completed')がtrueだったらindex_completedにリダイレクトする

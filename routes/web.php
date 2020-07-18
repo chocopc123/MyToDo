@@ -30,3 +30,5 @@ Route::post('register', 'UserController@register');
 Route::get('login', 'UserController@login_form');
 Route::post('login', 'UserController@login');
 Route::get('logout', 'UserController@logout');
+Route::get('user_delete_confirm/{id}', 'UserController@user_delete_confirm');
+Route::post('user_delete', 'UserController@user_delete');

@@ -43,6 +43,7 @@
           <td>{{ Auth::user()->email }}</td>
         </tr>
       </table>
+      <p class="pt-3"><a href="/user_delete_confirm/{{ Auth::id() }}" class="btn btn-danger">ユーザー削除</a></p>
     </div>
   </div>
 @endsection
