@@ -47,7 +47,7 @@
       <input type="password" class="form-control" id="passwordInput" name="password" value="{{old('password')}}" required>
     </div>
     <div class="form-grout">
-      <input type="checkbox" id="rememberInput" name="remember">
+      <input type="checkbox" id="rememberInput" name="remember" value="true">
       <label for="rememberInput">ログイン状態を保持</label>
     </div>
 
