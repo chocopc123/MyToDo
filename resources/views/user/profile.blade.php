@@ -29,18 +29,20 @@
 
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
-  <h3>プロフィール</h3>
+  <div id="wrapper" class="pt-3 col-12 col-sm-12 col-md-8 col-xl-8">
+    <h3 class="pb-3">プロフィール</h3>
 
-  <div>
-    <table>
-      <tr>
-        <th>ニックネーム</th>
-        <td>{{ Auth::user()->name }}</td>
-      </tr>
-      <tr>
-        <th>メールアドレス</th>
-        <td>{{ Auth::user()->email }}</td>
-      </tr>
-    </table>
+    <div>
+      <table>
+        <tr>
+          <th>ニックネーム</th>
+          <td>{{ Auth::user()->name }}</td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td>{{ Auth::user()->email }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 @endsection

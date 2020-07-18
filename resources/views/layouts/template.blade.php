@@ -8,7 +8,7 @@
   <body>
     <header>
       {{-- ナビゲーションバー --}}
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+      <nav class="navbar navbar-expand-lg navbar-light font-weight-bold" style="background-color: #b6e1ff;">
         <a class="navbar-brand" href="/">ToDoリスト</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -34,8 +34,8 @@
       @endif
     </header>
 
-    <div id="wrapper" class="p-3">
-      {{-- @section('content')を受け取る --}}
+    <div class="container-fluid row">
+      {{-- @section('content')コンテンツを受け取る --}}
       @yield('content')
     </div>
 

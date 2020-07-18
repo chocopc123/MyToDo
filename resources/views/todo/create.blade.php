@@ -29,63 +29,65 @@
 
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
-  <h2>ToDo追加</h2>
+  <div id="wrapper" class="pt-3 col-12 col-sm-12 col-md-8 col-xl-8">
+    <h2 class="pb-3">ToDo追加</h2>
 
-  {{-- createアクションにフォームのデータをPOSTする --}}
-  <form method="POST" action="/create">
-    {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
-    {{ csrf_field() }}
+    {{-- createアクションにフォームのデータをPOSTする --}}
+    <form method="POST" action="/create">
+      {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
+      {{ csrf_field() }}
 
-    {{-- バリデーションエラーがある場合は出力 --}}
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-          @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-          @endforeach
-        </ul>
+      {{-- バリデーションエラーがある場合は出力 --}}
+      @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
+      {{-- 各種フォーム入力欄 --}}
+      {{-- バリデーションエラーがあった場合は、old関数で入力データを復元する --}}
+      <div class="form-group">
+        <label for="titleInput">タイトル <span class="badge badge-danger">必須</span></label>
+        <input type="text" class="form-control" id="titleInput" name="title" value="{{old('title')}}" required>
       </div>
-    @endif
+      <div class="form-group">
+        <label for="explanationInput">詳細 <span class="badge badge-danger">必須</span></label>
+        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{old('explanation')}}</textarea>
+      </div>
+      <div class="form-group">
+        {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
+        @if(old('difficulty'))
+          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="{{old('difficulty')}}"></label>
+        @else
+          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="1"></label>
+        @endif
+      </div>
+      <div class="form-group">
+        {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
+        @if(old('importance'))
+          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="{{old('importance')}}"></label>
+        @else
+          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="1"></label>
+        @endif
+      </div>
+      <div class="form-group">
+        {{-- old関数に値がある場合はそれを、ない場合は現在時刻をvalueに設定する --}}
+        @if(old('deadline'))
+          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{old('deadline')}}" required></label>
+        @else
+          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}" required></label>
+        @endif
 
-    {{-- 各種フォーム入力欄 --}}
-    {{-- バリデーションエラーがあった場合は、old関数で入力データを復元する --}}
-    <div class="form-group">
-      <label for="titleInput">タイトル <span class="badge badge-danger">必須</span></label>
-      <input type="text" class="form-control" id="titleInput" name="title" value="{{old('title')}}" required>
-    </div>
-    <div class="form-group">
-      <label for="explanationInput">詳細 <span class="badge badge-danger">必須</span></label>
-      <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{old('explanation')}}</textarea>
-    </div>
-    <div class="form-group">
-      {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
-      @if(old('difficulty'))
-        <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="{{old('difficulty')}}"></label>
-      @else
-        <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="1"></label>
-      @endif
-    </div>
-    <div class="form-group">
-      {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
-      @if(old('importance'))
-        <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="{{old('importance')}}"></label>
-      @else
-        <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="1"></label>
-      @endif
-    </div>
-    <div class="form-group">
-      {{-- old関数に値がある場合はそれを、ない場合は現在時刻をvalueに設定する --}}
-      @if(old('deadline'))
-        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{old('deadline')}}" required></label>
-      @else
-        <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}" required></label>
-      @endif
+        <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time" value="{{old('deadline_time')}}"></label>
+      </div>
 
-      <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time" value="{{old('deadline_time')}}"></label>
-    </div>
-
-    {{-- 各種ボタン --}}
-    <input type="submit" class="btn btn-success" value="追加">
-    <a href="/" class="btn btn-primary">一覧に戻る</a>
-  </form>
+      {{-- 各種ボタン --}}
+      <input type="submit" class="btn btn-success" value="追加">
+      <a href="/" class="btn btn-primary">一覧に戻る</a>
+    </form>
+  </div>
 @endsection
