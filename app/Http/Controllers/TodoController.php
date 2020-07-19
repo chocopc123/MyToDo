@@ -63,6 +63,42 @@ class TodoController extends Controller{
         return view('todo.index', ['todos' => $todos]);
     }
 
+    public function overdue(){
+        // redirectセッションに値を設定
+        session(['redirect'=> "/overdue"]);
+        // ログインユーザーの未達成で期限間近のToDo一覧を作成日時の降順で取得
+        if(session('completed')){
+            $todos = Todo::where(function($todos){
+                $todos->where('user_id', Auth::id())
+                    ->where('complete', true);
+            })
+            ->where(function($todos){
+                $todos->where('deadline', '<' , date("Y-m-d"))
+                ->orwhere(function($todos){
+                    $todos->where('deadline', '=' , date("Y-m-d"))
+                        ->where('deadline_time', '<', date("H:i:s"));
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+            return view('todo.index_completed', ['todos' => $todos]);
+        }else{
+            $todos = Todo::where(function($todos){
+                $todos->where('user_id', Auth::id())
+                    ->where('complete', false);
+            })
+            ->where(function($todos){
+                $todos->where('deadline', '<' , date("Y-m-d"))
+                ->orwhere(function($todos){
+                    $todos->where('deadline', '=' , date("Y-m-d"))
+                        ->where('deadline_time', '<', date("H:i:s"));
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
+            return view('todo.index', ['todos' => $todos]);
+        }
+    }
 
     public function create(){
         // createビューを返す

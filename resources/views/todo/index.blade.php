@@ -84,6 +84,7 @@
       <h4 class="pt-4 pb-2 pl-5 font-weight-bold">絞り込み</h4>
       <a href="/" class="list-group-item list-group-item-action font-weight-bold <?php if(session('redirect')=='/'){ echo "active"; } ?>">未達成一覧</a>
       <a href="/duesoon" class="list-group-item list-group-item-action font-weight-bold <?php if(session('redirect')=='/duesoon'){ echo "active"; } ?>">期限間近</a>
+      <a href="/overdue" class="list-group-item list-group-item-action font-weight-bold <?php if(session('redirect')=='/overdue'){ echo "active"; } ?>">期限超過</a>
     </ul>
   </div>
 @endsection
