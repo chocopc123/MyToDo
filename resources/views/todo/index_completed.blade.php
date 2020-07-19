@@ -71,7 +71,8 @@
 
   {{-- サイドバー --}}
   <div class="col-12 col-sm-12 col-md-3 col-xl-2 order-md-first" style="background-color: #e3f2fd;">
-    <ul class="list-group mt-3">
+    <ul class="list-group">
+      <h4 class="pt-4 pb-2 pl-5 font-weight-bold">絞り込み</h4>
       <a href="/index_completed" class="list-group-item list-group-item-action font-weight-bold  <?php if(session('redirect')=='/index_completed'){ echo "active"; } ?>">達成済み一覧 <span class="sr-only">(current)</span></a>
       <a href="/overdue" class="list-group-item list-group-item-action font-weight-bold <?php if(session('redirect')=='/overdue'){ echo "active"; } ?>">期限超過</a>
     </ul>
