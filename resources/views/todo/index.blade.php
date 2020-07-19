@@ -81,8 +81,8 @@
   {{-- サイドバー --}}
   <div class="col-12 col-sm-12 col-md-3 col-xl-2 order-md-first" style="background-color: #e3f2fd;">
     <ul class="list-group mt-3">
-      <a href="/" class="list-group-item list-group-item-action text-body font-weight-bold">未達成リスト <span class="sr-only">(current)</span></a>
-      <a href="/index_completed" class="list-group-item list-group-item-action text-body font-weight-bold">達成リスト</a>
+      <a href="/" class="list-group-item list-group-item-action font-weight-bold <?php if(session('redirect')=='/'){ echo "active"; } ?>">未達成一覧</a>
+      <a href="/duesoon" class="list-group-item list-group-item-action font-weight-bold <?php if(session('redirect')=='/duesoon'){ echo "active"; } ?>">期限間近</a>
     </ul>
   </div>
 @endsection

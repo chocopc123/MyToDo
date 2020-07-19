@@ -13,6 +13,7 @@
 
 Route::get('/', 'TodoController@index');
 Route::get('index_completed', 'TodoController@index_completed');
+Route::get('duesoon', 'TodoController@duesoon');
 Route::get('create', 'TodoController@create');
 Route::post('create', 'TodoController@store');
 Route::get('edit/{id}', 'TodoController@edit');

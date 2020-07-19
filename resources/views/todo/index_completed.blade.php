@@ -72,8 +72,7 @@
   {{-- サイドバー --}}
   <div class="col-12 col-sm-12 col-md-3 col-xl-2 order-md-first" style="background-color: #e3f2fd;">
     <ul class="list-group mt-3">
-      <a href="/" class="list-group-item list-group-item-action text-body font-weight-bold">未達成リスト <span class="sr-only">(current)</span></a>
-      <a href="/index_completed" class="list-group-item list-group-item-action text-body font-weight-bold">達成リスト</a>
+      <a href="/index_completed" class="list-group-item list-group-item-action font-weight-bold  <?php if(session('redirect')=='/index_completed'){ echo "active"; } ?>">達成済み一覧 <span class="sr-only">(current)</span></a>
     </ul>
   </div>
 @endsection
