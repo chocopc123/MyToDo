@@ -18,7 +18,10 @@ class TodoController extends Controller{
         // redirectセッションに値を設定
         session(['redirect' => "/"]);
         // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
-        $todos = Todo::where([ ['user_id', Auth::id()], ['complete', false] ])->orderBy('created_at', 'desc')->paginate(20);
+        $todos = Todo::where([
+            ['user_id', Auth::id()], ['complete', false]
+            ])->orderBy('created_at', 'desc')
+            ->paginate(20);
         // $todosを渡してindexビューを返す
         return view('todo.index', ['todos' => $todos]);
     }
@@ -30,14 +33,33 @@ class TodoController extends Controller{
         // redirectセッションに値を設定
         session(['redirect' => "/index_completed"]);
         // ログインユーザーの達成済みのToDo一覧を作成日時の降順で取得
-        $todos = Todo::where([ ['user_id', Auth::id()], ['complete', true] ])->orderBy('created_at', 'desc')->get();
+        $todos = Todo::where([
+            ['user_id', Auth::id()], ['complete', true]
+            ])->orderBy('created_at', 'desc')
+            ->get();
         // $todosを渡してindex_completedビューを返す
         return view('todo.index_completed', ['todos' => $todos]);
     }
 
     public function duesoon(){
+        // redirectセッションに値を設定
         session(['redirect'=> "/duesoon"]);
-        $todos = Todo::where([ ['user_id', Auth::id()], ['complete', false],  ['deadline', '<' , date("Y-m-d", strtotime('+4 day'))] ])->orderBy('created_at', 'desc')->paginate(20);
+        // ログインユーザーの未達成で期限間近のToDo一覧を作成日時の降順で取得
+        $todos = Todo::where(function($todos){
+            $todos->where('user_id', Auth::id())
+                ->where('complete', false)
+                ->where('deadline', '<' , date("Y-m-d", strtotime('+4 day'))
+            );
+        })
+        ->where(function($todos){
+            $todos->where('deadline', '>' , date("Y-m-d"))
+            ->orwhere(function($todos){
+                $todos->where('deadline', '=' , date("Y-m-d"))
+                    ->where('deadline_time', '>', date("H:i:s"));
+            });
+        })
+        ->orderBy('created_at', 'desc')
+        ->paginate(20);
         return view('todo.index', ['todos' => $todos]);
     }
 
