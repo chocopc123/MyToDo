@@ -10,79 +10,42 @@ class TodoController extends Controller{
     public function __construct(){
         // ログインしていないとアクションにアクセス出来ないようにする
         $this->middleware('auth');
+        session(['refine' => '/']);
+        session(['sort' => 'created_at']);
+        session(['order' => 'desc']);
     }
 
     public function index(){
         // completedセッションに値を設定
         session(['completed' => false]);
         // redirectセッションに値を設定
-        session(['redirect' => "/"]);
-        // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
-        $todos = Todo::where([
-            ['user_id', Auth::id()], ['complete', false]
-            ])->orderBy('created_at', 'desc')
+        session(['redirect' => '/']);
+        if(session('refine') == '/'):
+            // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
+            $todos = Todo::where([
+                ['user_id', Auth::id()], ['complete', false]
+                ])->orderBy(session('sort'), session('order'))
+            ->orderBy('deadline_time', session('order'))
             ->paginate(20);
-        // $todosを渡してindexビューを返す
-        return view('todo.index', ['todos' => $todos]);
-    }
-
-
-    public function index_completed(){
-        // completedセッションに値を設定
-        session(['completed' => true]);
-        // redirectセッションに値を設定
-        session(['redirect' => "/index_completed"]);
-        // ログインユーザーの達成済みのToDo一覧を作成日時の降順で取得
-        $todos = Todo::where([
-            ['user_id', Auth::id()], ['complete', true]
-            ])->orderBy('created_at', 'desc')
-            ->get();
-        // $todosを渡してindex_completedビューを返す
-        return view('todo.index_completed', ['todos' => $todos]);
-    }
-
-    public function duesoon(){
-        // redirectセッションに値を設定
-        session(['redirect'=> "/duesoon"]);
-        // ログインユーザーの未達成で期限間近のToDo一覧を作成日時の降順で取得
-        $todos = Todo::where(function($todos){
-            $todos->where('user_id', Auth::id())
-                ->where('complete', false)
-                ->where('deadline', '<' , date("Y-m-d", strtotime('+4 day'))
-            );
-        })
-        ->where(function($todos){
-            $todos->where('deadline', '>' , date("Y-m-d"))
-            ->orwhere(function($todos){
-                $todos->where('deadline', '=' , date("Y-m-d"))
-                    ->where('deadline_time', '>', date("H:i:s"));
-            });
-        })
-        ->orderBy('created_at', 'desc')
-        ->paginate(20);
-        return view('todo.index', ['todos' => $todos]);
-    }
-
-    public function overdue(){
-        // redirectセッションに値を設定
-        session(['redirect'=> "/overdue"]);
-        // ログインユーザーの未達成で期限間近のToDo一覧を作成日時の降順で取得
-        if(session('completed')){
+        elseif(session('refine') == '/duesoon'):
+            // ログインユーザーの未達成で期限間近のToDo一覧を作成日時の降順で取得
             $todos = Todo::where(function($todos){
                 $todos->where('user_id', Auth::id())
-                    ->where('complete', true);
+                    ->where('complete', false)
+                    ->where('deadline', '<' , date("Y-m-d", strtotime('+4 day'))
+                );
             })
             ->where(function($todos){
-                $todos->where('deadline', '<' , date("Y-m-d"))
+                $todos->where('deadline', '>' , date("Y-m-d"))
                 ->orwhere(function($todos){
                     $todos->where('deadline', '=' , date("Y-m-d"))
-                        ->where('deadline_time', '<', date("H:i:s"));
+                        ->where('deadline_time', '>', date("H:i:s"));
                 });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy(session('sort'), session('order'))
+            ->orderBy('deadline_time', session('order'))
             ->paginate(20);
-            return view('todo.index_completed', ['todos' => $todos]);
-        }else{
+        elseif(session('refine') == '/overdue'):
             $todos = Todo::where(function($todos){
                 $todos->where('user_id', Auth::id())
                     ->where('complete', false);
@@ -94,10 +57,165 @@ class TodoController extends Controller{
                         ->where('deadline_time', '<', date("H:i:s"));
                 });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy(session('sort'), session('order'))
+            ->orderBy('deadline_time', session('order'))
             ->paginate(20);
-            return view('todo.index', ['todos' => $todos]);
+        endif;
+        // $todosを渡してindexビューを返す
+        return view('todo.index', ['todos' => $todos]);
+    }
+
+
+    public function index_completed(){
+        // completedセッションに値を設定
+        session(['completed' => true]);
+        // redirectセッションに値を設定
+        session(['redirect' => '/index_completed']);
+        if(session('refine') == '/duesoon'){
+            session(['refine' => '/']);
         }
+        if(session('refine') == '/'):
+            // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
+            $todos = Todo::where([
+                ['user_id', Auth::id()], ['complete', true]
+                ])->orderBy(session('sort'), session('order'))
+            ->orderBy('deadline_time', session('order'))
+            ->paginate(20);
+        elseif(session('refine') == '/overdue'):
+            $todos = Todo::where(function($todos){
+                $todos->where('user_id', Auth::id())
+                    ->where('complete', true);
+            })
+            ->where(function($todos){
+                $todos->where('deadline', '<' , date("Y-m-d"))
+                ->orwhere(function($todos){
+                    $todos->where('deadline', '=' , date("Y-m-d"))
+                        ->where('deadline_time', '<', date("H:i:s"));
+                });
+            })
+            ->orderBy(session('sort'), session('order'))
+            ->orderBy('deadline_time', session('order'))
+            ->paginate(20);
+        endif;
+        // $todosを渡してindex_completedビューを返す
+        return view('todo.index_completed', ['todos' => $todos]);
+    }
+
+    public function index_all(){
+        session(['refine' => '/']);
+        if(session('completed')):
+            return redirect('/index_completed');
+        else:
+            return redirect('/');
+        endif;
+    }
+
+    public function duesoon(){
+        // redirectセッションに値を設定
+        session(['refine'=> "/duesoon"]);
+        return redirect('/');
+    }
+
+    public function overdue(){
+        // redirectセッションに値を設定
+        session(['refine'=> "/overdue"]);
+        if(session('completed')):
+            return redirect('/index_completed');
+        else:
+            return redirect('/');
+        endif;
+    }
+
+    public function index_created_at(){
+        // sortに既にcreated_atが設定されている場合は並び順を反転
+        if(session('sort') == 'created_at'):
+            if(session('order') == 'desc'):
+                session(['order' => 'asc']);
+            elseif(session('order') == 'asc'):
+                session(['order' => 'desc']);
+            endif;
+        // sortにcreated_atが設定されていなかったら設定 & 並び順の初期化
+        else:
+            // sortにcreated_atを設定
+            session(['sort' => 'created_at']);
+            // 並び順をdescに設定
+            session(['order' => 'desc']);
+        endif;
+
+        if(session('completed')):
+            return redirect('/index_completed');
+        else:
+            return redirect('/');
+        endif;
+    }
+
+    public function index_deadline(){
+        // sortに既にdeadlineが設定されている場合は並び順を反転
+        if(session('sort') == 'deadline'):
+            if(session('order') == 'desc'):
+                session(['order' => 'asc']);
+            elseif(session('order') == 'asc'):
+                session(['order' => 'desc']);
+            endif;
+        // sortにdeadlineが設定されていなかったら設定 & 並び順の初期化
+        else:
+            // sortにdeadlineを設定
+            session(['sort' => 'deadline']);
+            // 並び順をascに設定
+            session(['order' => 'asc']);
+        endif;
+
+        if(session('completed')):
+            return redirect('/index_completed');
+        else:
+            return redirect('/');
+        endif;
+    }
+
+    public function index_difficulty(){
+        // sortに既にdifficiltyが設定されている場合は並び順を反転
+        if(session('sort') == 'difficulty'):
+            if(session('order') == 'desc'):
+                session(['order' => 'asc']);
+            elseif(session('order') == 'asc'):
+                session(['order' => 'desc']);
+            endif;
+        // sortにdifficultyが設定されていなかったら設定 & 並び順の初期化
+        else:
+            // sortにdifficultyを設定
+            session(['sort' => 'difficulty']);
+            // 並び順をascに設定
+            session(['order' => 'asc']);
+        endif;
+
+        if(session('completed')):
+            return redirect('/index_completed');
+        else:
+            return redirect('/');
+        endif;
+    }
+
+    public function index_importance(){
+        // sortに既にimportanceが設定されている場合は並び順を反転
+        if(session('sort') == 'importance'):
+            if(session('order') == 'desc'):
+                session(['order' => 'asc']);
+            elseif(session('order') == 'asc'):
+                session(['order' => 'desc']);
+            endif;
+        // sortにimportanceが設定されていなかったら設定 & 並び順の初期化
+        else:
+            // sortにimportanceを設定
+            session(['sort' => 'importance']);
+            // 並び順をascに設定
+            session(['order' => 'asc']);
+        endif;
+
+        if(session('completed')):
+            return redirect('/index_completed');
+        else:
+            return redirect('/');
+        endif;
     }
 
     public function create(){

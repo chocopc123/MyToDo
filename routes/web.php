@@ -13,8 +13,14 @@
 
 Route::get('/', 'TodoController@index');
 Route::get('index_completed', 'TodoController@index_completed');
+Route::get('index_all', 'TodoController@index_all');
 Route::get('duesoon', 'TodoController@duesoon');
 Route::get('overdue', 'TodoController@overdue');
+Route::get('index_created_at', 'TodoController@index_created_at');
+Route::get('index_deadline', 'TodoController@index_deadline');
+Route::get('index_difficulty', 'TodoController@index_difficulty');
+Route::get('index_importance', 'TodoController@index_importance');
+
 Route::get('create', 'TodoController@create');
 Route::post('create', 'TodoController@store');
 Route::get('edit/{id}', 'TodoController@edit');
