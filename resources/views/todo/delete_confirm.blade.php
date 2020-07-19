@@ -11,19 +11,19 @@
 {{-- class="active"と<span class="sr-only">(current)</span>を指定する --}}
 @section('navi')
   @if(session('completed'))
-  <li class="nav-item">
-    <a class="nav-link" href="/">未達成リスト</a>
-  </li>
-  <li class="nav-item active">
-    <a class="nav-link" href="/index_completed">達成リスト <span class="sr-only">(current)</span></a>
-  </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/">未達成リスト</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="/index_completed">達成リスト <span class="sr-only">(current)</span></a>
+    </li>
   @else
-  <li class="nav-item active">
-    <a class="nav-link" href="/">未達成リスト <span class="sr-only">(current)</span>  </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/index_completed">達成リスト</a>
-  </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="/">未達成リスト <span class="sr-only">(current)</span>  </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/index_completed">達成リスト</a>
+    </li>
   @endif
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

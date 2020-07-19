@@ -13,7 +13,10 @@ class TodoController extends Controller{
     }
 
     public function index(){
+        // completedセッションに値を設定
         session(['completed' => false]);
+        // redirectセッションに値を設定
+        session(['redirect' => "/"]);
         // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
         $todos = Todo::where([['complete', false], ['user_id', Auth::id()]])->orderBy('created_at', 'desc')->paginate(20);
         // $todosを渡してindexビューを返す
@@ -22,7 +25,10 @@ class TodoController extends Controller{
 
 
     public function index_completed(){
+        // completedセッションに値を設定
         session(['completed' => true]);
+        // redirectセッションに値を設定
+        session(['redirect' => "/index__completed"]);
         // ログインユーザーの達成済みのToDo一覧を作成日時の降順で取得
         $todos = Todo::where([['complete', true], ['user_id', Auth::id()]])->orderBy('created_at', 'desc')->get();
         // $todosを渡してindex_completedビューを返す
