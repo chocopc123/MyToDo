@@ -2,7 +2,7 @@
 @extends('layouts.template')
 
 {{-- head.blade.phpの@yield('title')に渡す --}}
-@section('title', 'ToDo編集|MyToDo')
+@section('title', 'ToDo編集')
 {{-- head.blade.phpを差し込む --}}
 @include('layouts.head')
 
