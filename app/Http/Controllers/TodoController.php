@@ -27,7 +27,7 @@ class TodoController extends Controller{
                 ['user_id', Auth::id()], ['complete', false]
                 ])->orderBy(session('sort'), session('order'))
                 ->orderBy('deadline_time', session('order'))
-            ->paginate(20);
+            ->paginate(5);
         // ログインユーザーの未達成で期限間近のToDo一覧を取得
         elseif(session('refine') == '/duesoon'):
             $todos = Todo::where(function($todos){
@@ -45,7 +45,7 @@ class TodoController extends Controller{
             })
             ->orderBy(session('sort'), session('order'))
             ->orderBy('deadline_time', session('order'))
-            ->paginate(20);
+            ->paginate(5);
         // ログインユーザーの未達成で期限超過のToDo一覧を取得
         elseif(session('refine') == '/overdue'):
             $todos = Todo::where(function($todos){
@@ -61,7 +61,7 @@ class TodoController extends Controller{
             })
             ->orderBy(session('sort'), session('order'))
             ->orderBy('deadline_time', session('order'))
-            ->paginate(20);
+            ->paginate(5);
         endif;
         // $todosを渡してindexビューを返す
         return view('todo.index', ['todos' => $todos]);
@@ -83,7 +83,7 @@ class TodoController extends Controller{
                 ['user_id', Auth::id()], ['complete', true]
                 ])->orderBy(session('sort'), session('order'))
             ->orderBy('deadline_time', session('order'))
-            ->paginate(20);
+            ->paginate(5);
         // ログインユーザーの達成済みで期限超過のToDo一覧を取得
         elseif(session('refine') == '/overdue'):
             $todos = Todo::where(function($todos){
@@ -99,7 +99,7 @@ class TodoController extends Controller{
             })
             ->orderBy(session('sort'), session('order'))
             ->orderBy('deadline_time', session('order'))
-            ->paginate(20);
+            ->paginate(5);
         endif;
         // $todosを渡してindex_completedビューを返す
         return view('todo.index_completed', ['todos' => $todos]);
