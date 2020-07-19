@@ -33,6 +33,7 @@
     <h3 class="pb-3">プロフィール</h3>
 
     <div>
+      {{-- ユーザープロフィール表示 --}}
       <table>
         <tr>
           <th>ニックネーム</th>
@@ -43,6 +44,7 @@
           <td>{{ Auth::user()->email }}</td>
         </tr>
       </table>
+      {{-- ユーザー削除ボタン --}}
       <p class="pt-3"><a href="/user_delete_confirm/{{ Auth::id() }}" class="btn btn-danger">ユーザー削除</a></p>
     </div>
   </div>

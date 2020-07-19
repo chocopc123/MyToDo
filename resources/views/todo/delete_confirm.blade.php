@@ -10,6 +10,7 @@
 {{-- template.blade.phpの@yield('navi')に渡す --}}
 {{-- class="active"と<span class="sr-only">(current)</span>を指定する --}}
 @section('navi')
+  {{-- 達成リストのnavbar --}}
   @if(session('completed'))
     <li class="nav-item">
       <a class="nav-link" href="/">未達成リスト</a>
@@ -17,6 +18,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="/index_completed">達成リスト <span class="sr-only">(current)</span></a>
     </li>
+  {{-- 未達成リストのnavbar --}}
   @else
     <li class="nav-item active">
       <a class="nav-link" href="/">未達成リスト <span class="sr-only">(current)</span>  </a>
@@ -57,9 +59,9 @@
         </div>
       @endif
 
-      {{-- 各種値をフォームにreadonlyで表示 --}}
       {{-- hiddenでidをコントローラに送る --}}
       <input type="hidden" class="form-control" name="id" value="{{$todo->id}}">
+      {{-- 各種値をフォームにreadonlyで表示 --}}
       <div class="form-group">
         <label for="titleInput">タイトル</label>
         <input type="text" readonly class="form-control" id="titleInput" name="title" value="{{$todo->title}}">

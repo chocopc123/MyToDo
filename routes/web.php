@@ -13,9 +13,11 @@
 
 Route::get('/', 'TodoController@index');
 Route::get('index_completed', 'TodoController@index_completed');
+// 絞り込み
 Route::get('index_all', 'TodoController@index_all');
 Route::get('duesoon', 'TodoController@duesoon');
 Route::get('overdue', 'TodoController@overdue');
+// 並べ替え
 Route::get('index_created_at', 'TodoController@index_created_at');
 Route::get('index_deadline', 'TodoController@index_deadline');
 Route::get('index_difficulty', 'TodoController@index_difficulty');

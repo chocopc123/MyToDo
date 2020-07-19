@@ -98,7 +98,6 @@
               <input type="date" class="form-control" id="deadlineInput" name="deadline" value="{{date("Y-m-d")}}" required>
             @endif
           </div>
-
           <div class="col-sm-4 col-md-3 col-xl-2">
             <label for="deadline_timeInput">時刻 <span class="badge badge-info">任意</span></label>
             <input type="time" class="form-control" id="deadline_timeInput" name="deadline_time" value="{{old('deadline_time')}}">

@@ -139,6 +139,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-sm-8 col-md-6 col-xl-4">
+              {{-- old関数に値がある場合はそれを、ない場合は元の値をvalueに設定する --}}
               @if(old('completed_date'))
                 <label for="completed_dateInput">達成日付 <span class="badge badge-danger">必須</span></label>
                 <input type="date" class="form-control" id="completed_dateInput" name="completed_date" value="{{old('completed_date')}}" required>
@@ -148,6 +149,7 @@
               @endif
             </div>
             <div class="col-sm-4 col-md-3 col-xl-2">
+              {{-- old関数に値がある場合はそれを、ない場合は元の値をvalueに設定する --}}
               @if(old('completed_time'))
                 <label for="completed_timeInput">時刻 <span class="badge badge-danger">必須</span></label>
                 <input type="time" class="form-control" id="completed_timeInput" name="completed_time" value="{{substr(old('completed_time'), 0, 5)}}" required>

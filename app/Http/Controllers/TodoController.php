@@ -10,6 +10,7 @@ class TodoController extends Controller{
     public function __construct(){
         // ログインしていないとアクションにアクセス出来ないようにする
         $this->middleware('auth');
+        // セッションの初期値を設定
         session(['refine' => '/']);
         session(['sort' => 'created_at']);
         session(['order' => 'desc']);
@@ -20,15 +21,15 @@ class TodoController extends Controller{
         session(['completed' => false]);
         // redirectセッションに値を設定
         session(['redirect' => '/']);
+        // ログインユーザーの未達成のToDo一覧を取得
         if(session('refine') == '/'):
-            // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
             $todos = Todo::where([
                 ['user_id', Auth::id()], ['complete', false]
                 ])->orderBy(session('sort'), session('order'))
-            ->orderBy('deadline_time', session('order'))
+                ->orderBy('deadline_time', session('order'))
             ->paginate(20);
+        // ログインユーザーの未達成で期限間近のToDo一覧を取得
         elseif(session('refine') == '/duesoon'):
-            // ログインユーザーの未達成で期限間近のToDo一覧を作成日時の降順で取得
             $todos = Todo::where(function($todos){
                 $todos->where('user_id', Auth::id())
                     ->where('complete', false)
@@ -45,6 +46,7 @@ class TodoController extends Controller{
             ->orderBy(session('sort'), session('order'))
             ->orderBy('deadline_time', session('order'))
             ->paginate(20);
+        // ログインユーザーの未達成で期限超過のToDo一覧を取得
         elseif(session('refine') == '/overdue'):
             $todos = Todo::where(function($todos){
                 $todos->where('user_id', Auth::id())
@@ -71,16 +73,18 @@ class TodoController extends Controller{
         session(['completed' => true]);
         // redirectセッションに値を設定
         session(['redirect' => '/index_completed']);
+        // refineに'/duesoon'が入っている場合は'/'に変更
         if(session('refine') == '/duesoon'){
             session(['refine' => '/']);
         }
+        // ログインユーザーの達成済みのToDo一覧を取得
         if(session('refine') == '/'):
-            // ログインユーザーの未達成のToDo一覧を作成日時の降順で取得
             $todos = Todo::where([
                 ['user_id', Auth::id()], ['complete', true]
                 ])->orderBy(session('sort'), session('order'))
             ->orderBy('deadline_time', session('order'))
             ->paginate(20);
+        // ログインユーザーの達成済みで期限超過のToDo一覧を取得
         elseif(session('refine') == '/overdue'):
             $todos = Todo::where(function($todos){
                 $todos->where('user_id', Auth::id())
@@ -101,8 +105,10 @@ class TodoController extends Controller{
         return view('todo.index_completed', ['todos' => $todos]);
     }
 
+    // 絞り込み条件をリセットする
     public function index_all(){
         session(['refine' => '/']);
+        // 達成済みか判定してリダイレクト
         if(session('completed')):
             return redirect('/index_completed');
         else:
@@ -110,15 +116,18 @@ class TodoController extends Controller{
         endif;
     }
 
+    // 絞り込み条件に期限間近をセットする
     public function duesoon(){
         // redirectセッションに値を設定
         session(['refine'=> "/duesoon"]);
         return redirect('/');
     }
 
+    // 絞り込み条件に期限超過をセットする
     public function overdue(){
         // redirectセッションに値を設定
         session(['refine'=> "/overdue"]);
+        // 達成済みか判定してリダイレクト
         if(session('completed')):
             return redirect('/index_completed');
         else:
@@ -126,6 +135,7 @@ class TodoController extends Controller{
         endif;
     }
 
+    // 並べ替え条件に作成日時をセットする
     public function index_created_at(){
         // sortに既にcreated_atが設定されている場合は並び順を反転
         if(session('sort') == 'created_at'):
@@ -141,7 +151,7 @@ class TodoController extends Controller{
             // 並び順をdescに設定
             session(['order' => 'desc']);
         endif;
-
+        // 達成済みか判定してリダイレクト
         if(session('completed')):
             return redirect('/index_completed');
         else:
@@ -149,6 +159,7 @@ class TodoController extends Controller{
         endif;
     }
 
+    // 並べ替え条件に目標期限をセットする
     public function index_deadline(){
         // sortに既にdeadlineが設定されている場合は並び順を反転
         if(session('sort') == 'deadline'):
@@ -164,7 +175,7 @@ class TodoController extends Controller{
             // 並び順をascに設定
             session(['order' => 'asc']);
         endif;
-
+        // 達成済みか判定してリダイレクト
         if(session('completed')):
             return redirect('/index_completed');
         else:
@@ -172,6 +183,7 @@ class TodoController extends Controller{
         endif;
     }
 
+    // 並べ替え条件に難易度をセットする
     public function index_difficulty(){
         // sortに既にdifficiltyが設定されている場合は並び順を反転
         if(session('sort') == 'difficulty'):
@@ -187,7 +199,7 @@ class TodoController extends Controller{
             // 並び順をascに設定
             session(['order' => 'asc']);
         endif;
-
+        // 達成済みか判定してリダイレクト
         if(session('completed')):
             return redirect('/index_completed');
         else:
@@ -195,6 +207,7 @@ class TodoController extends Controller{
         endif;
     }
 
+    // 並べ替え条件に重要度をセットする
     public function index_importance(){
         // sortに既にimportanceが設定されている場合は並び順を反転
         if(session('sort') == 'importance'):
@@ -210,7 +223,7 @@ class TodoController extends Controller{
             // 並び順をascに設定
             session(['order' => 'asc']);
         endif;
-
+        // 達成済みか判定してリダイレクト
         if(session('completed')):
             return redirect('/index_completed');
         else:
