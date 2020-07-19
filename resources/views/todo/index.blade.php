@@ -30,8 +30,12 @@
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
   <div id="wrapper" class="col-12 col-sm-12 col-md-9 col-xl-10">
-    {{-- ToDo追加ボタン --}}
-    <p class="pt-3"><a href="/create" class="btn btn-primary">ToDo追加</a></p>
+    <div class="py-3">
+      {{-- ToDo追加ボタン --}}
+      <a href="/create" class="btn btn-primary">ToDo追加</></a>
+      {{-- 件数表示 --}}
+      <a class="pl-2 text-muted">{{ count($todos) }} 件</a>
+    </div>
 
     {{-- ToDoが一つもない場合はエラーを表示 --}}
     @if(count($todos)==0)
