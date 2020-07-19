@@ -69,19 +69,44 @@
         <textarea readonly class="form-control" id="explanationInput" name="explanation" cols="30" rows="10">{{$todo->explanation}}</textarea>
       </div>
       <div class="form-group">
-        <label>難易度<input type="range" readonly class="form-control-range" name="difficulty" min="1" max="3" value="{{$todo->difficulty}}"></label>
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            <label for="difficultyInput">難易度</label>
+            <input type="range" readonly class="form-control-range" id="difficultyInput" name="difficulty" min="1" max="3" value="{{$todo->difficulty}}">
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        <label>重要度<input type="range" readonly class="form-control-range" name="importance" min="1" max="3" value="{{$todo->importance}}"></label>
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            <label for="importanceInput">重要度</label>
+            <input type="range" readonly class="form-control-range" id="importanceInput name="importance" min="1" max="3" value="{{$todo->importance}}">
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        <label>目標期限<input type="date" readonly class="form-control" name="deadline" value="{{$todo->deadline}}"></label>
-        <label>時刻<input type="time" readonly class="form-control" name="deadline_time" value="{{$todo->deadline_time}}"></label>
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            <label for="deadlineInput">目標期限</label>
+            <input type="date" readonly class="form-control" id="deadlineInput" name="deadline" value="{{$todo->deadline}}">
+          </div>
+          <div class="col-sm-4 col-md-3 col-xl-2">
+            <label for="deadline_timeInput">時刻</label>
+            <input type="time" readonly class="form-control" id="deadline_timeInput" name="deadline_time" value="{{$todo->deadline_time}}">
+          </div>
       </div>
       @if($todo->complete)
-        <div class="form-group">
-          <label>達成日付<input type="date" readonly class="form-control" name="completed_date" value="{{$todo->completed_date}}"></label>
-          <label>時刻<input type="time" readonly class="form-control" name="completed_time" value="{{substr($todo->completed_time, 0, 5)}}"></label>
+        <div class="form-group pt-3">
+          <div class="row">
+            <div class="col-sm-8 col-md-6 col-xl-4">
+              <label for="completed_dateInput">達成日付</label>
+              <input type="date" readonly class="form-control" id="completed_dateInput" name="completed_date" value="{{$todo->completed_date}}">
+            </div>
+            <div class="col-sm-4 col-md-3 col-xl-2">
+              <label for="completed_timeInput">時刻</label>
+              <input type="time" readonly class="form-control" id="completed_timeInput" name="completed_time" value="{{substr($todo->completed_time, 0, 5)}}">
+            </div>
+          </div>
         </div>
       @endif
 

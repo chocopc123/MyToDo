@@ -29,7 +29,7 @@
 
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
-  <div id="wrapper" class="pt-3 col-12 col-sm-12 col-md-8 col-xl-8">
+  <div id="wrapper" class="pt-3 col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8">
     <h2 class="pb-3">ToDo追加</h2>
 
     {{-- createアクションにフォームのデータをPOSTする --}}
@@ -59,30 +59,51 @@
         <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{old('explanation')}}</textarea>
       </div>
       <div class="form-group">
-        {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
-        @if(old('difficulty'))
-          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="{{old('difficulty')}}"></label>
-        @else
-          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="1"></label>
-        @endif
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
+            @if(old('difficulty'))
+              <label for="difficultyInput">難易度</label>
+              <input type="range" class="form-control-range" id="difficultyInput" name="difficulty" min="1" max="3" value="{{old('difficulty')}}">
+            @else
+              <label for="difficultyInput">難易度</label>
+              <input type="range" class="form-control-range" id="difficultyInput" name="difficulty" min="1" max="3" value="1">
+            @endif
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
-        @if(old('importance'))
-          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="{{old('importance')}}"></label>
-        @else
-          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="1"></label>
-        @endif
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            {{-- old関数に値がある場合はそれを、ない場合は1をvalueに設定する --}}
+            @if(old('importance'))
+            <label for="importanceInput">重要度</label>
+              <input type="range" class="form-control-range" id="importanceInput" name="importance" min="1" max="3" value="{{old('importance')}}">
+            @else
+              <label for="importanceInput">重要度</label>
+              <input type="range" class="form-control-range" id="importanceInput" name="importance" min="1" max="3" value="1">
+            @endif
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        {{-- old関数に値がある場合はそれを、ない場合は現在時刻をvalueに設定する --}}
-        @if(old('deadline'))
-          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{old('deadline')}}" required></label>
-        @else
-          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{date("Y-m-d")}}" required></label>
-        @endif
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            {{-- old関数に値がある場合はそれを、ない場合は現在時刻をvalueに設定する --}}
+            @if(old('deadline'))
+              <label for="deadlineInput">目標期限 <span class="badge badge-danger">必須</span></label>
+              <input type="date" class="form-control" id="deadlineInput" name="deadline" value="{{old('deadline')}}" required>
+            @else
+              <label for="deadlineInput">目標期限 <span class="badge badge-danger">必須</span></label>
+              <input type="date" class="form-control" id="deadlineInput" name="deadline" value="{{date("Y-m-d")}}" required>
+            @endif
+          </div>
 
-        <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time" value="{{old('deadline_time')}}"></label>
+          <div class="col-sm-4 col-md-3 col-xl-2">
+            <label for="deadline_timeInput">時刻 <span class="badge badge-info">任意</span></label>
+            <input type="time" class="form-control" id="deadline_timeInput" name="deadline_time" value="{{old('deadline_time')}}">
+          </div>
+        </div>
       </div>
 
       {{-- 各種ボタン --}}

@@ -81,49 +81,82 @@
         @endif
       </div>
       <div class="form-group">
-        {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
-        @if(old('difficulty'))
-          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="{{old('difficulty')}}"></label>
-        @else
-          <label>難易度<input type="range" class="form-control-range" name="difficulty" min="1" max="3" value="{{$todo->difficulty}}"></label>
-        @endif
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
+            @if(old('difficulty'))
+              <label for="difficultyInput">難易度</label>
+              <input type="range" class="form-control-range" id="difficultyInput" name="difficulty" min="1" max="3" value="{{old('difficulty')}}">
+            @else
+              <label for="difficultyInput">難易度</label>
+              <input type="range" class="form-control-range" name="difficulty" id="difficultyInput" min="1" max="3" value="{{$todo->difficulty}}">
+            @endif
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
-        @if(old('importance'))
-          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="{{old('importance')}}"></label>
-        @else
-          <label>重要度<input type="range" class="form-control-range" name="importance" min="1" max="3" value="{{$todo->importance}}"></label>
-        @endif
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
+            @if(old('importance'))
+              <label for="importanceInput">重要度</label>
+              <input type="range" class="form-control-range" id="importanceInput" name="importance" min="1" max="3" value="{{old('importance')}}">
+            @else
+              <label for="importanceInput">重要度</label>
+              <input type="range" class="form-control-range" id="importanceInput" name="importance" min="1" max="3" value="{{$todo->importance}}">
+            @endif
+          </div>
+        </div>
       </div>
       <div class="form-group">
-        {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
-        @if(old('deadline'))
-          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{old('deadline')}}" required></label>
-        @else
-          <label>目標期限 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="deadline" value="{{$todo->deadline}}" required></label>
-        @endif
-        {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
-        @if(old('deadline_time'))
-          <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time" value="{{old('deadline_time')}}"></label>
-        @else
-          <label>時刻 <span class="badge badge-info">任意</span><input type="time" class="form-control" name="deadline_time" value="{{$todo->deadline_time}}"></label>
-        @endif
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
+            @if(old('deadline'))
+              <label for="deadlineInput">目標期限 <span class="badge badge-danger">必須</span></label>
+              <input type="date" class="form-control" id="deadlineInput" name="deadline" value="{{old('deadline')}}" required>
+            @else
+              <label for="deadlineInput">目標期限 <span class="badge badge-danger">必須</span></label>
+              <input type="date" class="form-control" id="deadlineInput" name="deadline" value="{{$todo->deadline}}" required>
+            @endif
+          </div>
+
+          <div class="col-sm-4 col-md-3 col-xl-2">
+            {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
+            @if(old('deadline_time'))
+              <label for="deadline_timeInput">時刻 <span class="badge badge-info">任意</span></label>
+              <input type="time" class="form-control" id="deadline_timeInput" name="deadline_time" value="{{old('deadline_time')}}">
+            @else
+              <label for="deadline_timeInput">時刻 <span class="badge badge-info">任意</span></label>
+              <input type="time" class="form-control" id="deadline_timeInput" name="deadline_time" value="{{$todo->deadline_time}}">
+            @endif
+          </div>
+        </div>
       </div>
 
       {{-- 達成済みだったら達成日付・時刻の編集フォームを表示 --}}
       @if($todo->complete)
         <div class="form-group">
-          @if(old('completed_date'))
-            <label>達成日付 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="completed_date" value="{{old('completed_date')}}" required></label>
-          @else
-            <label>達成日付 <span class="badge badge-danger">必須</span><input type="date" class="form-control" name="completed_date" value="{{$todo->completed_date}}" required></label>
-          @endif
-          @if(old('completed_time'))
-            <label>時刻 <span class="badge badge-danger">必須</span><input type="time" class="form-control" name="completed_time" value="{{substr(old('completed_time'), 0, 5)}}" required></label>
-          @else
-            <label>時刻 <span class="badge badge-danger">必須</span><input type="time" class="form-control" name="completed_time" value="{{substr($todo->completed_time, 0, 5)}}" required></label>
-          @endif
+          <div class="row">
+            <div class="col-sm-8 col-md-6 col-xl-4">
+              @if(old('completed_date'))
+                <label for="completed_dateInput">達成日付 <span class="badge badge-danger">必須</span></label>
+                <input type="date" class="form-control" id="completed_dateInput" name="completed_date" value="{{old('completed_date')}}" required>
+              @else
+                <label for="completed_dateInput">達成日付 <span class="badge badge-danger">必須</span></label>
+                <input type="date" class="form-control" id="completed_dateInput" name="completed_date" value="{{$todo->completed_date}}" required>
+              @endif
+            </div>
+            <div class="col-sm-4 col-md-3 col-xl-2">
+              @if(old('completed_time'))
+                <label for="completed_timeInput">時刻 <span class="badge badge-danger">必須</span></label>
+                <input type="time" class="form-control" id="completed_timeInput" name="completed_time" value="{{substr(old('completed_time'), 0, 5)}}" required>
+              @else
+                <label for="completed_timeInput">時刻 <span class="badge badge-danger">必須</span></label>
+                <input type="time" class="form-control" id="completed_timeInput" name="completed_time" value="{{substr($todo->completed_time, 0, 5)}}" required>
+              @endif
+            </div>
+          </div>
         </div>
       @endif
 
