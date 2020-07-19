@@ -28,7 +28,7 @@ class TodoController extends Controller{
         // completedセッションに値を設定
         session(['completed' => true]);
         // redirectセッションに値を設定
-        session(['redirect' => "/index__completed"]);
+        session(['redirect' => "/index_completed"]);
         // ログインユーザーの達成済みのToDo一覧を作成日時の降順で取得
         $todos = Todo::where([['complete', true], ['user_id', Auth::id()]])->orderBy('created_at', 'desc')->get();
         // $todosを渡してindex_completedビューを返す

@@ -130,11 +130,7 @@
       {{-- 各種ボタン --}}
       <input type="submit" class="btn btn-success" value="修正">
       {{-- セッションの値によって一覧に戻るボタンの挙動を変える --}}
-      @if(session('completed'))
-        <a href="/index_completed" class="btn btn-primary">一覧に戻る</a>
-      @else
-        <a href="/" class="btn btn-primary">一覧に戻る</a>
-      @endif
+      <a href="{{ session('redirect') }}" class="btn btn-primary">一覧に戻る</a>
     </form>
   </div>
 @endsection
