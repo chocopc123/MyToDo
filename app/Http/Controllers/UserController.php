@@ -24,7 +24,7 @@ class UserController extends Controller{
         // バリデーションを設定する
         $request->validate([
             'name'=>'required|string|max:30',
-            'email'=>'required|string|max:254',
+            'email'=>'required|string|max:254|unique:users,email',
             'password'=>'required|string|min:8|max:128|confirmed',
         ]);
         // $userに値を設定する
