@@ -241,7 +241,7 @@ class TodoController extends Controller{
         // バリデーションを設定する
         $request->validate([
             'title'=>'required|string|max:40',
-            'explanation'=>'required|string|max:500',
+            'explanation'=>'nullable|string|max:500',
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string|max:10',
@@ -281,7 +281,7 @@ class TodoController extends Controller{
         // バリデーションを設定する
         $request->validate([
             'title'=>'required|string|max:40',
-            'explanation'=>'required|string|max:500',
+            'explanation'=>'nullable|string|max:500',
             'difficulty'=>'required|integer|max:3',
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string|max:10',

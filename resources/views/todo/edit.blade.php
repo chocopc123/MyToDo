@@ -72,12 +72,12 @@
         @endif
       </div>
       <div class="form-group">
-        <label for="explanationInput">詳細 <span class="badge badge-danger">必須</span></label>
+        <label for="explanationInput">詳細 <span class="badge badge-info">任意</span></label>
         {{-- old関数に値がある場合はそれを、ない場合は元の内容をvalueに設定する --}}
         @if(old('explanation'))
-          <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{old('explanation')}}</textarea>
+          <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10">{{old('explanation')}}</textarea>
         @else
-          <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{$todo->explanation}}</textarea>
+          <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10">{{$todo->explanation}}</textarea>
         @endif
       </div>
       <div class="form-group">

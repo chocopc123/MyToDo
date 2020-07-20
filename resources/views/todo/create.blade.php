@@ -55,8 +55,8 @@
         <input type="text" class="form-control" id="titleInput" name="title" value="{{old('title')}}" required>
       </div>
       <div class="form-group">
-        <label for="explanationInput">詳細 <span class="badge badge-danger">必須</span></label>
-        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10" required>{{old('explanation')}}</textarea>
+        <label for="explanationInput">詳細 <span class="badge badge-info">任意</span></label>
+        <textarea class="form-control" id="explanationInput" name="explanation" cols="30" rows="10">{{old('explanation')}}</textarea>
       </div>
       <div class="form-group">
         <div class="row">
