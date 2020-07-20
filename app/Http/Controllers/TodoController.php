@@ -41,6 +41,9 @@ class TodoController extends Controller{
                 ->orwhere(function($todos){
                     $todos->where('deadline', '=' , date("Y-m-d"))
                         ->where('deadline_time', '>', date("H:i:s"));
+                })->orwhere(function($todos){
+                    $todos->where('deadline', '=', date("Y-m-d"))
+                        ->whereNull('deadline_time' );
                 });
             })
             ->orderBy(session('sort'), session('order'))
