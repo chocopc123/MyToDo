@@ -34,7 +34,7 @@
       {{-- ToDo追加ボタン --}}
       <a href="/create" class="btn btn-primary">ToDo追加</></a>
       {{-- 件数表示 --}}
-      <a class="pl-2 text-muted">{{ count($todos) }} 件</a>
+      <a class="pl-2 text-muted">{{ $todos->total() }} 件</a>
     </div>
 
     {{-- ToDoが一つもない場合はエラーを表示 --}}

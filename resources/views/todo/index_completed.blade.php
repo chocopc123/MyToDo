@@ -31,7 +31,7 @@
 @section('content')
   <div id="wrapper" class="pt-3 col-12 col-sm-12 col-md-9 col-xl-10">
     {{-- 件数表示 --}}
-    <a class="text-muted">{{ count($todos) }} 件</a>
+    <a class="text-muted">{{ $todos->total() }} 件</a>
     {{-- ToDoが一つもない場合はエラーを表示 --}}
     @if(count($todos)==0)
       <h5>ToDoがまだありません。</h5>
