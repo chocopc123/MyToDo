@@ -91,10 +91,10 @@ class TodoController extends Controller{
                     ->where('complete', true);
             })
             ->where(function($todos){
-                $todos->where('deadline', '<' , date("Y-m-d"))
+                $todos->whereColumn('deadline', '<' , 'completed_date')
                 ->orwhere(function($todos){
-                    $todos->where('deadline', '=' , date("Y-m-d"))
-                        ->where('deadline_time', '<', date("H:i:s"));
+                    $todos->whereColumn('deadline', '=' , 'completed_date')
+                        ->whereColumn('deadline_time', '<', 'completed_time');
                 });
             })
             ->orderBy(session('sort'), session('order'))
