@@ -33,6 +33,9 @@
     <div class="py-3">
       {{-- ToDo追加ボタン --}}
       <a href="/create" class="btn btn-primary">ToDo追加</></a>
+      @if($search)
+        <a class="pl-2 text-muted">検索ワード：{{ $search }}</a>
+      @endif
       {{-- 件数表示 --}}
       <a class="pl-2 text-muted">{{ $todos->total() }} 件</a>
     </div>
