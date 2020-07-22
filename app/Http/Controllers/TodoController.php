@@ -106,7 +106,7 @@ class TodoController extends Controller{
             $todos = Todo::where([
                 ['user_id', Auth::id()], ['complete', true]
             ])
-            // あいまい検索    
+            // あいまい検索
             ->where(function($todos) use($request){
                 $todos->where('title', 'like', '%'. $request->search. '%')
                     ->orwhere('explanation', 'like', '%'. $request->search. '%');
@@ -121,7 +121,7 @@ class TodoController extends Controller{
                 $todos->where('user_id', Auth::id())
                     ->where('complete', true);
             })
-            // あいまい検索  
+            // あいまい検索
             ->where(function($todos) use($request){
                 $todos->where('title', 'like', '%'. $request->search. '%')
                     ->orwhere('explanation', 'like', '%'. $request->search. '%');
