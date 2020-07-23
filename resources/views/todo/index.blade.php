@@ -1,3 +1,5 @@
+{{-- template.blade.phpの@yield('logo-path')に渡す --}}
+@section('logo-path', 'image/mytodo_icon.png')
 {{-- templateを読み込む --}}
 @extends('layouts.template')
 
