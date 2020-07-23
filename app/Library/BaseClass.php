@@ -6,7 +6,7 @@ use App\Folder;
 use Illuminate\Support\Facades\Auth;
 
 class BaseClass{
-  public static function getfolders($request) {
+  public static function getfolders() {
     $folders = Folder::where('user_id', Auth::id())->get();
     return $folders;
   }

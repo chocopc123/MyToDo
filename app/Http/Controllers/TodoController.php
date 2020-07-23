@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use App\Library\BaseClass;
 use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller{
@@ -17,6 +18,8 @@ class TodoController extends Controller{
     }
 
     public function index(Request $request){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // completedセッションに値を設定
         session(['completed' => false]);
         // redirectセッションに値を設定
@@ -88,11 +91,13 @@ class TodoController extends Controller{
             ->paginate(5);
         endif;
         // $todosを渡してindexビューを返す
-        return view('todo.index', ['todos' => $todos, 'search' => $request->search]);
+        return view('todo.index', ['todos' => $todos, 'search' => $request->search, 'folders' => $folders]);
     }
 
 
     public function index_completed(Request $request){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // completedセッションに値を設定
         session(['completed' => true]);
         // redirectセッションに値を設定
@@ -140,7 +145,7 @@ class TodoController extends Controller{
             ->paginate(5);
         endif;
         // $todosを渡してindex_completedビューを返す
-        return view('todo.index_completed', ['todos' => $todos]);
+        return view('todo.index_completed', ['todos' => $todos, 'folders' => $folders]);
     }
 
     // 絞り込み条件をリセットする
@@ -270,8 +275,10 @@ class TodoController extends Controller{
     }
 
     public function create(){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // createビューを返す
-        return view('todo.create');
+        return view('todo.create', ['folders' => $folders]);
     }
 
 
@@ -308,10 +315,12 @@ class TodoController extends Controller{
 
 
     public function edit(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // $idをもつToDoを抜き出す
         $todo = Todo::find($id);
         // $todoを渡してeditビューを返す
-        return view('todo.edit', ['todo' => $todo]);
+        return view('todo.edit', ['todo' => $todo, 'folders' => $folders]);
     }
 
 
@@ -360,10 +369,12 @@ class TodoController extends Controller{
 
 
     public function delete_confirm(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // $idをもつToDoを抜き出す
         $todo = Todo::find($id);
         // $todoを渡してdelete_confirmビューを返す
-        return view('todo.delete_confirm', ['todo' => $todo]);
+        return view('todo.delete_confirm', ['todo' => $todo, 'folders' => $folders]);
     }
 
 
@@ -382,10 +393,12 @@ class TodoController extends Controller{
 
 
     public function complete_confirm(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // $idをもつToDoを抜き出す
         $todo = Todo::find($id);
         // $todoを渡してcomplete_confirmビューを返す
-        return view('todo.complete_confirm', ['todo' => $todo]);
+        return view('todo.complete_confirm', ['todo' => $todo, 'folders' => $folders]);
     }
 
 
@@ -406,10 +419,12 @@ class TodoController extends Controller{
 
 
     public function release_confirm(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // $idをもつToDoを抜き出す
         $todo = Todo::find($id);
         // $todoを渡してrelease_confirmビューを返す
-        return view('todo.release_confirm', ['todo' => $todo]);
+        return view('todo.release_confirm', ['todo' => $todo, 'folders' => $folders]);
     }
 
 

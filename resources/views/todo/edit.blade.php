@@ -35,6 +35,19 @@
       <a class="dropdown-item" href="/logout">ログアウト</a>
     </div>
   </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      フォルダ
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="/folder_create_form">新規作成</a>
+      @if($folders)
+        @foreach($folders as $folder)
+          <a class="dropdown-item" href="#">{{ $folder->name }}</a>
+        @endforeach
+      @endif
+    </div>
+  </li>
 @endsection
 
 {{-- template.blade.phpの@yield('content')に渡す --}}
