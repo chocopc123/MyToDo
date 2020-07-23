@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Todo;
+use App\Library\BaseClass;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller{
@@ -65,8 +66,10 @@ class UserController extends Controller{
     }
 
     public function profile(){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // profileビューを返す
-        return view('user.profile');
+        return view('user.profile', ['folders' => $folders]);
     }
 
     public function logout(){
@@ -77,10 +80,12 @@ class UserController extends Controller{
     }
 
     public function user_delete_confirm(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
         // $idをもつユーザーを抜き出す
         $user = User::find($id);
         // $userを渡してdelete_confirmビューを返す
-        return view('user.user_delete_confirm', ['user' => $user]);
+        return view('user.user_delete_confirm', ['user' => $user, 'folders' => $folders]);
     }
 
     public function user_delete(Request $request){
