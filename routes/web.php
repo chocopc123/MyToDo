@@ -42,3 +42,6 @@ Route::post('login', 'UserController@login');
 Route::get('logout', 'UserController@logout');
 Route::get('user_delete_confirm/{id}', 'UserController@user_delete_confirm');
 Route::post('user_delete', 'UserController@user_delete');
+
+Route::get('folder_create_form', 'FolderController@folder_create_form');
+Route::post('folder_create', 'FolderController@folder_create');
