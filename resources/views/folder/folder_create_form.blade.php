@@ -35,7 +35,7 @@
       <a class="dropdown-item active" href="/folder_create_form">新規作成 <span class="sr-only">(current)</span></a>
       @if($folders)
         @foreach($folders as $folder)
-          <a class="dropdown-item" href="#">{{ $folder->name }}</a>
+          <a class="dropdown-item" href="/folder_index/{{ $folder->id }}">{{ $folder->name }}</a>
         @endforeach
       @endif
     </div>
