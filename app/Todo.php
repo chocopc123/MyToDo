@@ -11,5 +11,5 @@ class Todo extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'todos';
     protected $fillable = ['title', 'explanation', 'difficulty','importance', 'complete', 'deadline', 'deadline_time',
-        'completed_date', 'completed_time', 'completed_date','completed_time', 'user_id'];
+        'completed_date', 'completed_time', 'user_id', 'folder_id'];
 }
