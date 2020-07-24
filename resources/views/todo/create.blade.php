@@ -4,7 +4,7 @@
 @extends('layouts.template')
 
 {{-- head.blade.phpの@yield('title')に渡す --}}
-@section('title', 'ToDo追加')
+@section('title', 'ToDo作成')
 {{-- head.blade.phpを差し込む --}}
 @include('layouts.head')
 
@@ -45,7 +45,7 @@
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
   <div id="wrapper" class="pt-3 col-12 col-sm-12 col-md-12 col-lg-10 col-xl-8">
-    <h2 class="pb-3">ToDo追加</h2>
+    <h2 class="pb-3">ToDo作成</h2>
 
     {{-- createアクションにフォームのデータをPOSTする --}}
     <form method="POST" action="/create">

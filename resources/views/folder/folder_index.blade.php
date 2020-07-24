@@ -47,7 +47,7 @@
   <div id="wrapper" class="col-12 col-sm-12 col-md-9 col-xl-10">
     <h3 class="pt-3">{{ $fold->name }}</h3>
     <div class="py-3">
-      {{-- フォルダToDo追加ボタン --}}
+      {{-- フォルダへToDo追加ボタン --}}
       <a href="/add_folder_form/{{ $fold->id }}" class="btn btn-primary">フォルダへ追加</></a>
       {{-- 検索ワードと結果件数表示 --}}
       @if($search)
