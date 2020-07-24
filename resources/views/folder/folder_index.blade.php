@@ -1,10 +1,10 @@
 {{-- template.blade.phpの@yield('logo-path')に渡す --}}
-@section('logo-path', 'image/mytodo_icon.png')
+@section('logo-path', '../image/mytodo_icon.png')
 {{-- templateを読み込む --}}
 @extends('layouts.template')
 
 {{-- head.blade.phpの@yield('title')に渡す --}}
-@section('title', '未達成')
+@section('title', 'フォルダ詳細')
 {{-- head.blade.phpを差し込む --}}
 @include('layouts.head')
 
@@ -12,8 +12,8 @@
 {{-- template.blade.phpの@yield('navi')に渡す --}}
 {{-- class="active"と<span class="sr-only">(current)</span>を指定する --}}
 @section('navi')
-  <li class="nav-item active">
-    <a class="nav-link" href="/">未達成リスト <span class="sr-only">(current)</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="/">未達成リスト</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/index_completed">達成リスト</a>
@@ -28,8 +28,8 @@
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      フォルダ
+    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      フォルダ <span class="sr-only">(current)</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <a class="dropdown-item" href="/folder_create_form">新規作成</a>
@@ -47,7 +47,7 @@
   <div id="wrapper" class="col-12 col-sm-12 col-md-9 col-xl-10">
     <div class="py-3">
       {{-- ToDo追加ボタン --}}
-      <a href="/create" class="btn btn-primary">ToDo追加</></a>
+      <a href="/create" class="btn btn-primary">フォルダへ追加</></a>
       @if($search)
         <a class="pl-2 text-muted">検索ワード：{{ $search }}</a>
       @endif

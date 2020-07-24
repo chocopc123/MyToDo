@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Folder;
+use App\Todo;
 use App\Library\BaseClass;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,5 +26,25 @@ class FolderController extends Controller
         $folder->user_id = Auth::id();
         $folder->save();
         return redirect( session('redirect') );
+    }
+
+    public function folder_index(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
+        // フォルダのTodo一覧を取得
+        $todos = Todo::where('folder_id', $id)
+            ->where('title', 'like', '%'. $request->search. '%')
+        ->paginate(5);
+        return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search]);
+    }
+
+    public function add_folder_form(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
+        // ToDo一覧を取得
+        $todos = Todo::where('user_id', Auth::id())
+            ->where('title', 'like', '%'. $request->search. '%')
+        ->paginate(5);
+        return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search]);
     }
 }

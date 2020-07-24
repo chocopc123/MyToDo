@@ -4,7 +4,7 @@
 @extends('layouts.template')
 
 {{-- head.blade.phpの@yield('title')に渡す --}}
-@section('title', 'ユーザー作成')
+@section('title', '新規フォルダ作成')
 {{-- head.blade.phpを差し込む --}}
 @include('layouts.head')
 
@@ -19,20 +19,20 @@
     <a class="nav-link" href="/index_completed">達成リスト</a>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      ダッシュボード <span class="sr-only">(current)</span>
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      ダッシュボード
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item active" href="/profile">プロフィール <span class="sr-only">(current)</span></a>
+      <a class="dropdown-item" href="/profile">プロフィール</a>
       <a class="dropdown-item" href="/logout">ログアウト</a>
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      フォルダ
+    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      フォルダ <span class="sr-only">(current)</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="/folder_create_form">新規作成</a>
+      <a class="dropdown-item active" href="/folder_create_form">新規作成 <span class="sr-only">(current)</span></a>
       @if($folders)
         @foreach($folders as $folder)
           <a class="dropdown-item" href="#">{{ $folder->name }}</a>
