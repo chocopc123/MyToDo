@@ -45,10 +45,8 @@
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
   <div id="wrapper" class="col-12 col-sm-12 col-md-9 col-xl-10">
-    <h3></h3>
     <div class="py-3">
-      {{-- ToDo追加ボタン --}}
-      <a href="/create" class="btn btn-primary">フォルダへ追加</></a>
+      {{-- 検索ワードと結果件数表示 --}}
       @if($search)
         <a class="pl-2 text-muted">検索ワード：{{ $search }}</a>
       @endif
@@ -91,9 +89,7 @@
             <h6 class="card-subtitle mb-2 text-body">作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
 
             {{-- 各種ボタン --}}
-            <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a></p>
-            <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
-            <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
+            <p><a href="/add_folder/{{ $folder->id }}/{{ $todo->id }}" class="btn btn-success">追加</a></p>
           </div>
         </div>
       @endforeach

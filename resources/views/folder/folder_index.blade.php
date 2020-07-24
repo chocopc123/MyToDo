@@ -45,16 +45,17 @@
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
   <div id="wrapper" class="col-12 col-sm-12 col-md-9 col-xl-10">
+    <h3 class="pt-3">{{ $folder->name }}</h3>
     <div class="py-3">
-      {{-- ToDo追加ボタン --}}
-      <a href="/create" class="btn btn-primary">フォルダへ追加</></a>
+      {{-- フォルダToDo追加ボタン --}}
+      <a href="/add_folder_form/{{ $folder->id }}" class="btn btn-primary">フォルダへ追加</></a>
+      {{-- 検索ワードと結果件数表示 --}}
       @if($search)
         <a class="pl-2 text-muted">検索ワード：{{ $search }}</a>
       @endif
       {{-- 件数表示 --}}
       <a class="pl-2 text-muted">{{ $todos->total() }} 件</a>
     </div>
-
     {{-- ToDoが一つもない場合はエラーを表示 --}}
     @if(count($todos)==0)
       <h5>ToDoがまだありません。</h5>
