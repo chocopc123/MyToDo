@@ -89,7 +89,7 @@
             <h6 class="card-subtitle mb-2 text-body">作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
 
             {{-- 各種ボタン --}}
-            <p><a href="/add_folder/{{ $folder->id }}/{{ $todo->id }}" class="btn btn-success">追加</a></p>
+            <p><a href="/add_folder/{{ $fold->id }}/{{ $todo->id }}" class="btn btn-success">追加</a></p>
           </div>
         </div>
       @endforeach

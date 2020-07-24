@@ -39,7 +39,7 @@ class FolderController extends Controller
                 ->where('title', 'like', '%'. $request->search. '%')
                 ->orderBy('created_at', 'desc')
             ->paginate(5);
-            return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'folder' => $folder]);
+            return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
@@ -56,7 +56,7 @@ class FolderController extends Controller
                 ->where('title', 'like', '%'. $request->search. '%')
                 ->orderBy('created_at', 'desc')
             ->paginate(5);
-            return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'folder' => $folder]);
+            return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
