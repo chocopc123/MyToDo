@@ -37,6 +37,7 @@ class FolderController extends Controller
             // フォルダのTodo一覧を取得
             $todos = Todo::where('folder_id', $folder->id)
                 ->where('title', 'like', '%'. $request->search. '%')
+                ->orderBy('created_at', 'desc')
             ->paginate(5);
             return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'folder' => $folder]);
         else:
