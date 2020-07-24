@@ -54,6 +54,7 @@ class FolderController extends Controller
             // ToDo一覧を取得
             $todos = Todo::where('user_id', Auth::id())
                 ->where('title', 'like', '%'. $request->search. '%')
+                ->where('folder_id', '=', 0)
                 ->orderBy('created_at', 'desc')
             ->paginate(5);
             return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder]);

@@ -59,7 +59,7 @@ class TodoController extends Controller{
                         ->where('deadline_time', '>', date("H:i:s"));
                 })->orwhere(function($todos){
                     $todos->where('deadline', '=', date("Y-m-d"))
-                        ->whereNull('deadline_time' );
+                        ->whereNull('deadline_time');
                 });
             })
             // 並べ替え
