@@ -73,7 +73,7 @@
 
         {{-- hiddenでidをコントローラに送る --}}
         <input type="hidden" name="id" value="{{$todo->id}}">
-        <input type="submit" class="btn btn-primary" value="達成">
+        <input type="submit" class="btn btn-success" value="達成">
       </form>
     </div>
 
