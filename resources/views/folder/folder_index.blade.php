@@ -45,10 +45,13 @@
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
   <div id="wrapper" class="col-12 col-sm-12 col-md-9 col-xl-10">
+    {{-- フォルダ名表示 --}}
     <h3 class="pt-3">{{ $fold->name }}</h3>
     <div class="py-3">
       {{-- フォルダへToDo追加ボタン --}}
       <a href="/add_folder_form/{{ $fold->id }}" class="btn btn-primary">フォルダへ追加</></a>
+      {{-- フォルダ削除ボタン --}}
+      <a href="/delete_folder_confirm/{{ $fold->id }}" class="btn btn-danger">フォルダを削除</></a>
       {{-- 検索ワードと結果件数表示 --}}
       @if($search)
         <a class="pl-2 text-muted">検索ワード：{{ $search }}</a>

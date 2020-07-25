@@ -79,4 +79,21 @@ class FolderController extends Controller
             return redirect( session('redirect') );
         endif;
     }
+
+    public function delete_folder_confirm(Request $request, $folder_id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
+        // フォルダを取得
+        $folder = Folder::find($folder_id);
+        return view( 'folder.delete_folder_confirm', ['folders' => $folders, 'fold' => $folder] );
+    }
+
+    public function delete_folder(Request $request){
+        // 受け取ったフォルダを削除する
+        Folder::where('id', $request->id)->delete();
+        // flash_messageセッションを設定
+        session()->flash('flash_message', 'フォルダの削除が完了しました');
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
+    }
 }

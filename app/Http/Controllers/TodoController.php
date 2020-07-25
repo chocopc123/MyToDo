@@ -151,12 +151,8 @@ class TodoController extends Controller{
     // 絞り込み条件をリセットする
     public function index_all(){
         session(['refine' => '/']);
-        // 達成済みか判定してリダイレクト
-        if(session('completed')):
-            return redirect('/index_completed');
-        else:
-            return redirect('/');
-        endif;
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
     // 絞り込み条件に期限間近をセットする
@@ -170,12 +166,8 @@ class TodoController extends Controller{
     public function overdue(){
         // redirectセッションに値を設定
         session(['refine'=> "/overdue"]);
-        // 達成済みか判定してリダイレクト
-        if(session('completed')):
-            return redirect('/index_completed');
-        else:
-            return redirect('/');
-        endif;
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
     // 並べ替え条件に作成日時をセットする
@@ -194,12 +186,8 @@ class TodoController extends Controller{
             // 並び順をdescに設定
             session(['order' => 'desc']);
         endif;
-        // 達成済みか判定してリダイレクト
-        if(session('completed')):
-            return redirect('/index_completed');
-        else:
-            return redirect('/');
-        endif;
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
     // 並べ替え条件に目標期限をセットする
@@ -218,12 +206,8 @@ class TodoController extends Controller{
             // 並び順をascに設定
             session(['order' => 'asc']);
         endif;
-        // 達成済みか判定してリダイレクト
-        if(session('completed')):
-            return redirect('/index_completed');
-        else:
-            return redirect('/');
-        endif;
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
     // 並べ替え条件に難易度をセットする
@@ -242,12 +226,8 @@ class TodoController extends Controller{
             // 並び順をascに設定
             session(['order' => 'asc']);
         endif;
-        // 達成済みか判定してリダイレクト
-        if(session('completed')):
-            return redirect('/index_completed');
-        else:
-            return redirect('/');
-        endif;
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
     // 並べ替え条件に重要度をセットする
@@ -266,12 +246,8 @@ class TodoController extends Controller{
             // 並び順をascに設定
             session(['order' => 'asc']);
         endif;
-        // 達成済みか判定してリダイレクト
-        if(session('completed')):
-            return redirect('/index_completed');
-        else:
-            return redirect('/');
-        endif;
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
     public function create(){
@@ -359,12 +335,8 @@ class TodoController extends Controller{
         $todo->save();
         // flash_messageセッションにメッセージを代入
         session()->flash('flash_message', 'ToDoの編集が完了しました');
-        // session('completed')がtrueだったらindex_completedにリダイレクトする
-        if(session('completed')){
-            return redirect('/index_completed');
-        }else{
-            return redirect('/');
-        }
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
 
@@ -383,12 +355,8 @@ class TodoController extends Controller{
         Todo::where('id', $request->id)->delete();
         // flash_messageセッションにメッセージを代入
         session()->flash('flash_message', '削除が完了しました');
-        // session('completed')がtrueだったらindex_completedにリダイレクトする
-        if(session('completed')){
-            return redirect('/index_completed');
-        }else{
-            return redirect('/');
-        }
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
     }
 
 
