@@ -96,4 +96,24 @@ class FolderController extends Controller
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }
+
+    public function folder_release_confirm(Request $request, $folder_id, $todo_id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
+        // フォルダを取得
+        $folder = Folder::find($folder_id);
+        // Todoを取得
+        $todo = Todo::find($todo_id);
+        return view( 'folder.folder_release_confirm', ['folders' => $folders, 'fold' => $folder, 'todo' => $todo] );
+    }
+
+    public function folder_release(Request $request){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
+        // Todoを取得
+        $todo = Todo::find($request->todo_id);
+        $todo->folder_id = 0;
+        $todo->save();
+        return redirect( '/folder_index/'. $request->folder_id );
+    }
 }

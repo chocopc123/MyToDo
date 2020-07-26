@@ -50,3 +50,5 @@ Route::get('add_folder_form/{id}', 'FolderController@add_folder_form');
 Route::get('add_folder/{folder_id}/{todo_id}', 'FolderController@add_folder');
 Route::get('delete_folder_confirm/{folder_id}', 'FolderController@delete_folder_confirm');
 Route::post('delete_folder', 'FolderController@delete_folder');
+Route::get('folder_release_confirm/{folder_id}/{todo_id}', 'FolderController@folder_release_confirm');
+Route::post('folder_release', 'FolderController@folder_release');

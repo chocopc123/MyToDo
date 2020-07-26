@@ -94,7 +94,10 @@
             <h6 class="card-subtitle mb-2 text-body">作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
 
             {{-- 各種ボタン --}}
-            <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a></p>
+            <p>
+              <a href="/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a>
+              <a href="/folder_release_confirm/{{$fold->id}}/{{$todo->id}}" class="btn btn-danger">フォルダから削除</a>
+            </p>
             <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
             <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
           </div>
