@@ -267,7 +267,7 @@ class TodoController extends Controller{
             'importance'=>'required|integer|max:3',
             'deadline'=>'required|string|max:10',
             'deadline_time'=>'nullable|string',
-            'folder_id'=>'required|string',
+            'folder_id'=>'required|integer',
         ]);
         // $todoに値を設定する
         $todo = new Todo;
@@ -313,6 +313,7 @@ class TodoController extends Controller{
             'deadline_time'=>'nullable|string|max:8',
             'completed_date'=>'filled|string|max:10',
             'completed_time'=>'filled|string|max:8',
+            'folder_id'=>'required|integer',
         ]);
         // $todoに値を設定する
         $todo = Todo::find($request->id);
@@ -333,6 +334,7 @@ class TodoController extends Controller{
         if($request->completed_time){
             $todo->completed_time = $request->completed_time;
         }
+        $todo->folder_id = $request->folder_id;
         // データベースに保存
         $todo->save();
         // flash_messageセッションにメッセージを代入
