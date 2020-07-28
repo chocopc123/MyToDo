@@ -59,6 +59,12 @@
           <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline}}</h6>
         @endif
         <h6 card-subtitle mb-2 text-muted>作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
+        {{-- フォルダ名を表示 --}}
+        @foreach($folders as $folder)
+          @if($folder->id == $todo->folder_id)
+            <h6 class="card-subtitle mb-2 text-body">フォルダ名：{{ $folder->name }}</h6>
+          @endif
+        @endforeach
       </div>
     </div>
 

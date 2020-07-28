@@ -126,6 +126,18 @@
           </div>
         </div>
       @endif
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-8 col-md-6 col-xl-4">
+            <label for="folderSelect">フォルダ <span class="badge badge-info">任意</span></label>
+            @foreach($folders as $folder)
+              @if($folder->id == $todo->folder_id)
+                <input type="text" readonly class="form-control" id="folderSelect" name="folder_id" value="{{ $folder->name }}">
+              @endif
+            @endforeach
+        </div>
+        </div>
+      </div>
 
       {{-- 各種ボタン --}}
       <input type="submit" readonly class="btn btn-danger" value="削除">

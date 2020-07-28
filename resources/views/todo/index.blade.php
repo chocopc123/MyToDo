@@ -88,6 +88,12 @@
             @endif
 
             <h6 class="card-subtitle mb-2 text-body">作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
+            {{-- フォルダ名を表示 --}}
+            @foreach($folders as $folder)
+              @if($folder->id == $todo->folder_id)
+                <h6 class="card-subtitle mb-2 text-body">フォルダ名：{{ $folder->name }}</h6>
+              @endif
+            @endforeach
 
             {{-- 各種ボタン --}}
             <p><a href="/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a></p>
