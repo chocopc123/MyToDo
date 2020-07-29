@@ -91,6 +91,10 @@ class FolderController extends Controller
     public function delete_folder(Request $request){
         // 受け取ったフォルダを削除する
         Folder::where('id', $request->id)->delete();
+        Todo::where('folder_id', $request->id)
+            ->update([
+                'folder_id' => '0',
+            ]);
         // flash_messageセッションを設定
         session()->flash('flash_message', 'フォルダの削除が完了しました');
         // redirectセッションの値によってリダイレクトする
