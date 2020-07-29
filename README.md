@@ -10,7 +10,7 @@
 * Vagrant
 * Laravel Homestead 10.10.1
 * PHP 7.4.5
-* Laravel Framework 5.5.49
+* Laravel Framework 6.18.31
  
 # 機能
 
