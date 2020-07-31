@@ -29,11 +29,11 @@ class TodoController extends Controller{
 
         // ログインユーザーの未達成のToDo一覧を絞り込んで取得
         if(session('refine') == '/'):
-            $todos = Refine::default(false, $request);
+            $todos = Refine::default(false, $request)->paginate(5);
         elseif(session('refine') == '/duesoon'):
-            $todos = Refine::duesoon(false, $request);
+            $todos = Refine::duesoon(false, $request)->paginate(5);
         elseif(session('refine') == '/overdue'):
-            $todos = Refine::overdue(false, $request);
+            $todos = Refine::overdue(false, $request)->paginate(5);
         endif;
 
         // $todosを渡してindexビューを返す

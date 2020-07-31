@@ -32,8 +32,7 @@ class Refine{
     })
     // 並べ替え
     ->orderBy(session('sort'), session('order'))
-    ->orderBy('deadline_time', session('order'))
-    ->paginate(5);
+    ->orderBy('deadline_time', session('order'));
     return $todos;
   }
 
@@ -61,8 +60,7 @@ class Refine{
     })
     // 並べ替え
     ->orderBy(session('sort'), session('order'))
-    ->orderBy('deadline_time', session('order'))
-    ->paginate(5);
+    ->orderBy('deadline_time', session('order'));
     return $todos;
   }
 
@@ -86,8 +84,7 @@ class Refine{
     })
     // 並べ替え
     ->orderBy(session('sort'), session('order'))
-    ->orderBy('deadline_time', session('order'))
-    ->paginate(5);
+    ->orderBy('deadline_time', session('order'));
     return $todos;
   }
 
@@ -111,8 +108,7 @@ class Refine{
     })
     // 並べ替え
     ->orderBy(session('sort'), session('order'))
-    ->orderBy('deadline_time', session('order'))
-    ->paginate(5);
+    ->orderBy('deadline_time', session('order'));
     return $todos;
   }
 }

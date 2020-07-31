@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Folder;
 use App\Todo;
 use App\Library\BaseClass;
+use App\Library\Refine;
 use Illuminate\Support\Facades\Auth;
 
 class FolderController extends Controller
@@ -34,11 +35,13 @@ class FolderController extends Controller
         $folders = BaseClass::getfolders();
         // フォルダを取得
         if($folder = Folder::find($id)):
-            // フォルダのTodo一覧を取得
-            $todos = Todo::where('folder_id', $folder->id)
-                ->where('title', 'like', '%'. $request->search. '%')
-                ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            if(session('refine') == '/'):
+                $todos = Refine::default(false, $request)->where('folder_id', $folder->id)->paginate(5);
+            elseif(session('refine') == '/duesoon'):
+                $todos = Refine::duesoon(false, $request)->where('folder_id', $folder->id)->paginate(5);
+            elseif(session('refine') == '/overdue'):
+                $todos = Refine::overdue(false, $request)->where('folder_id', $folder->id)->paginate(5);
+            endif;
             return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
@@ -120,4 +123,29 @@ class FolderController extends Controller
         $todo->save();
         return redirect( '/folder_index/'. $request->folder_id );
     }
+
+    // 絞り込み条件をリセットする
+    public function folder_index_all($folder_id){
+        // refineセッションをリセット
+        Refine::reset_refine();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/folder_index/'. $folder_id );
+    }
+
+    // 絞り込み条件に期限間近をセットする
+    public function folder_index_duesoon($folder_id){
+        // refineセッションに値をセット
+        Refine::set_refine_duesoon();
+        // リダイレクトする
+        return redirect( '/folder_index/'. $folder_id );
+    }
+
+    // 絞り込み条件に期限超過をセットする
+    public function folder_index_overdue($folder_id){
+        // refineセッションに値をセット
+        Refine::set_refine_overdue();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/folder_index/'. $folder_id );
+    }
+
 }
