@@ -65,22 +65,24 @@ class TodoController extends Controller{
 
     // 絞り込み条件をリセットする
     public function index_all(){
-        session(['refine' => '/']);
+        // refineセッションをリセット
+        Refine::reset_refine();
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }
 
     // 絞り込み条件に期限間近をセットする
     public function duesoon(){
-        // redirectセッションに値を設定
-        session(['refine'=> "/duesoon"]);
+        // refineセッションに値をセット
+        Refine::set_refine_duesoon();
+        // リダイレクトする
         return redirect('/');
     }
 
     // 絞り込み条件に期限超過をセットする
     public function overdue(){
-        // redirectセッションに値を設定
-        session(['refine'=> "/overdue"]);
+        // refineセッションに値をセット
+        Refine::set_refine_overdue();
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }

@@ -6,6 +6,21 @@ use App\Todo;
 use Illuminate\Support\Facades\Auth;
 
 class Refine{
+  public static function reset_refine(){
+    // refineセッションに値を設定
+    session(['refine'=> "/"]);
+  }
+
+  public static function set_refine_duesoon(){
+    // refineセッションに値を設定
+    session(['refine'=> "/duesoon"]);
+  }
+
+  public static function set_refine_overdue(){
+    // refineセッションに値を設定
+    session(['refine'=> "/overdue"]);
+  }
+
   public static function default($complete, $request) {
     $todos = Todo::where([
       ['user_id', Auth::id()], ['complete', $complete],
