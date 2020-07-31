@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Todo;
 use App\Library\BaseClass;
+use App\Library\Refine;
 use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller{
@@ -24,72 +25,16 @@ class TodoController extends Controller{
         session(['completed' => false]);
         // redirectセッションに値を設定
         session(['redirect' => '/']);
-        // ログインユーザーの未達成のToDo一覧を取得
+
+        // ログインユーザーの未達成のToDo一覧を絞り込んで取得
         if(session('refine') == '/'):
-            $todos = Todo::where([
-                ['user_id', Auth::id()], ['complete', false],
-            ])
-            // あいまい検索
-            ->where(function($todos) use($request){
-                $todos->where('title', 'like', '%'. $request->search.'%')
-                    ->orwhere('explanation', 'like', '%'. $request->search. '%');
-            })
-            // 並べ替え
-            ->orderBy(session('sort'), session('order'))
-            ->orderBy('deadline_time', session('order'))
-            ->paginate(5);
-        // ログインユーザーの未達成で期限間近のToDo一覧を取得
+            $todos = Refine::default(false, $request);
         elseif(session('refine') == '/duesoon'):
-            $todos = Todo::where(function($todos) use($request){
-                $todos->where('user_id', Auth::id())
-                    ->where('complete', false)
-                    ->where('deadline', '<' , date("Y-m-d", strtotime('+4 day'))
-                );
-            })
-            // あいまい検索
-            ->where(function($todos) use($request){
-                $todos->where('title', 'like', '%'. $request->search. '%')
-                    ->orwhere('explanation', 'like', '%'. $request->search. '%');
-            })
-            // 期限の判定
-            ->where(function($todos){
-                $todos->where('deadline', '>' , date("Y-m-d"))
-                ->orwhere(function($todos){
-                    $todos->where('deadline', '=' , date("Y-m-d"))
-                        ->where('deadline_time', '>', date("H:i:s"));
-                })->orwhere(function($todos){
-                    $todos->where('deadline', '=', date("Y-m-d"))
-                        ->whereNull('deadline_time');
-                });
-            })
-            // 並べ替え
-            ->orderBy(session('sort'), session('order'))
-            ->orderBy('deadline_time', session('order'))
-            ->paginate(5);
-        // ログインユーザーの未達成で期限超過のToDo一覧を取得
+            $todos = Refine::duesoon(false, $request);
         elseif(session('refine') == '/overdue'):
-            $todos = Todo::where(function($todos){
-                $todos->where('user_id', Auth::id())
-                    ->where('complete', false);
-            })
-            // あいまい検索
-            ->where(function($todos) use($request){
-                $todos->where('title', 'like', '%'. $request->search. '%')
-                    ->orwhere('explanation', 'like', '%'. $request->search. '%');
-            })
-            // 期限の判定
-            ->where(function($todos){
-                $todos->where('deadline', '<' , date("Y-m-d"))
-                ->orwhere(function($todos){
-                    $todos->where('deadline', '=' , date("Y-m-d"))
-                        ->where('deadline_time', '<', date("H:i:s"));
-                });
-            })
-            // 並べ替え
-            ->orderBy(session('sort'), session('order'))
-            ->orderBy('deadline_time', session('order'))
-            ->paginate(5);
+            $todos = Refine::overdue(false, $request);
         endif;
+
         // $todosを渡してindexビューを返す
         return view('todo.index', ['todos' => $todos, 'search' => $request->search, 'folders' => $folders]);
     }
@@ -106,44 +51,14 @@ class TodoController extends Controller{
         if(session('refine') == '/duesoon'){
             session(['refine' => '/']);
         }
-        // ログインユーザーの達成済みのToDo一覧を取得
+
+        // ログインユーザーの達成済みのToDo一覧を絞り込んで取得
         if(session('refine') == '/'):
-            $todos = Todo::where([
-                ['user_id', Auth::id()], ['complete', true]
-            ])
-            // あいまい検索
-            ->where(function($todos) use($request){
-                $todos->where('title', 'like', '%'. $request->search. '%')
-                    ->orwhere('explanation', 'like', '%'. $request->search. '%');
-            })
-            // 並べ替え
-            ->orderBy(session('sort'), session('order'))
-            ->orderBy('deadline_time', session('order'))
-            ->paginate(5);
-        // ログインユーザーの達成済みで期限超過のToDo一覧を取得
+            $todos = Refine::default(true, $request);
         elseif(session('refine') == '/overdue'):
-            $todos = Todo::where(function($todos){
-                $todos->where('user_id', Auth::id())
-                    ->where('complete', true);
-            })
-            // あいまい検索
-            ->where(function($todos) use($request){
-                $todos->where('title', 'like', '%'. $request->search. '%')
-                    ->orwhere('explanation', 'like', '%'. $request->search. '%');
-            })
-            // 期限の判定
-            ->where(function($todos){
-                $todos->whereColumn('deadline', '<' , 'completed_date')
-                ->orwhere(function($todos){
-                    $todos->whereColumn('deadline', '=' , 'completed_date')
-                        ->whereColumn('deadline_time', '<', 'completed_time');
-                });
-            })
-            // 並べ替え
-            ->orderBy(session('sort'), session('order'))
-            ->orderBy('deadline_time', session('order'))
-            ->paginate(5);
+            $todos = Refine::completed_overdue(true, $request);
         endif;
+
         // $todosを渡してindex_completedビューを返す
         return view('todo.index_completed', ['todos' => $todos, 'folders' => $folders]);
     }
