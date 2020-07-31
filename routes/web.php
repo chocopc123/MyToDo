@@ -58,7 +58,7 @@ Route::get('folder_index_all/{folder_id}', 'FolderController@folder_index_all');
 Route::get('folder_index_duesoon/{folder_id}', 'FolderController@folder_index_duesoon');
 Route::get('folder_index_overdue/{folder_id}', 'FolderController@folder_index_overdue');
 // フォルダ画面並べ替え
-Route::get('folder_index_created_at', 'FolderController@folder_index_created_at');
-Route::get('folder_index_deadline', 'FolderController@folder_index_deadline');
-Route::get('folder_index_difficulty', 'FolderController@folder_index_difficulty');
-Route::get('folder_index_importance', 'FolderController@folder_index_importance');
+Route::get('folder_index_created_at/{folder_id}', 'FolderController@folder_index_created_at');
+Route::get('folder_index_deadline/{folder_id}', 'FolderController@folder_index_deadline');
+Route::get('folder_index_difficulty/{folder_id}', 'FolderController@folder_index_difficulty');
+Route::get('folder_index_importance/{folder_id}', 'FolderController@folder_index_importance');

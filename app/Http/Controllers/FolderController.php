@@ -7,6 +7,7 @@ use App\Folder;
 use App\Todo;
 use App\Library\BaseClass;
 use App\Library\Refine;
+use App\Library\Sort;
 use Illuminate\Support\Facades\Auth;
 
 class FolderController extends Controller
@@ -144,6 +145,38 @@ class FolderController extends Controller
     public function folder_index_overdue($folder_id){
         // refineセッションに値をセット
         Refine::set_refine_overdue();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/folder_index/'. $folder_id );
+    }
+
+    // 並べ替え条件に作成日時をセットする
+    public function folder_index_created_at($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_created_at();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/folder_index/'. $folder_id );
+    }
+
+    // 並べ替え条件に目標期限をセットする
+    public function folder_index_deadline($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_deadline();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/folder_index/'. $folder_id );
+    }
+
+    // 並べ替え条件に難易度をセットする
+    public function folder_index_difficulty($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_difficulty();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/folder_index/'. $folder_id );
+    }
+
+    // 並べ替え条件に重要度をセットする
+    public function folder_index_importance($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_importance();
         // redirectセッションの値によってリダイレクトする
         return redirect( '/folder_index/'. $folder_id );
     }
