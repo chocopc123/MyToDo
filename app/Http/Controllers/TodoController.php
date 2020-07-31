@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Todo;
 use App\Library\BaseClass;
 use App\Library\Refine;
+use App\Library\Sort;
 use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller{
@@ -89,80 +90,32 @@ class TodoController extends Controller{
 
     // 並べ替え条件に作成日時をセットする
     public function index_created_at(){
-        // sortに既にcreated_atが設定されている場合は並び順を反転
-        if(session('sort') == 'created_at'):
-            if(session('order') == 'desc'):
-                session(['order' => 'asc']);
-            elseif(session('order') == 'asc'):
-                session(['order' => 'desc']);
-            endif;
-        // sortにcreated_atが設定されていなかったら設定 & 並び順の初期化
-        else:
-            // sortにcreated_atを設定
-            session(['sort' => 'created_at']);
-            // 並び順をdescに設定
-            session(['order' => 'desc']);
-        endif;
+        // sortセッションに値をセット
+        Sort::set_sort_created_at();
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }
 
     // 並べ替え条件に目標期限をセットする
     public function index_deadline(){
-        // sortに既にdeadlineが設定されている場合は並び順を反転
-        if(session('sort') == 'deadline'):
-            if(session('order') == 'desc'):
-                session(['order' => 'asc']);
-            elseif(session('order') == 'asc'):
-                session(['order' => 'desc']);
-            endif;
-        // sortにdeadlineが設定されていなかったら設定 & 並び順の初期化
-        else:
-            // sortにdeadlineを設定
-            session(['sort' => 'deadline']);
-            // 並び順をascに設定
-            session(['order' => 'asc']);
-        endif;
+        // sortセッションに値をセット
+        Sort::set_sort_deadline();
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }
 
     // 並べ替え条件に難易度をセットする
     public function index_difficulty(){
-        // sortに既にdifficiltyが設定されている場合は並び順を反転
-        if(session('sort') == 'difficulty'):
-            if(session('order') == 'desc'):
-                session(['order' => 'asc']);
-            elseif(session('order') == 'asc'):
-                session(['order' => 'desc']);
-            endif;
-        // sortにdifficultyが設定されていなかったら設定 & 並び順の初期化
-        else:
-            // sortにdifficultyを設定
-            session(['sort' => 'difficulty']);
-            // 並び順をascに設定
-            session(['order' => 'asc']);
-        endif;
+        // sortセッションに値をセット
+        Sort::set_sort_difficulty();
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }
 
     // 並べ替え条件に重要度をセットする
     public function index_importance(){
-        // sortに既にimportanceが設定されている場合は並び順を反転
-        if(session('sort') == 'importance'):
-            if(session('order') == 'desc'):
-                session(['order' => 'asc']);
-            elseif(session('order') == 'asc'):
-                session(['order' => 'desc']);
-            endif;
-        // sortにimportanceが設定されていなかったら設定 & 並び順の初期化
-        else:
-            // sortにimportanceを設定
-            session(['sort' => 'importance']);
-            // 並び順をascに設定
-            session(['order' => 'asc']);
-        endif;
+        // sortセッションに値をセット
+        Sort::set_sort_importance();
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }
