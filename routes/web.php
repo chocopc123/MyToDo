@@ -62,3 +62,13 @@ Route::get('folder_index_created_at/{folder_id}', 'FolderController@folder_index
 Route::get('folder_index_deadline/{folder_id}', 'FolderController@folder_index_deadline');
 Route::get('folder_index_difficulty/{folder_id}', 'FolderController@folder_index_difficulty');
 Route::get('folder_index_importance/{folder_id}', 'FolderController@folder_index_importance');
+
+// ToDoフォルダ追加画面絞り込み
+Route::get('add_folder_all/{folder_id}', 'FolderController@add_folder_all');
+Route::get('add_folder_duesoon/{folder_id}', 'FolderController@add_folder_duesoon');
+Route::get('add_folder_overdue/{folder_id}', 'FolderController@add_folder_overdue');
+// ToDoフォルダ追加画面並べ替え
+Route::get('add_folder_created_at/{folder_id}', 'FolderController@add_folder_created_at');
+Route::get('add_folder_deadline/{folder_id}', 'FolderController@add_folder_deadline');
+Route::get('add_folder_difficulty/{folder_id}', 'FolderController@add_folder_difficulty');
+Route::get('add_folder_importance/{folder_id}', 'FolderController@add_folder_importance');

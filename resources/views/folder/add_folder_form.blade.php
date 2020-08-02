@@ -12,8 +12,8 @@
 {{-- template.blade.phpの@yield('navi')に渡す --}}
 {{-- class="active"と<span class="sr-only">(current)</span>を指定する --}}
 @section('navi')
-  <li class="nav-item active">
-    <a class="nav-link" href="/">未達成リスト <span class="sr-only">(current)</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="/">未達成リスト</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/index_completed">達成リスト</a>
@@ -28,8 +28,8 @@
     </div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      フォルダ
+    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      フォルダ <span class="sr-only">(current)</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <a class="dropdown-item" href="/folder_create_form">新規作成</a>
@@ -45,6 +45,7 @@
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
   <div id="wrapper" class="col-12 col-sm-12 col-md-9 col-xl-10">
+    <h3 class="pt-3">{{ $fold->name }}フォルダへ追加</h3>
     <div class="py-3">
       {{-- 検索ワードと結果件数表示 --}}
       @if($search)
@@ -101,16 +102,16 @@
   <div class="col-12 col-sm-12 col-md-3 col-xl-2 order-md-first" style="background-color: #e3f2fd;">
     <ul class="list-group">
       <h4 class="pt-4 pb-2 pl-5 font-weight-bold">絞り込み</h4>
-      <a href="/index_all" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/'){ echo "active"; } ?>">未達成一覧</a>
-      <a href="/duesoon" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/duesoon'){ echo "active"; } ?>">期限間近</a>
-      <a href="/overdue" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/overdue'){ echo "active"; } ?>">期限超過</a>
+      <a href="/add_folder_all/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/'){ echo "active"; } ?>">未達成一覧</a>
+      <a href="/add_folder_duesoon/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/duesoon'){ echo "active"; } ?>">期限間近</a>
+      <a href="/add_folder_overdue/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/overdue'){ echo "active"; } ?>">期限超過</a>
     </ul>
     <ul class="list-group">
       <h4 class="pt-4 pb-2 pl-5 font-weight-bold">並べ変え</h4>
-      <a href="/index_created_at" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='created_at'){ echo "active"; } ?>">作成日時</a>
-      <a href="/index_deadline" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='deadline'){ echo "active"; } ?>">期限</a>
-      <a href="/index_difficulty" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='difficulty'){ echo "active"; } ?>">難易度</a>
-      <a href="/index_importance" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='importance'){ echo "active"; } ?>">重要度</a>
+      <a href="/add_folder_created_at/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='created_at'){ echo "active"; } ?>">作成日時</a>
+      <a href="/add_folder_deadline/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='deadline'){ echo "active"; } ?>">期限</a>
+      <a href="/add_folder_difficulty/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='difficulty'){ echo "active"; } ?>">難易度</a>
+      <a href="/add_folder_importance/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='importance'){ echo "active"; } ?>">重要度</a>
     </ul>
   </div>
 @endsection

@@ -55,9 +55,9 @@ class TodoController extends Controller{
 
         // ログインユーザーの達成済みのToDo一覧を絞り込んで取得
         if(session('refine') == '/'):
-            $todos = Refine::default(true, $request);
+            $todos = Refine::default(true, $request)->paginate(5);
         elseif(session('refine') == '/overdue'):
-            $todos = Refine::completed_overdue(true, $request);
+            $todos = Refine::completed_overdue(true, $request)->paginate(5);
         endif;
 
         // $todosを渡してindex_completedビューを返す

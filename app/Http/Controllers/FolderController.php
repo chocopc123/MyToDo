@@ -28,7 +28,7 @@ class FolderController extends Controller
         $folder->user_id = Auth::id();
         $folder->save();
         session()->flash('flash_message', 'フォルダ新規登録作成が完了しました');
-        return redirect('/folder_index/'.$folder->id);
+        return redirect('/add_folder/'.$folder->id);
     }
 
     public function folder_index(Request $request, $id){
@@ -36,6 +36,7 @@ class FolderController extends Controller
         $folders = BaseClass::getfolders();
         // フォルダを取得
         if($folder = Folder::find($id)):
+            // ToDo一覧を取得
             if(session('refine') == '/'):
                 $todos = Refine::default(false, $request)->where('folder_id', $folder->id)->paginate(5);
             elseif(session('refine') == '/duesoon'):
@@ -56,11 +57,13 @@ class FolderController extends Controller
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
-            $todos = Todo::where('user_id', Auth::id())
-                ->where('title', 'like', '%'. $request->search. '%')
-                ->where('folder_id', '=', 0)
-                ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            if(session('refine') == '/'):
+                $todos = Refine::default(false, $request)->where('folder_id', 0)->paginate(5);
+            elseif(session('refine') == '/duesoon'):
+                $todos = Refine::duesoon(false, $request)->where('folder_id', 0)->paginate(5);
+            elseif(session('refine') == '/overdue'):
+                $todos = Refine::overdue(false, $request)->where('folder_id', 0)->paginate(5);
+            endif;
             return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
@@ -125,6 +128,9 @@ class FolderController extends Controller
         return redirect( '/folder_index/'. $request->folder_id );
     }
 
+
+    // folder_index_formの絞り込み、並べ替え
+
     // 絞り込み条件をリセットする
     public function folder_index_all($folder_id){
         // refineセッションをリセット
@@ -179,6 +185,67 @@ class FolderController extends Controller
         Sort::set_sort_importance();
         // redirectセッションの値によってリダイレクトする
         return redirect( '/folder_index/'. $folder_id );
+    }
+
+
+    // add_folder_formの絞り込み
+
+    // 絞り込み条件をリセットする
+    public function add_folder_all($folder_id){
+        // refineセッションをリセット
+        Refine::reset_refine();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/add_folder_form/'. $folder_id );
+    }
+
+    // 絞り込み条件に期限間近をセットする
+    public function add_folder_duesoon($folder_id){
+        // refineセッションに値をセット
+        Refine::set_refine_duesoon();
+        // リダイレクトする
+        return redirect( '/add_folder_form/'. $folder_id );
+    }
+
+    // 絞り込み条件に期限超過をセットする
+    public function add_folder_overdue($folder_id){
+        // refineセッションに値をセット
+        Refine::set_refine_overdue();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/add_folder_form/'. $folder_id );
+    }
+
+    // add_folder_formの並べ替え
+
+    // 並べ替え条件に作成日時をセットする
+    public function add_folder_created_at($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_created_at();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/add_folder_form/'. $folder_id );
+    }
+
+    // 並べ替え条件に目標期限をセットする
+    public function add_folder_deadline($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_deadline();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/add_folder_form/'. $folder_id );
+    }
+
+    // 並べ替え条件に難易度をセットする
+    public function add_folder_difficulty($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_difficulty();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/add_folder_form/'. $folder_id );
+    }
+
+    // 並べ替え条件に重要度をセットする
+    public function add_folder_importance($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_importance();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( '/add_folder_form/'. $folder_id );
     }
 
 }
