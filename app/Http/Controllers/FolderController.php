@@ -66,7 +66,7 @@ class FolderController extends Controller
             elseif(session('refine') == '/overdue'):
                 $todos = Refine::completed_overdue(true, $request)->where('folder_id', $folder->id)->paginate(5);
             endif;
-            return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
+            return view('folder.folder_index_completed', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
@@ -107,7 +107,7 @@ class FolderController extends Controller
             elseif(session('refine') == '/overdue'):
                 $todos = Refine::completed_overdue(true, $request)->where('folder_id', 0)->paginate(5);
             endif;
-            return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
+            return view('folder.add_folder_completed_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
