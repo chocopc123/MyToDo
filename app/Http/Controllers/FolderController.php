@@ -44,7 +44,25 @@ class FolderController extends Controller
             elseif(session('refine') == '/overdue'):
                 $todos = Refine::overdue(false, $request)->where('folder_id', $folder->id)->paginate(5);
             endif;
-            return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder]);
+            return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => false]);
+        else:
+            session()->flash('flash_message', '存在しないフォルダです');
+            return redirect( session('redirect') );
+        endif;
+    }
+
+    public function folder_index_completed(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
+        // フォルダを取得
+        if($folder = Folder::find($id)):
+            // ToDo一覧を取得
+            if(session('refine') == '/'):
+                $todos = Refine::default(true, $request)->where('folder_id', $folder->id)->paginate(5);
+            elseif(session('refine') == '/duesoon'):
+                $todos = Refine::completed_overdue(true, $request)->where('folder_id', $folder->id)->paginate(5);
+            endif;
+            return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
@@ -64,7 +82,25 @@ class FolderController extends Controller
             elseif(session('refine') == '/overdue'):
                 $todos = Refine::overdue(false, $request)->where('folder_id', 0)->paginate(5);
             endif;
-            return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder]);
+            return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => false]);
+        else:
+            session()->flash('flash_message', '存在しないフォルダです');
+            return redirect( session('redirect') );
+        endif;
+    }
+
+    public function add_folder_completed_form(Request $request, $id){
+        // フォルダ一覧を取得
+        $folders = BaseClass::getfolders();
+        // フォルダを取得
+        if($folder = Folder::find($id)):
+            // ToDo一覧を取得
+            if(session('refine') == '/'):
+                $todos = Refine::default(true, $request)->where('folder_id', 0)->paginate(5);
+            elseif(session('refine') == '/completed_overdue'):
+                $todos = Refine::overdue(true, $request)->where('folder_id', 0)->paginate(5);
+            endif;
+            return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
