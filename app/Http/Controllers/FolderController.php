@@ -34,6 +34,8 @@ class FolderController extends Controller
     public function folder_index(Request $request, $id){
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
+        // folder_redirectセッションに値を設定
+        session(['folder_redirect' => '/folder_index/']);
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
@@ -54,12 +56,14 @@ class FolderController extends Controller
     public function folder_index_completed(Request $request, $id){
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
+        // folder_redirectセッションに値を設定
+        session(['folder_redirect' => '/folder_index_completed/']);
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
             if(session('refine') == '/'):
                 $todos = Refine::default(true, $request)->where('folder_id', $folder->id)->paginate(5);
-            elseif(session('refine') == '/duesoon'):
+            elseif(session('refine') == '/overdue'):
                 $todos = Refine::completed_overdue(true, $request)->where('folder_id', $folder->id)->paginate(5);
             endif;
             return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
@@ -72,6 +76,8 @@ class FolderController extends Controller
     public function add_folder_form(Request $request, $id){
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
+        // folder_redirectセッションに値を設定
+        session(['folder_redirect' => '/add_folder_form/']);
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
@@ -92,13 +98,14 @@ class FolderController extends Controller
     public function add_folder_completed_form(Request $request, $id){
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
+        session(['folder_redirect' => '/add_folder_completed_form/']);
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
             if(session('refine') == '/'):
                 $todos = Refine::default(true, $request)->where('folder_id', 0)->paginate(5);
-            elseif(session('refine') == '/completed_overdue'):
-                $todos = Refine::overdue(true, $request)->where('folder_id', 0)->paginate(5);
+            elseif(session('refine') == '/overdue'):
+                $todos = Refine::completed_overdue(true, $request)->where('folder_id', 0)->paginate(5);
             endif;
             return view('folder.add_folder_form', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
         else:
@@ -172,7 +179,7 @@ class FolderController extends Controller
         // refineセッションをリセット
         Refine::reset_refine();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/folder_index/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 絞り込み条件に期限間近をセットする
@@ -180,7 +187,7 @@ class FolderController extends Controller
         // refineセッションに値をセット
         Refine::set_refine_duesoon();
         // リダイレクトする
-        return redirect( '/folder_index/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 絞り込み条件に期限超過をセットする
@@ -188,7 +195,7 @@ class FolderController extends Controller
         // refineセッションに値をセット
         Refine::set_refine_overdue();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/folder_index/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 並べ替え条件に作成日時をセットする
@@ -196,7 +203,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_created_at();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/folder_index/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 並べ替え条件に目標期限をセットする
@@ -204,7 +211,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_deadline();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/folder_index/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 並べ替え条件に難易度をセットする
@@ -212,7 +219,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_difficulty();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/folder_index/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 並べ替え条件に重要度をセットする
@@ -220,7 +227,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_importance();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/folder_index/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
 
@@ -231,7 +238,7 @@ class FolderController extends Controller
         // refineセッションをリセット
         Refine::reset_refine();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/add_folder_form/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 絞り込み条件に期限間近をセットする
@@ -239,7 +246,7 @@ class FolderController extends Controller
         // refineセッションに値をセット
         Refine::set_refine_duesoon();
         // リダイレクトする
-        return redirect( '/add_folder_form/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 絞り込み条件に期限超過をセットする
@@ -247,7 +254,7 @@ class FolderController extends Controller
         // refineセッションに値をセット
         Refine::set_refine_overdue();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/add_folder_form/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // add_folder_formの並べ替え
@@ -257,7 +264,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_created_at();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/add_folder_form/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 並べ替え条件に目標期限をセットする
@@ -265,7 +272,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_deadline();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/add_folder_form/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 並べ替え条件に難易度をセットする
@@ -273,7 +280,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_difficulty();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/add_folder_form/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
     // 並べ替え条件に重要度をセットする
@@ -281,7 +288,7 @@ class FolderController extends Controller
         // sortセッションに値をセット
         Sort::set_sort_importance();
         // redirectセッションの値によってリダイレクトする
-        return redirect( '/add_folder_form/'. $folder_id );
+        return redirect( session('folder_redirect'). $folder_id );
     }
 
 }
