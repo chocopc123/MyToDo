@@ -36,6 +36,10 @@ class FolderController extends Controller
         $folders = BaseClass::getfolders();
         // folder_redirectセッションに値を設定
         session(['folder_redirect' => '/folder_index/']);
+        // sortに'completed_date'が入っている場合は'created_at'に変更
+        if(session('sort') == 'completed_date'){
+            session(['sort' => 'created_at']);
+        }
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
@@ -58,6 +62,10 @@ class FolderController extends Controller
         $folders = BaseClass::getfolders();
         // folder_redirectセッションに値を設定
         session(['folder_redirect' => '/folder_index_completed/']);
+        // refineに'/duesoon'が入っている場合は'/'に変更
+        if(session('refine') == '/duesoon'){
+            session(['refine' => '/']);
+        }
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
@@ -226,6 +234,14 @@ class FolderController extends Controller
     public function folder_index_importance($folder_id){
         // sortセッションに値をセット
         Sort::set_sort_importance();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('folder_redirect'). $folder_id );
+    }
+
+    // 並べ替え条件に達成日時をセットする
+    public function folder_index_completed_date($folder_id){
+        // sortセッションに値をセット
+        Sort::set_sort_completed_date();
         // redirectセッションの値によってリダイレクトする
         return redirect( session('folder_redirect'). $folder_id );
     }

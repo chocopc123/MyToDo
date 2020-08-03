@@ -71,4 +71,21 @@ class Sort{
       session(['order' => 'asc']);
     endif;
   }
+
+  public static function set_sort_completed_date(){
+    // sortに既にcompleted_dateが設定されている場合は並び順を反転
+    if(session('sort') == 'completed_date'):
+      if(session('order') == 'desc'):
+        session(['order' => 'asc']);
+      elseif(session('order') == 'asc'):
+        session(['order' => 'desc']);
+      endif;
+    // sortにcompleted_dateが設定されていなかったら設定 & 並び順の初期化
+    else:
+      // sortにcompleted_dateを設定
+      session(['sort' => 'completed_date']);
+      // 並び順をascに設定
+      session(['order' => 'asc']);
+    endif;
+  }
 }

@@ -22,6 +22,7 @@ Route::get('index_created_at', 'TodoController@index_created_at');
 Route::get('index_deadline', 'TodoController@index_deadline');
 Route::get('index_difficulty', 'TodoController@index_difficulty');
 Route::get('index_importance', 'TodoController@index_importance');
+Route::get('index_completed_date', 'TodoController@index_completed_date');
 
 Route::get('create', 'TodoController@create');
 Route::post('create', 'TodoController@store');
@@ -64,6 +65,7 @@ Route::get('folder_index_created_at/{folder_id}', 'FolderController@folder_index
 Route::get('folder_index_deadline/{folder_id}', 'FolderController@folder_index_deadline');
 Route::get('folder_index_difficulty/{folder_id}', 'FolderController@folder_index_difficulty');
 Route::get('folder_index_importance/{folder_id}', 'FolderController@folder_index_importance');
+Route::get('folder_index_completed_date/{folder_id}', 'FolderController@folder_index_completed_date');
 
 // ToDoフォルダ追加画面絞り込み
 Route::get('add_folder_all/{folder_id}', 'FolderController@add_folder_all');

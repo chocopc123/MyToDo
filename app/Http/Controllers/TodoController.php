@@ -26,6 +26,10 @@ class TodoController extends Controller{
         session(['completed' => false]);
         // redirectセッションに値を設定
         session(['redirect' => '/']);
+        // sortに'completed_date'が入っている場合は'created_at'に変更
+        if(session('sort') == 'completed_date'){
+            session(['sort' => 'created_at']);
+        }
 
         // ログインユーザーの未達成のToDo一覧を絞り込んで取得
         if(session('refine') == '/'):
@@ -119,6 +123,15 @@ class TodoController extends Controller{
         // redirectセッションの値によってリダイレクトする
         return redirect( session('redirect') );
     }
+
+    // 並べ替え条件に達成日時をセットする
+    public function index_completed_date(){
+        // sortセッションに値をセット
+        Sort::set_sort_completed_date();
+        // redirectセッションの値によってリダイレクトする
+        return redirect( session('redirect') );
+    }
+
 
     public function create(){
         // フォルダ一覧を取得

@@ -106,6 +106,7 @@
       <a href="/index_deadline" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='deadline'){ echo "active"; } ?>">期限</a>
       <a href="/index_difficulty" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='difficulty'){ echo "active"; } ?>">難易度</a>
       <a href="/index_importance" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='importance'){ echo "active"; } ?>">重要度</a>
+      <a href="/index_completed_date" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='completed_date'){ echo "active"; } ?>">達成日時</a>
     </ul>
   </div>
 @endsection
