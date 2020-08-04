@@ -11,6 +11,6 @@ class Folder extends Model
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'name', 'user_id', 'password', 'remember_token',
+        'name', 'user_id',
     ];
 }
