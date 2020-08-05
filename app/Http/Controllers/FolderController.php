@@ -33,7 +33,7 @@ class FolderController extends Controller
         $folder->user_id = Auth::id();
         $folder->save();
         session()->flash('flash_message', 'フォルダ新規登録作成が完了しました');
-        return redirect('/add_folder/'.$folder->id);
+        return redirect('/folder_index/'.$folder->id);
     }
 
     public function folder_index(Request $request, $id){
