@@ -42,9 +42,9 @@ class FolderController extends Controller
         // folder_redirectセッションに値を設定
         session(['folder_redirect' => '/folder_index/']);
         // sortに'completed_date'が入っている場合は'created_at'に変更
-        if(session('sort') == 'completed_date'){
+        if(session('sort') == 'completed_date'):
             session(['sort' => 'created_at']);
-        }
+        endif;
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
@@ -68,9 +68,9 @@ class FolderController extends Controller
         // folder_redirectセッションに値を設定
         session(['folder_redirect' => '/folder_index_completed/']);
         // refineに'/duesoon'が入っている場合は'/'に変更
-        if(session('refine') == '/duesoon'){
+        if(session('refine') == '/duesoon'):
             session(['refine' => '/']);
-        }
+        endif;
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得

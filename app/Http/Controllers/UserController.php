@@ -35,11 +35,11 @@ class UserController extends Controller{
         $user->password = bcrypt($request->password);
         // データベースに保存
         $user->save();
-        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])):
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             session()->flash('flash_message', 'ユーザー新規登録が完了しました');
             return redirect()->intended('profile');
-        }
+        endif;
         // リダイレクトする
         return redirect('/');
     }
@@ -56,11 +56,11 @@ class UserController extends Controller{
             'password'=>'required|string|between:8, 128',
         ]);
         // ログインする
-        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->remember)){
+        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->remember)):
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             session()->flash('flash_message', 'ログインしました');
             return redirect()->intended('profile');
-        }
+        endif;
         // 失敗した場合はloginにリダイレクト
         return redirect('login');
     }

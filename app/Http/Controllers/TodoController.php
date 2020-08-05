@@ -27,9 +27,9 @@ class TodoController extends Controller{
         // redirectセッションに値を設定
         session(['redirect' => '/']);
         // sortに'completed_date'が入っている場合は'created_at'に変更
-        if(session('sort') == 'completed_date'){
+        if(session('sort') == 'completed_date'):
             session(['sort' => 'created_at']);
-        }
+        endif;
 
         // ログインユーザーの未達成のToDo一覧を絞り込んで取得
         if(session('refine') == '/'):
@@ -53,9 +53,9 @@ class TodoController extends Controller{
         // redirectセッションに値を設定
         session(['redirect' => '/index_completed']);
         // refineに'/duesoon'が入っている場合は'/'に変更
-        if(session('refine') == '/duesoon'){
+        if(session('refine') == '/duesoon'):
             session(['refine' => '/']);
-        }
+        endif;
 
         // ログインユーザーの達成済みのToDo一覧を絞り込んで取得
         if(session('refine') == '/'):
@@ -162,9 +162,9 @@ class TodoController extends Controller{
         $todo->deadline = $request->deadline;
         $todo->user_id = Auth::id();
         // deadline_timeが送られてきた場合は設定する
-        if($request->deadline_time){
+        if($request->deadline_time):
             $todo->deadline_time = $request->deadline_time;
-        }
+        endif;
         $todo->folder_id = $request->folder_id;
         // データベースに保存
         $todo->save();
@@ -206,17 +206,17 @@ class TodoController extends Controller{
         $todo->importance = $request->importance;
         $todo->deadline = $request->deadline;
         // deadline_timeが送られてきた場合は設定する
-        if($request->deadline_time){
+        if($request->deadline_time):
             $todo->deadline_time = $request->deadline_time;
-        }
+        endif;
         // completed_dateが送られてきた場合は設定する
-        if($request->completed_date){
+        if($request->completed_date):
             $todo->completed_date = $request->completed_date;
-        }
+        endif;
         // completed_timeが送られてきた場合は設定する
-        if($request->completed_time){
+        if($request->completed_time):
             $todo->completed_time = $request->completed_time;
-        }
+        endif;
         $todo->folder_id = $request->folder_id;
         // データベースに保存
         $todo->save();
