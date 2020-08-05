@@ -53,7 +53,7 @@ class UserController extends Controller{
         // バリデーションを設定する
         $request->validate([
             'email'=>'required|string|max:254',
-            'password'=>'required|string|min:8|max:128',
+            'password'=>'required|string|between:8, 128',
         ]);
         // ログインする
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->remember)){
