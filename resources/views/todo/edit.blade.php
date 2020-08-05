@@ -182,8 +182,8 @@
           <div class="col-sm-8 col-md-6 col-xl-4">
             <label for="folderSelect">フォルダ <span class="badge badge-info">任意</span></label>
             <select class="form-control" name="folder_id" id="folderSelect">
+              <option value="0">無し</option>
               @foreach($folders as $folder)
-                <option value="0">無し</option>
                 @if($folder->id == $todo->folder_id)
                   <option value="{{ $folder->id }}" selected>{{ $folder->name }}</option>
                 @else
