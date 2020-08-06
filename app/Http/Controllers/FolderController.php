@@ -56,6 +56,20 @@ class FolderController extends Controller
                 $todos = Refine::overdue(false, $request)->where('folder_id', $folder->id)->paginate(5);
             endif;
             return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => false]);
+        elseif($id == 0):
+            $folder = new Folder;
+            $folder->id = 0;
+            $folder->name = '未設定';
+            $folder->user_id = Auth::id();
+            // ToDo一覧を取得
+            if(session('refine') == '/'):
+                $todos = Refine::default(false, $request)->where('folder_id', $folder->id)->paginate(5);
+            elseif(session('refine') == '/duesoon'):
+                $todos = Refine::duesoon(false, $request)->where('folder_id', $folder->id)->paginate(5);
+            elseif(session('refine') == '/overdue'):
+                $todos = Refine::overdue(false, $request)->where('folder_id', $folder->id)->paginate(5);
+            endif;
+            return view('folder.folder_index', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => false]);
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
@@ -73,6 +87,18 @@ class FolderController extends Controller
         endif;
         // フォルダを取得
         if($folder = Folder::find($id)):
+            // ToDo一覧を取得
+            if(session('refine') == '/'):
+                $todos = Refine::default(true, $request)->where('folder_id', $folder->id)->paginate(5);
+            elseif(session('refine') == '/overdue'):
+                $todos = Refine::completed_overdue(true, $request)->where('folder_id', $folder->id)->paginate(5);
+            endif;
+            return view('folder.folder_index_completed', ['todos' => $todos, 'folders' => $folders, 'search' => $request->search, 'fold' => $folder, 'completed' => true]);
+        elseif($id == 0):
+            $folder = new Folder;
+            $folder->id = 0;
+            $folder->name = '未設定';
+            $folder->user_id = Auth::id();
             // ToDo一覧を取得
             if(session('refine') == '/'):
                 $todos = Refine::default(true, $request)->where('folder_id', $folder->id)->paginate(5);

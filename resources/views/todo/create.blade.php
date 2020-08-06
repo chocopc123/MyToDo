@@ -33,6 +33,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <a class="dropdown-item" href="/folder_create_form">新規作成</a>
+      <a class="dropdown-item" href="/folder_index/0">未設定</a>
       @if($folders)
         @foreach($folders as $folder)
           <a class="dropdown-item" href="/folder_index/{{ $folder->id }}">{{ $folder->name }}</a>
