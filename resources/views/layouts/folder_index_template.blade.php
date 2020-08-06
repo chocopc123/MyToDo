@@ -93,6 +93,9 @@
             @endif
 
             <h6 class="card-subtitle mb-2 text-body">作成日時：{{($todo->created_at)->format('Y-m-d H:i')}}</h6>
+            @if($todo->completed_date)
+              <h6 class="card-subtitle mb-2 text-body">達成日時：{{$todo->completed_date. " ". substr($todo->completed_time, 0, 5)}}</h6>
+            @endif
 
             {{-- 各種ボタン --}}
             <p>
