@@ -6,9 +6,9 @@
   </ul>
   <ul class="list-group">
     <h4 class="pt-4 pb-2 pl-5 font-weight-bold">絞り込み</h4>
-    <a href="/folder/index_all/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/'){ echo "active"; } ?>">一覧</a>
-    <a href="/folder/index_duesoon/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/duesoon'){ echo "active"; } ?>">期限間近</a>
-    <a href="/folder/index_overdue/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/overdue'){ echo "active"; } ?>">期限超過</a>
+    <a href="/folder/refine/all/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/'){ echo "active"; } ?>">一覧</a>
+    <a href="/folder/refine/duesoon/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/duesoon'){ echo "active"; } ?>">期限間近</a>
+    <a href="/folder/refine/overdue/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('refine')=='/overdue'){ echo "active"; } ?>">期限超過</a>
   </ul>
   <ul class="list-group">
     <h4 class="pt-4 pb-2 pl-5 font-weight-bold">並べ替え</h4>

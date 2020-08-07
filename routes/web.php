@@ -67,9 +67,11 @@ Route::prefix('folder')->group(function(){
 });
 
 // フォルダ画面絞り込み
-Route::get('folder_index_all/{folder_id}', 'FolderController@folder_index_all');
-Route::get('folder_index_duesoon/{folder_id}', 'FolderController@folder_index_duesoon');
-Route::get('folder_index_overdue/{folder_id}', 'FolderController@folder_index_overdue');
+Route::prefix('folder/refine')->group(function(){
+  Route::get('all/{folder_id}', 'FolderController@folder_index_all');
+  Route::get('duesoon/{folder_id}', 'FolderController@folder_index_duesoon');
+  Route::get('overdue/{folder_id}', 'FolderController@folder_index_overdue');
+});
 // フォルダ画面並べ替え
 Route::get('folder_index_created_at/{folder_id}', 'FolderController@folder_index_created_at');
 Route::get('folder_index_deadline/{folder_id}', 'FolderController@folder_index_deadline');
