@@ -73,11 +73,13 @@ Route::prefix('folder/refine')->group(function(){
   Route::get('overdue/{folder_id}', 'FolderController@folder_index_overdue');
 });
 // フォルダ画面並べ替え
-Route::get('folder_index_created_at/{folder_id}', 'FolderController@folder_index_created_at');
-Route::get('folder_index_deadline/{folder_id}', 'FolderController@folder_index_deadline');
-Route::get('folder_index_difficulty/{folder_id}', 'FolderController@folder_index_difficulty');
-Route::get('folder_index_importance/{folder_id}', 'FolderController@folder_index_importance');
-Route::get('folder_index_completed_date/{folder_id}', 'FolderController@folder_index_completed_date');
+Route::prefix('folder/sort')->group(function(){
+  Route::get('created_at/{folder_id}', 'FolderController@folder_index_created_at');
+  Route::get('deadline/{folder_id}', 'FolderController@folder_index_deadline');
+  Route::get('difficulty/{folder_id}', 'FolderController@folder_index_difficulty');
+  Route::get('importance/{folder_id}', 'FolderController@folder_index_importance');
+  Route::get('completed_date/{folder_id}', 'FolderController@folder_index_completed_date');
+});
 
 // ToDoフォルダ追加画面絞り込み
 Route::get('add_folder_all/{folder_id}', 'FolderController@add_folder_all');
