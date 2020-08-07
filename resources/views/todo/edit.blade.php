@@ -1,5 +1,5 @@
 {{-- template.blade.phpの@yield('logo-path')に渡す --}}
-@section('logo-path', '../image/mytodo_icon.png')
+@section('logo-path', '../../image/mytodo_icon.png')
 {{-- templateを読み込む --}}
 @extends('layouts.template')
 
@@ -59,7 +59,7 @@
     <h2 class="pb-3">ToDoの編集</h2>
 
     {{-- editアクションにフォームのデータをPOSTする --}}
-    <form method="POST" action="/edit">
+    <form method="POST" action="/todo/edit">
       {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
       {{ csrf_field() }}
 

@@ -1,5 +1,5 @@
 {{-- template.blade.phpの@yield('logo-path')に渡す --}}
-@section('logo-path', '../image/mytodo_icon.png')
+@section('logo-path', '../../image/mytodo_icon.png')
 {{-- templateを読み込む --}}
 @extends('layouts.template')
 
@@ -74,7 +74,7 @@
 
     {{-- 達成ボタン --}}
     <div style="display:inline-flex">
-      <form method="POST" action="/complete">
+      <form method="POST" action="/todo/complete">
         {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
         {{ csrf_field() }}
 

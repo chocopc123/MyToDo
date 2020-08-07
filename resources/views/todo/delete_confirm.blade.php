@@ -1,5 +1,5 @@
 {{-- template.blade.phpの@yield('logo-path')に渡す --}}
-@section('logo-path', '../image/mytodo_icon.png')
+@section('logo-path', '../../image/mytodo_icon.png')
 {{-- templateを読み込む --}}
 @extends('layouts.template')
 
@@ -60,7 +60,7 @@
     <h2 class="pb-3">ToDo削除</h2>
 
     {{-- deleteアクションにフォームのデータをPOSTする --}}
-    <form method="POST" action="/delete">
+    <form method="POST" action="/todo/delete">
       {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
       {{ csrf_field() }}
 

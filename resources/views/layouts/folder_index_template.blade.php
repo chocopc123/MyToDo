@@ -53,7 +53,7 @@
         {{-- フォルダへToDo追加ボタン --}}
         <a href="/add_folder_form/{{ $fold->id }}" class="btn btn-primary">フォルダへ追加</></a>
         {{-- フォルダ削除ボタン --}}
-        <a href="/delete_folder_confirm/{{ $fold->id }}" class="btn btn-danger">フォルダを削除</></a>
+        <a href="/todo/delete_folder_confirm/{{ $fold->id }}" class="btn btn-danger">フォルダを削除</></a>
       @endif
       {{-- 検索ワードと結果件数表示 --}}
       @if($search)
@@ -101,11 +101,11 @@
 
             {{-- 各種ボタン --}}
             <p>
-              <a href="/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a>
+              <a href="/todo/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a>
               <a href="/folder_release_confirm/{{$fold->id}}/{{$todo->id}}" class="btn btn-danger">フォルダから削除</a>
             </p>
-            <a href="/edit/{{$todo->id}}" class="card-link">修正</a>
-            <a href="/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
+            <a href="/todo/edit/{{$todo->id}}" class="card-link">修正</a>
+            <a href="/todo/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
           </div>
         </div>
       @endforeach

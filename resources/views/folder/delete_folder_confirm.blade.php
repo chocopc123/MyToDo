@@ -49,7 +49,7 @@
     <h2 class="pb-3">{{ $fold->name }}</h2>
 
     {{-- delete_folderアクションにフォームのデータをPOSTする --}}
-    <form method="POST" action="/delete_folder">
+    <form method="POST" action="/todo/delete_folder">
       {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
       {{ csrf_field() }}
 

@@ -49,7 +49,7 @@
     <h2 class="pb-3">ToDo作成</h2>
 
     {{-- createアクションにフォームのデータをPOSTする --}}
-    <form method="POST" action="/create">
+    <form method="POST" action="/todo/create">
       {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
       {{ csrf_field() }}
 

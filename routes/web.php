@@ -14,26 +14,32 @@
 Route::get('/', 'TodoController@index');
 Route::get('index_completed', 'TodoController@index_completed');
 // 絞り込み
-Route::get('index_all', 'TodoController@index_all');
-Route::get('duesoon', 'TodoController@duesoon');
-Route::get('overdue', 'TodoController@overdue');
+Route::prefix('index/refine')->group(function(){
+  Route::get('all', 'TodoController@index_all');
+  Route::get('duesoon', 'TodoController@duesoon');
+  Route::get('overdue', 'TodoController@overdue');
+});
 // 並べ替え
-Route::get('index_created_at', 'TodoController@index_created_at');
-Route::get('index_deadline', 'TodoController@index_deadline');
-Route::get('index_difficulty', 'TodoController@index_difficulty');
-Route::get('index_importance', 'TodoController@index_importance');
-Route::get('index_completed_date', 'TodoController@index_completed_date');
+Route::prefix('index/sort')->group(function(){
+  Route::get('created_at', 'TodoController@index_created_at');
+  Route::get('deadline', 'TodoController@index_deadline');
+  Route::get('difficulty', 'TodoController@index_difficulty');
+  Route::get('importance', 'TodoController@index_importance');
+  Route::get('completed_date', 'TodoController@index_completed_date');
+});
 
-Route::get('create', 'TodoController@create');
-Route::post('create', 'TodoController@store');
-Route::get('edit/{id}', 'TodoController@edit');
-Route::post('edit', 'TodoController@update');
-Route::get('delete_confirm/{id}', 'TodoController@delete_confirm');
-Route::post('delete', 'TodoController@delete');
-Route::get('complete_confirm/{id}', 'TodoController@complete_confirm');
-Route::post('complete', 'TodoController@complete');
-Route::get('release_confirm/{id}', 'TodoController@release_confirm');
-Route::post('release', 'TodoController@release');
+Route::prefix('todo')->group(function(){
+  Route::get('create', 'TodoController@create');
+  Route::post('create', 'TodoController@store');
+  Route::get('edit/{id}', 'TodoController@edit');
+  Route::post('edit', 'TodoController@update');
+  Route::get('delete_confirm/{id}', 'TodoController@delete_confirm');
+  Route::post('delete', 'TodoController@delete');
+  Route::get('complete_confirm/{id}', 'TodoController@complete_confirm');
+  Route::post('complete', 'TodoController@complete');
+  Route::get('release_confirm/{id}', 'TodoController@release_confirm');
+  Route::post('release', 'TodoController@release');
+});
 
 Route::get('profile', 'UserController@profile');
 Route::get('register', 'UserController@register_form');
