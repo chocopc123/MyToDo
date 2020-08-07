@@ -82,11 +82,15 @@ Route::prefix('folder/sort')->group(function(){
 });
 
 // ToDoフォルダ追加画面絞り込み
-Route::get('add_folder_all/{folder_id}', 'FolderController@add_folder_all');
-Route::get('add_folder_duesoon/{folder_id}', 'FolderController@add_folder_duesoon');
-Route::get('add_folder_overdue/{folder_id}', 'FolderController@add_folder_overdue');
+Route::prefix('folder/add/sort')->group(function(){
+  Route::get('all/{folder_id}', 'FolderController@add_folder_all');
+  Route::get('duesoon/{folder_id}', 'FolderController@add_folder_duesoon');
+  Route::get('overdue/{folder_id}', 'FolderController@add_folder_overdue');
+});
 // ToDoフォルダ追加画面並べ替え
-Route::get('add_folder_created_at/{folder_id}', 'FolderController@add_folder_created_at');
-Route::get('add_folder_deadline/{folder_id}', 'FolderController@add_folder_deadline');
-Route::get('add_folder_difficulty/{folder_id}', 'FolderController@add_folder_difficulty');
-Route::get('add_folder_importance/{folder_id}', 'FolderController@add_folder_importance');
+Route::prefix('folder/add/refine')->group(function(){
+  Route::get('created_at/{folder_id}', 'FolderController@add_folder_created_at');
+  Route::get('deadline/{folder_id}', 'FolderController@add_folder_deadline');
+  Route::get('difficulty/{folder_id}', 'FolderController@add_folder_difficulty');
+  Route::get('importance/{folder_id}', 'FolderController@add_folder_importance');
+});
