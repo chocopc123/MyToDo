@@ -33,14 +33,14 @@ class FolderController extends Controller
         $folder->user_id = Auth::id();
         $folder->save();
         session()->flash('flash_message', 'フォルダ新規登録作成が完了しました');
-        return redirect('/folder_index/'.$folder->id);
+        return redirect('/folder/index/'.$folder->id);
     }
 
     public function folder_index(Request $request, $id){
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
         // folder_redirectセッションに値を設定
-        session(['folder_redirect' => '/folder_index/']);
+        session(['folder_redirect' => '/folder/index/']);
         // sortに'completed_date'が入っている場合は'created_at'に変更
         if(session('sort') == 'completed_date'):
             session(['sort' => 'created_at']);
@@ -80,7 +80,7 @@ class FolderController extends Controller
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
         // folder_redirectセッションに値を設定
-        session(['folder_redirect' => '/folder_index_completed/']);
+        session(['folder_redirect' => '/folder/index_completed/']);
         // refineに'/duesoon'が入っている場合は'/'に変更
         if(session('refine') == '/duesoon'):
             session(['refine' => '/']);
@@ -116,7 +116,7 @@ class FolderController extends Controller
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
         // folder_redirectセッションに値を設定
-        session(['folder_redirect' => '/add_folder_form/']);
+        session(['folder_redirect' => '/folder/add_form/']);
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
@@ -137,7 +137,7 @@ class FolderController extends Controller
     public function add_folder_completed_form(Request $request, $id){
         // フォルダ一覧を取得
         $folders = BaseClass::getfolders();
-        session(['folder_redirect' => '/add_folder_completed_form/']);
+        session(['folder_redirect' => '/folder/add_completed_form/']);
         // フォルダを取得
         if($folder = Folder::find($id)):
             // ToDo一覧を取得
@@ -162,7 +162,7 @@ class FolderController extends Controller
             $todo->folder_id = $folder_id;
             $todo->save();
             session()->flash('flash_message', $folder->name. 'フォルダにToDoを追加しました');
-            return redirect( '/folder_index/'. $folder_id );
+            return redirect( '/folder/index/'. $folder_id );
         else:
             session()->flash('flash_message', '存在しないフォルダです');
             return redirect( session('redirect') );
@@ -207,7 +207,7 @@ class FolderController extends Controller
         $todo = Todo::find($request->todo_id);
         $todo->folder_id = 0;
         $todo->save();
-        return redirect( '/folder_index/'. $request->folder_id );
+        return redirect( '/folder/index/'. $request->folder_id );
     }
 
 

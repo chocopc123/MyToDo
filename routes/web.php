@@ -41,26 +41,30 @@ Route::prefix('todo')->group(function(){
   Route::post('release', 'TodoController@release');
 });
 
-Route::get('profile', 'UserController@profile');
-Route::get('register', 'UserController@register_form');
-Route::post('register', 'UserController@register');
-Route::get('login', 'UserController@login_form');
-Route::post('login', 'UserController@login');
-Route::get('logout', 'UserController@logout');
-Route::get('user_delete_confirm/{id}', 'UserController@user_delete_confirm');
-Route::post('user_delete', 'UserController@user_delete');
+Route::prefix('user')->group(function(){
+  Route::get('profile', 'UserController@profile');
+  Route::get('register', 'UserController@register_form');
+  Route::post('register', 'UserController@register');
+  Route::get('login', 'UserController@login_form');
+  Route::post('login', 'UserController@login');
+  Route::get('logout', 'UserController@logout');
+  Route::get('user_delete_confirm/{id}', 'UserController@user_delete_confirm');
+  Route::post('user_delete', 'UserController@user_delete');
+});
 
-Route::get('folder_create_form', 'FolderController@folder_create_form');
-Route::post('folder_create', 'FolderController@folder_create');
-Route::get('folder_index/{id}', 'FolderController@folder_index');
-Route::get('folder_index_completed/{id}', 'FolderController@folder_index_completed');
-Route::get('add_folder_form/{id}', 'FolderController@add_folder_form');
-Route::get('add_folder_completed_form/{id}', 'FolderController@add_folder_completed_form');
-Route::get('add_folder/{folder_id}/{todo_id}', 'FolderController@add_folder');
-Route::get('delete_folder_confirm/{folder_id}', 'FolderController@delete_folder_confirm');
-Route::post('delete_folder', 'FolderController@delete_folder');
-Route::get('folder_release_confirm/{folder_id}/{todo_id}', 'FolderController@folder_release_confirm');
-Route::post('folder_release', 'FolderController@folder_release');
+Route::prefix('folder')->group(function(){
+  Route::get('create_form', 'FolderController@folder_create_form');
+  Route::post('create', 'FolderController@folder_create');
+  Route::get('index/{id}', 'FolderController@folder_index');
+  Route::get('index_completed/{id}', 'FolderController@folder_index_completed');
+  Route::get('add_form/{id}', 'FolderController@add_folder_form');
+  Route::get('add_completed_form/{id}', 'FolderController@add_folder_completed_form');
+  Route::get('add/{folder_id}/{todo_id}', 'FolderController@add_folder');
+  Route::get('delete_confirm/{folder_id}', 'FolderController@delete_folder_confirm');
+  Route::post('delete', 'FolderController@delete_folder');
+  Route::get('release_confirm/{folder_id}/{todo_id}', 'FolderController@folder_release_confirm');
+  Route::post('release', 'FolderController@folder_release');
+});
 
 // フォルダ画面絞り込み
 Route::get('folder_index_all/{folder_id}', 'FolderController@folder_index_all');

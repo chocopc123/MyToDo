@@ -1,5 +1,5 @@
 {{-- template.blade.phpの@yield('logo-path')に渡す --}}
-@section('logo-path', '../image/mytodo_icon.png')
+@section('logo-path', '../../image/mytodo_icon.png')
 {{-- templateを読み込む --}}
 @extends('layouts.template')
 
@@ -34,8 +34,8 @@
       ダッシュボード
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="/profile">プロフィール</a>
-      <a class="dropdown-item" href="/logout">ログアウト</a>
+      <a class="dropdown-item" href="/user/profile">プロフィール</a>
+      <a class="dropdown-item" href="/user/logout">ログアウト</a>
     </div>
   </li>
   <li class="nav-item dropdown">
@@ -43,11 +43,11 @@
       フォルダ
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="/folder_create_form">新規作成</a>
-      <a class="dropdown-item" href="/folder_index/0">未設定</a>
+      <a class="dropdown-item" href="/folder/create_form">新規作成</a>
+      <a class="dropdown-item" href="/folder/index/0">未設定</a>
       @if($folders)
         @foreach($folders as $folder)
-          <a class="dropdown-item" href="/folder_index/{{ $folder->id }}">{{ $folder->name }}</a>
+          <a class="dropdown-item" href="/folder/index/{{ $folder->id }}">{{ $folder->name }}</a>
         @endforeach
       @endif
     </div>
@@ -60,14 +60,14 @@
     <h2 class="pb-3">ユーザー削除</h2>
     <p>本当に削除していいですか?</p>
     {{-- deleteアクションにフォームのデータをPOSTする --}}
-    <form method="POST" action="/user_delete">
+    <form method="POST" action="/user/user_delete">
       {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
       {{ csrf_field() }}
       <input type="hidden" name="id" value="{{$user->id}}">
       {{-- 各種ボタン --}}
       <input type="submit" readonly class="btn btn-danger" value="削除">
       {{-- セッションの値によって一覧に戻るボタンの挙動を変える --}}
-      <a href="/profile" class="btn btn-primary">戻る</a>
+      <a href="/user/profile" class="btn btn-primary">戻る</a>
     </form>
   </div>
 @endsection

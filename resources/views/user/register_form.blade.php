@@ -13,10 +13,10 @@
 {{-- class="active"と<span class="sr-only">(current)</span>を指定する --}}
 @section('navi')
   <li class="nav-item active">
-    <a class="nav-link" href="/register">新規登録 <span class="sr-only">(current)</span></a>
+    <a class="nav-link" href="/user/register">新規登録 <span class="sr-only">(current)</span></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/login">ログイン</a>
+    <a class="nav-link" href="/user/login">ログイン</a>
   </li>
 @endsection
 
@@ -24,7 +24,7 @@
 @section('content')
   <div id="wrapper" class="pt-3 col-12 col-sm-12 col-md-8 col-xl-8">
     {{-- createアクションにフォームのデータをPOSTする --}}
-    <form method="POST" action="/register">
+    <form method="POST" action="/user/register">
       {{-- クロス・サイト・リクエスト・フォージェリ対策 --}}
       {{ csrf_field() }}
 

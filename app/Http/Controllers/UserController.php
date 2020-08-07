@@ -38,7 +38,7 @@ class UserController extends Controller{
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])):
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             session()->flash('flash_message', 'ユーザー新規登録が完了しました');
-            return redirect()->intended('profile');
+            return redirect()->intended('user/profile');
         endif;
         // リダイレクトする
         return redirect('/');
@@ -59,10 +59,10 @@ class UserController extends Controller{
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->remember)):
             // ログイン後にアクセスしようとしていたアクションにリダイレクト、無い場合はprofileへ
             session()->flash('flash_message', 'ログインしました');
-            return redirect()->intended('profile');
+            return redirect()->intended('user/profile');
         endif;
         // 失敗した場合はloginにリダイレクト
-        return redirect('login');
+        return redirect('user/login');
     }
 
     public function profile(){
@@ -76,7 +76,7 @@ class UserController extends Controller{
         // ログアウトする
         Auth::logout();
         // ログインビューを返す
-        return redirect('login');
+        return redirect('user/login');
     }
 
     public function user_delete_confirm(Request $request, $id){
@@ -97,6 +97,6 @@ class UserController extends Controller{
         Auth::logout();
         // フラッシュメッセージの表示
         session()->flash('flash_message', 'ユーザーの削除が完了しました');
-        return redirect('/register');
+        return redirect('/user/register');
     }
 }

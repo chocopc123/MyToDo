@@ -33,8 +33,8 @@
       ダッシュボード
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="/profile">プロフィール</a>
-      <a class="dropdown-item" href="/logout">ログアウト</a>
+      <a class="dropdown-item" href="/user/profile">プロフィール</a>
+      <a class="dropdown-item" href="/user/logout">ログアウト</a>
     </div>
   </li>
   <li class="nav-item dropdown">
@@ -42,11 +42,11 @@
       フォルダ
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="/folder_create_form">新規作成</a>
-      <a class="dropdown-item" href="/folder_index/0">未設定</a>
+      <a class="dropdown-item" href="/folder/create_form">新規作成</a>
+      <a class="dropdown-item" href="/folder/index/0">未設定</a>
       @if($folders)
         @foreach($folders as $folder)
-          <a class="dropdown-item" href="/folder_index/{{ $folder->id }}">{{ $folder->name }}</a>
+          <a class="dropdown-item" href="/folder/index/{{ $folder->id }}">{{ $folder->name }}</a>
         @endforeach
       @endif
     </div>

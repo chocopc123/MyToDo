@@ -1,5 +1,5 @@
 {{-- template.blade.phpの@yield('logo-path')に渡す --}}
-@section('logo-path', '../image/mytodo_icon.png')
+@section('logo-path', '../../image/mytodo_icon.png')
 {{-- templateを読み込む --}}
 @extends('layouts.template')
 
@@ -23,8 +23,8 @@
       ダッシュボード
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="/profile">プロフィール</a>
-      <a class="dropdown-item" href="/logout">ログアウト</a>
+      <a class="dropdown-item" href="/user/profile">プロフィール</a>
+      <a class="dropdown-item" href="/user/logout">ログアウト</a>
     </div>
   </li>
   <li class="nav-item dropdown">
@@ -32,11 +32,11 @@
       フォルダ <span class="sr-only">(current)</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="/folder_create_form">新規作成</a>
-      <a class="dropdown-item" href="/folder_index/0">未設定</a>
+      <a class="dropdown-item" href="/folder/create_form">新規作成</a>
+      <a class="dropdown-item" href="/folder/index/0">未設定</a>
       @if($folders)
         @foreach($folders as $folder)
-          <a class="dropdown-item" href="/folder_index/{{ $folder->id }}">{{ $folder->name }}</a>
+          <a class="dropdown-item" href="/folder/index/{{ $folder->id }}">{{ $folder->name }}</a>
         @endforeach
       @endif
     </div>
@@ -51,9 +51,9 @@
     <div class="py-3">
       @if($fold->id != 0)
         {{-- フォルダへToDo追加ボタン --}}
-        <a href="/add_folder_form/{{ $fold->id }}" class="btn btn-primary">フォルダへ追加</></a>
+        <a href="/folder/add_form/{{ $fold->id }}" class="btn btn-primary">フォルダへ追加</></a>
         {{-- フォルダ削除ボタン --}}
-        <a href="/todo/delete_folder_confirm/{{ $fold->id }}" class="btn btn-danger">フォルダを削除</></a>
+        <a href="/folder/delete_confirm/{{ $fold->id }}" class="btn btn-danger">フォルダを削除</></a>
       @endif
       {{-- 検索ワードと結果件数表示 --}}
       @if($search)
@@ -102,7 +102,7 @@
             {{-- 各種ボタン --}}
             <p>
               <a href="/todo/complete_confirm/{{$todo->id}}" class="btn btn-success">達成</a>
-              <a href="/folder_release_confirm/{{$fold->id}}/{{$todo->id}}" class="btn btn-danger">フォルダから削除</a>
+              <a href="/folder/release_confirm/{{$fold->id}}/{{$todo->id}}" class="btn btn-danger">フォルダから削除</a>
             </p>
             <a href="/todo/edit/{{$todo->id}}" class="card-link">修正</a>
             <a href="/todo/delete_confirm/{{$todo->id}}" class="card-link">削除</a>
