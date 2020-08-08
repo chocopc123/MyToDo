@@ -9,7 +9,7 @@
 @include('layouts.head')
 
 {{-- ナビゲーションバー --}}
-@include('layouts.todo_navi')
+@include('layouts.index.navi')
 
 {{-- template.blade.phpの@yield('content')に渡す --}}
 @section('content')
