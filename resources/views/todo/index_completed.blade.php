@@ -29,7 +29,7 @@
             <h6 class="card-subtitle mb-2 text-body">難易度：{{$todo->difficulty}}</h6>
             <h6 class="card-subtitle mb-2 text-body">重要度：{{$todo->importance}}</h6>
 
-            {{-- 現在日時と目標日時の差によってテキストカラーを変更 --}}
+            {{-- 現在日時と達成日時の差によってテキストカラーを変更 --}}
             <?php
               if( (($todo->deadline. " ". $todo->deadline_time) < ($todo->completed_date. " ". $todo->completed_time) && $todo->deadline_time != null) || $todo->deadline < $todo->completed_date & $todo->deadline_time == null ){
                 echo '<h6 class="card-subtitle mb-2 text-danger">'. ((strtotime($todo->completed_date) - (strtotime($todo->deadline))) / (60*60*24)). "日遅延</h6>";
