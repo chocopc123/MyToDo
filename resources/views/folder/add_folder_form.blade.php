@@ -18,4 +18,4 @@
     <a href="/folder/add/refine/importance/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='importance'){ echo "active"; } ?>">重要度 <?php if(session('sort')=='importance'){ echo '[' . session('order') . ']'; } ?></a>
   </ul>
 @endsection
-@extends('layouts.add_folder_form_template')
+@extends('layouts.folder.add_form_template')

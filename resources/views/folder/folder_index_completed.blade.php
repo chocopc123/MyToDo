@@ -18,4 +18,4 @@
     <a href="/folder/sort/completed_date/{{ $fold->id }}" class="list-group-item list-group-item-action font-weight-bold <?php if(session('sort')=='completed_date'){ echo "active"; } ?>">達成日時 <?php if(session('sort')=='completed_date'){ echo '[' . session('order') . ']'; } ?></a>
   </ul>
 @endsection
-@extends('layouts.folder_index_template')
+@extends('layouts.folder.index_template')
