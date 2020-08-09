@@ -13,19 +13,20 @@
 
 Route::get('/', 'TodoController@index');
 Route::get('index_completed', 'TodoController@index_completed');
+
 // 絞り込み
 Route::prefix('index/refine')->group(function(){
-  Route::get('all', 'TodoController@index_all');
-  Route::get('duesoon', 'TodoController@duesoon');
-  Route::get('overdue', 'TodoController@overdue');
+  Route::get('all', 'TodoRefineSortController@index_all');
+  Route::get('duesoon', 'TodoRefineSortController@duesoon');
+  Route::get('overdue', 'TodoRefineSortController@overdue');
 });
 // 並べ替え
 Route::prefix('index/sort')->group(function(){
-  Route::get('created_at', 'TodoController@index_created_at');
-  Route::get('deadline', 'TodoController@index_deadline');
-  Route::get('difficulty', 'TodoController@index_difficulty');
-  Route::get('importance', 'TodoController@index_importance');
-  Route::get('completed_date', 'TodoController@index_completed_date');
+  Route::get('created_at', 'TodoRefineSortController@index_created_at');
+  Route::get('deadline', 'TodoRefineSortController@index_deadline');
+  Route::get('difficulty', 'TodoRefineSortController@index_difficulty');
+  Route::get('importance', 'TodoRefineSortController@index_importance');
+  Route::get('completed_date', 'TodoRefineSortController@index_completed_date');
 });
 
 Route::prefix('todo')->group(function(){
@@ -68,29 +69,29 @@ Route::prefix('folder')->group(function(){
 
 // フォルダ画面絞り込み
 Route::prefix('folder/refine')->group(function(){
-  Route::get('all/{folder_id}', 'FolderController@folder_index_all');
-  Route::get('duesoon/{folder_id}', 'FolderController@folder_index_duesoon');
-  Route::get('overdue/{folder_id}', 'FolderController@folder_index_overdue');
+  Route::get('all/{folder_id}', 'FolderRefineSortController@folder_index_all');
+  Route::get('duesoon/{folder_id}', 'FolderRefineSortController@folder_index_duesoon');
+  Route::get('overdue/{folder_id}', 'FolderRefineSortController@folder_index_overdue');
 });
 // フォルダ画面並べ替え
 Route::prefix('folder/sort')->group(function(){
-  Route::get('created_at/{folder_id}', 'FolderController@folder_index_created_at');
-  Route::get('deadline/{folder_id}', 'FolderController@folder_index_deadline');
-  Route::get('difficulty/{folder_id}', 'FolderController@folder_index_difficulty');
-  Route::get('importance/{folder_id}', 'FolderController@folder_index_importance');
-  Route::get('completed_date/{folder_id}', 'FolderController@folder_index_completed_date');
+  Route::get('created_at/{folder_id}', 'FolderRefineSortController@folder_index_created_at');
+  Route::get('deadline/{folder_id}', 'FolderRefineSortController@folder_index_deadline');
+  Route::get('difficulty/{folder_id}', 'FolderRefineSortController@folder_index_difficulty');
+  Route::get('importance/{folder_id}', 'FolderRefineSortController@folder_index_importance');
+  Route::get('completed_date/{folder_id}', 'FolderRefineSortController@folder_index_completed_date');
 });
 
 // ToDoフォルダ追加画面絞り込み
 Route::prefix('folder/add/sort')->group(function(){
-  Route::get('all/{folder_id}', 'FolderController@add_folder_all');
-  Route::get('duesoon/{folder_id}', 'FolderController@add_folder_duesoon');
-  Route::get('overdue/{folder_id}', 'FolderController@add_folder_overdue');
+  Route::get('all/{folder_id}', 'FolderRefineSortController@add_folder_all');
+  Route::get('duesoon/{folder_id}', 'FolderRefineSortController@add_folder_duesoon');
+  Route::get('overdue/{folder_id}', 'FolderRefineSortController@add_folder_overdue');
 });
 // ToDoフォルダ追加画面並べ替え
 Route::prefix('folder/add/refine')->group(function(){
-  Route::get('created_at/{folder_id}', 'FolderController@add_folder_created_at');
-  Route::get('deadline/{folder_id}', 'FolderController@add_folder_deadline');
-  Route::get('difficulty/{folder_id}', 'FolderController@add_folder_difficulty');
-  Route::get('importance/{folder_id}', 'FolderController@add_folder_importance');
+  Route::get('created_at/{folder_id}', 'FolderRefineSortController@add_folder_created_at');
+  Route::get('deadline/{folder_id}', 'FolderRefineSortController@add_folder_deadline');
+  Route::get('difficulty/{folder_id}', 'FolderRefineSortController@add_folder_difficulty');
+  Route::get('importance/{folder_id}', 'FolderRefineSortController@add_folder_importance');
 });
