@@ -29,9 +29,13 @@
       {{ csrf_field() }}
 
       {{-- バリデーションエラーがある場合は出力 --}}
-      @if ($errors->any())
+      @if ($errors->any() || isset($auth_error))
         <div class="alert alert-danger">
           <ul>
+            {{-- ログインエラーがある場合は出力 --}}
+            @if(isset($auth_error))
+              <li>{{ $auth_error }}</li>
+            @endif
             @foreach ($errors->all() as $error)
               <li>{{ $error }}</li>
             @endforeach

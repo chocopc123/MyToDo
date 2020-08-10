@@ -62,7 +62,8 @@ class UserController extends Controller{
             return redirect()->intended('user/profile');
         endif;
         // 失敗した場合はloginにリダイレクト
-        return redirect('user/login');
+        $auth_error = 'ログイン情報が間違っています。';
+        return view('user.login_form', ['auth_error' => $auth_error]);
     }
 
     public function profile(){
