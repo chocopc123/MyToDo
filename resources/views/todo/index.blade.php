@@ -34,8 +34,8 @@
           <div class="card-body">
             <h4 class="card-title">{{$todo->title}}</h4>
             <p>{!! nl2br(e($todo->explanation)) !!}</p>
-            <h6 class="card-subtitle mb-2 text-body">難易度：{{$todo->difficulty}}</h6>
-            <h6 class="card-subtitle mb-2 text-body">重要度：{{$todo->importance}}</h6>
+            {{-- 難易度と重要度を表示 --}}
+            @include('layouts.difficulty_importance', ['todo'=>$todo])
 
             {{-- 現在日時と目標日時の差によって期限までの日数を表示 --}}
             <?php

@@ -20,8 +20,9 @@
       <div class="card-body">
         <h4 class="card-title">{{$todo->title}}</h4>
         <p>{!! nl2br(e($todo->explanation)) !!}</p>
-        <h6 card-subtitle mb-2 text-muted>難易度：{{$todo->difficulty}}</h6>
-        <h6 card-subtitle mb-2 text-muted>重要度：{{$todo->importance}}</h6>
+        {{-- 難易度と重要度を表示 --}}
+        @include('layouts.difficulty_importance', ['todo'=>$todo])
+
         @if($todo->deadline_time)
           <h6 card-subtitle mb-2 text-muted>目標期限：{{$todo->deadline. " ". substr($todo->deadline_time, 0, 5)}}</h6>
         @else
