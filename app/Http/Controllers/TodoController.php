@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller{
     public function __construct(){
-        // ログインしていないとアクションにアクセス出来ないようにする
-        $this->middleware('auth');
         // セッションの初期値を設定
         session(['refine' => '/']);
         session(['sort' => 'created_at']);

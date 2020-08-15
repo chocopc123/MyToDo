@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller{
     public function __construct(){
-        // ログインしていないとlogoutとprofileにはアクセス出来ないようにする
-        $this->middleware('auth', ['only' => ['logout', 'profile', 'user_delete_confirm', 'user_delete']]);
-        // ログインしていたらlogoutとprofile以外にはアクセスできないようにする
-        $this->middleware('guest', ['except' => ['logout', 'profile', 'user_delete_confirm', 'user_delete']]);
     }
 
     public function register_form(){

@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Auth;
 class FolderController extends Controller
 {
     public function __construct(){
-        // ログインしていないとアクションにアクセス出来ないようにする
-        $this->middleware('auth');
     }
 
     public function folder_create_form(){
